@@ -597,7 +597,96 @@
    font-size: 1.6rem;
     padding: 1.2rem;
   }
-
+  .project__table-task tr{
+    flex-direction: column;
+    display: none;
+    &:first-child{
+      display:flex ;
+    }
+    &.active{
+      display: flex;
+    }
+  }
+  .project__table-task thead{
+    display: none;
+  }
+  .project__top{
+    flex-direction: column;
+    align-items: flex-start;
+    gap:1rem;
+    margin-bottom: 2.4rem;
+  }
+  .wrap .container{
+    padding: 2.4rem 1.6rem;
+  }
+  .project__top-icon{
+   width: 6rem;
+    height: 6rem;
+  }
+  .project__top-title{
+    font-size: 2rem;
+  }
+  .project__top-block:last-child{
+    justify-content: space-between;
+    width: 100%;
+  }
+  .project__top-link{
+   font-size: 1.4rem;
+  }
+  .project__top .project__percent{
+   font-size: 1.6rem;
+  }
+  .project__progress{
+   margin: 0 0 1rem;
+  }
+  .project__table-task {
+    width: 100vw;
+    margin: 0 -1.6rem;
+    position: relative;
+  }
+  .project__task-step{
+    background-color: var(--color-beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+    color:var(--color-text);
+    font-size: 2rem;
+    padding: 1.6rem 5rem;
+  }
+  .project__task-step > *{
+    font-size: 1.6rem;
+  }
+  .project__task{
+   gap:1.6rem;
+    justify-content: center;
+  }
+  .project__task-time{
+    padding: 1.6rem 2.4rem;
+    text-align: center;
+  }
+  .project__table-task table{
+    border: none;
+  }
+  .project__table-task td{
+    border-right: none;
+    border-left: none;
+  }
+  .header__button{
+    display: none;
+  }
+  .header__link{
+    display: none;
+  }
+  .header__task-nav > *{
+    position: absolute;
+    top: 1.6rem;
+    width: 3.2rem;
+    height: 1.2rem;
+  }
+  .project__task-prev{
+    left: 1.6rem;
+  }
 }
 
 

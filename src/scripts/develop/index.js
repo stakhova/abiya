@@ -92,6 +92,12 @@ function addPercentStyle(){
         }
     })
 }
+
+function changeMob() {
+    if(window.innerWidth <= 666){
+        $('.project__top-block:first-child').after($('.project__progress'));
+    }
+}
 $(document).ready(function(){
     let loginForm = $('.login__form');
     validateForm(loginForm, function () {
@@ -99,6 +105,7 @@ $(document).ready(function(){
     });
     progressBar();
     addPercentStyle();
+    changeMob()
 
 
 

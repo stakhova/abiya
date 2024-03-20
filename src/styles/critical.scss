@@ -1,0 +1,164 @@
+
+@font-face {
+    font-family: "Arimo";
+    src: url("../fonts/Arimo-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Arimo";
+    src: url("../fonts/Arimo-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+
+@font-face {
+    font-family: "RozhaOne";
+    src: url("../fonts/RozhaOne-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+:root {
+    --color-white: #fff;
+    --color-black: #111;
+    --color-gold: #B3A384;
+    --color-violet: #564073;
+    --color-beige:#EDE8E0;
+    --color-zero-percent:#EBEBEB;
+    --color-middle-percent:rgba(179, 163, 132, 0.50);
+    --color-full-percent:rgba(86, 64, 115, 0.35);
+    --color-accept:rgba(183, 226, 182, 0.50);
+    --color-reject:#F0C5BF;
+    --color-clafify:#FFE8CC;
+    --color-text:#4B4B4B;
+    --color-red:#EE1D52;
+    --color-grey:#BFBBBB;
+    --color-cancel:#4B4B4B;
+    --color-border:rgba(179, 163, 132, 0.50);
+    --color-inactive:#E8E8E8;
+
+    --Arimo:'Arimo', sans-serif;
+    --RozhaOne:'RozhaOne', sans-serif;
+
+
+}
+
+*, *:before,
+*:after {
+    box-sizing: border-box;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+*, body, html {
+    -webkit-text-size-adjust: none;
+    -webkit-appearance: none;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border: none;
+}
+
+mark {
+    -webkit-text-fill-color: initial;
+    text-fill-color: transparent;
+    background: none;
+}
+.img{
+    display: block;
+}
+.img.contain img {
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
+.img > img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button {
+    background: transparent;
+}
+
+h1 {
+    margin: 0;
+}
+
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+}
+
+
+@media only screen and (max-width: 1440px) {
+    html {
+        font-size: 9.6px;
+    }
+}
+@media only screen and (max-width: 1366px) {
+    html {
+        font-size: 9.1px;
+    }
+}
+@media only screen and (max-width: 1280px) {
+    html {
+        font-size: 8.53px;
+    }
+}
+@media only screen and (max-width: 1170px) {
+    html {
+        font-size: 7.8px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    html {
+        font-size: 6.83px;
+    }
+}
+
+@media only screen and (max-width: 890px) {
+    html {
+        font-size: 5.93px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    html {
+        font-size: 5.12px;
+    }
+}
+
+@media only screen and (max-width: 666px) {
+    html {
+        font-size: 10px;
+    }
+}

@@ -1,101 +1,112 @@
 //= partials/head.html
 
-<div class="wrap ">
+<div class="wrap wrap__noback">
     //= partials/header.html
 
-    <div class="wrap__main">
+    <div class="wrap__main ">
         <section class="project">
             <div class="container">
-                <div class="project__top">
+                <form class="project__search">
 
+                    <div class="project__search-input">
+                        <input type="text" placeholder="Search for...">
+                    </div>
+                    <button class="section__button">Search</button>
+
+                </form>
+                <div class="project__table project__list">
+                    <table>
+
+                        <colgroup>
+                            <col span="1" style="width: 47%;">
+                            <col span="1" style="width: 18%;">
+                            <col span="1" style="width: 16%;">
+                            <col span="1" style="width: 9%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>Kick Off Date</th>
+                                <th>Duration</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="project__text">
+                                        <a href="">Project 1</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__percent">
+                                        <span>0</span>%
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="project__text">
+                                        <a href="">Project 2</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__percent">
+                                        <span>20</span>%
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="project__text">
+                                        <a href="">Project 3</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="project__percent">
+                                        <span>100</span>%
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="project__load">
+                                <td colspan="4">
+                                    <button class="section__button section__button-secondary ">Load More</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="project__progress">
-
-            </div>
-            <div class="project__table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name of Stage</th>
-                            <th>Step 01</th>
-                            <th>Step 02</th>
-                            <th>Step 03</th>
-                            <th>Step 04</th>
-                            <th>Step 05</th>
-                            <th>Duration</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="project__task-step">
-                                    01<h3>Preparation</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project__task">
-                                    <div class="project__task-img img">
-                                        <img src="./img/table/meeting.svg" alt="">
-                                    </div>
-                                    <h3  class="project__task-title">Kick Off
-                                        Meeting</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project__task">
-                                    <div class="project__task-img img">
-                                        <img src="./img/table/meeting.svg" alt="">
-                                    </div>
-                                    <h3  class="project__task-title">Kick Off
-                                        Meeting</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project__task">
-                                    <div class="project__task-img img">
-                                        <img src="./img/table/meeting.svg" alt="">
-                                    </div>
-                                    <h3  class="project__task-title">Kick Off
-                                        Meeting</h3>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> <div class="project__task-step">
-                                02<h3>Preparation</h3>
-                            </div></td>
-                            <td>
-                                <div class="project__task">
-                                    <div class="project__task-img img">
-                                        <img src="./img/table/meeting.svg" alt="">
-                                    </div>
-                                    <h3  class="project__task-title">Kick Off
-                                        Meeting</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project__task">
-                                    <div class="project__task-img img">
-                                        <img src="./img/table/meeting.svg" alt="">
-                                    </div>
-                                    <h3  class="project__task-title">Kick Off
-                                        Meeting</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="project__task">
-                                    <div class="project__task-img img">
-                                        <img src="./img/table/meeting.svg" alt="">
-                                    </div>
-                                    <h3  class="project__task-title">Kick Off
-                                        Meeting</h3>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </section>
     </div>

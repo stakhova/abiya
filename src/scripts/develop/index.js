@@ -72,16 +72,33 @@ function ajaxSend(form) {
 }
 
 
+function progressBar(){
+    let allTasks = $('.project__task').length
+    let acceptTasks = $('.project__task.accept').length
+    let percent = acceptTasks*100/allTasks
+    $('.project__progress-bar').css('width', `${percent}%`)
 
+}
 
-
-
+function addPercentStyle(){
+    $('.project__percent span').each(function (){
+        let result = $(this).text()
+        let wrap = $(this).closest('.project__percent')
+        if( result == '0' ){
+            wrap.addClass('zero')
+        }
+        if( result == '100' ){
+            wrap.addClass('full')
+        }
+    })
+}
 $(document).ready(function(){
     let loginForm = $('.login__form');
     validateForm(loginForm, function () {
         ajaxSend(loginForm, '/wp-admin/admin-ajax.php')
     });
-
+    progressBar();
+    addPercentStyle();
 
 
 
@@ -95,5 +112,4 @@ $(window).resize(function(){
 
 });
 $(window).scroll(function () {
-    changeHeader()
 });

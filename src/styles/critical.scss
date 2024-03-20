@@ -22,6 +22,18 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
 
 :root {
     --color-white: #fff;
@@ -34,16 +46,16 @@
     --color-full-percent:rgba(86, 64, 115, 0.35);
     --color-accept:rgba(183, 226, 182, 0.50);
     --color-reject:#F0C5BF;
-    --color-clafify:#FFE8CC;
+    --color-clafify:rgba(255, 232, 204, 0.50);
     --color-text:#4B4B4B;
     --color-red:#EE1D52;
     --color-grey:#BFBBBB;
     --color-cancel:#4B4B4B;
     --color-border:rgba(179, 163, 132, 0.50);
     --color-inactive:#E8E8E8;
-
     --Arimo:'Arimo', sans-serif;
     --RozhaOne:'RozhaOne', sans-serif;
+    --Poppins:'Poppins', sans-serif;
 
 
 }

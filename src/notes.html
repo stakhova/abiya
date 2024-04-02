@@ -1,0 +1,150 @@
+//= partials/head.html
+
+<div class="wrap ">
+    //= partials/header.html
+
+    <div class="wrap__main">
+        <section class="project">
+            <div class="container">
+                <div class="project__top">
+                    <div class="project__top-block">
+                        <div class="project__top-icon img">
+                            <img src="./img/icon-diagram.svg" alt="">
+                        </div>
+                        <h3 class="project__top-title">Project 1</h3>
+                    </div>
+                    <div class="project__top-block ">
+                        <a href="" class="project__top-link">Project Overview</a>
+                        <div class="project__percent"><span>4</span>%</div>
+                        <span class="project__top-days">4 days</span>
+                    </div>
+                </div>
+                <div class="project__progress">
+                    <div class="project__progress-bar">
+
+                    </div>
+                </div>
+
+                <div class="notes__block">
+                    <div class="notes__item" data-id="1">
+                        <div class="notes__top" >
+                            <h2 class="notes__title">Note 1</h2>
+                            <div class="notes__btn">
+                                <button class="notes__top-edit img">
+                                    <img src="./img/edit.svg" alt="">
+                                </button>
+                                <button class="notes__top-delete img">
+                                    <img src="./img/delete-black.svg" alt="">
+                                </button>
+                            </div>
+                        </div>
+                        <p class="notes__desc">
+                            Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.
+                        </p>
+                        <div class="notes__file">
+                            <div class="notes__file-item" data-id="1">
+                                <h3>Uploaded <span>file 1.pdf</span></h3>
+                                <div class="notes__btn">
+                                    <button class="notes__file-upload img">
+                                        <img src="./img/upload.svg" alt="">
+                                    </button>
+                                    <button class="notes__file-delete img">
+                                        <img src="./img/delete.svg" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="notes__file-item" data-id="2">
+                                <h3>Uploaded <span>file 2.pdf</span></h3>
+                                <div class="notes__btn">
+                                    <button class="notes__file-upload img">
+                                        <img src="./img/upload.svg" alt="">
+                                    </button>
+                                    <button class="notes__file-delete img">
+                                        <img src="./img/delete.svg" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="notes__item" data-id="2">
+                        <div class="notes__top">
+                            <h2 class="notes__title">Note 2</h2>
+                            <div class="notes__btn">
+                                <button class="notes__top-edit img">
+                                    <img src="./img/edit.svg" alt="">
+                                </button>
+                                <button class="notes__top-delete img">
+                                    <img src="./img/delete-black.svg" alt="">
+                                </button>
+                            </div>
+                        </div>
+                        <p class="notes__desc">
+                            Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.
+                        </p>
+                    </div>
+
+                    <button class="section__button notes__button">Add Notes</button>
+                </div>
+            </div>
+        </section>
+        <div class="modal modal__notes">
+            <div class="modal__wrap">
+                <div class="modal__content ">
+                    <div class="modal__close img">
+                        <img src="./img/close.svg" alt="">
+                    </div>
+                    <div class="modal__overflow">
+                        <div class="project__top-block">
+                            <div class="project__top-icon img">
+                                <img src="./img/icon-diagram.svg" alt="">
+                            </div>
+                            <h3 class="project__top-title">New Note For “Project 1”</h3>
+                        </div>
+                        <form action="" class="form__notes form">
+                            <div class="form__line"></div>
+                            <div class="form__input">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" id="title">
+
+                            </div>
+                            <div class="form__input">
+                                <label for="text">Text</label>
+                                <textarea  name="text" id="text" ></textarea>
+                            </div>
+                            <div class="form__line"></div>
+                            <div class="form__file">
+                                <div class="form__file-list">
+<!--                                    <div class="form__file-item">-->
+<!--                                        <h3>Uploaded file 1.pdf</h3>-->
+<!--                                        <button class="notes__file-delete img">-->
+<!--                                            <img src="./img/delete.svg" alt="">-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div class="form__file-item">-->
+<!--                                        <h3>Uploaded file 2.pdf</h3>-->
+<!--                                        <button class="notes__file-delete img">-->
+<!--                                            <img src="./img/delete.svg" alt="">-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="form__file-upload">
+                                    <label for="upload"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                    <input type="file" name='uploadfiles' multiple id="upload" />
+                                </div>
+                            </div>
+
+
+                            <button class="section__button">Attach</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+//= partials/scripts.html
+
+</body>
+</html>

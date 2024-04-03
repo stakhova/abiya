@@ -108,12 +108,33 @@ function changeMob() {
     }
 }
 
-function toogleModal(btn, modal, ) {
+function toogleModal(btn, modal ) {
     btn.click(function () {
+        let button = $(this)
+        function appendToModal(){
+
+            let desc = button.data('desc')
+            let managers = button.data('manager').split(',');
+            let number1 = button.closest('tr').index() + 1
+            let number2 = button.closest('td').index()
+            let part1 = button.closest('tr').find('.project__task-step h3').text()
+            let part2 = button.find('.project__task-title').text()
+            console.log('manager',managers)
+
+
+
+            let managerList = '';
+            managers.forEach(function(manager){
+                managerList += '<span>' + manager.trim() + '</span>';
+            });
+            $('.project__manager-list').html(managerList);
+            $('.project__modal-desc p').text(desc)
+            $('.project__modal-title').html(`<span>Stage ${number1}. ${part1}</span>Step ${number2}. ${part2}`)
+        }
+        appendToModal()
         modal.show();
         $('body').css('overflow', 'hidden');
-        $('.modal__social').css('opacity', '1');
-        console.log('btn',$(this))
+
         return false;
     });
     $('.modal__close').click(function () {
@@ -238,7 +259,7 @@ $(document).ready(function(){
 
     toogleModal($('.notes__button'), $('.modal__notes'));
     toogleModal($('.project__task.reject'), $('.modal__task'));
-    toogleModal($('.project__task.clarify'), $('.modal__task'));
+    toogleModal($('.project__task.clarify'), $('.modal__task-clarify'));
     uploadFiles()
     deleteNotes('.notes__top-delete','.notes__item', 'delete__notes')
     deleteNotes('.notes__file-delete','.notes__file-item', 'delete__file')

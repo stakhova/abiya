@@ -52,6 +52,7 @@
     width: 100%;
     text-align: center;
     position: relative;
+    display: block;
     color:white;
     background-color: var(--color-violet);
     font: 700 1.6rem / normal var(--Arimo);
@@ -383,9 +384,6 @@
       border-collapse: collapse;
       border: 0.1rem solid var(--color-middle-percent);
     }
-    //td, th{
-    //  height: 100%;
-    //}
     thead{
       background-color: var(--color-beige);
     }
@@ -394,12 +392,15 @@
       font: 400 2rem / normal var(--RozhaOne);
       text-transform: capitalize;
       color:var(--color-text);
-      padding: 2rem 2.4rem;
+      padding: 1.8rem 2.4rem;
     }
-    td{
-      //& > *{
-      //  padding: 0 2.4rem;
-      //}
+    &-clarify{
+      margin: 4rem 0;
+
+      th{
+        font-size: 1.6rem;
+        padding: 1.25rem 2.4rem;
+      }
     }
   }
   &__task{
@@ -582,6 +583,72 @@
   &__task-prev{
     left: 1.6rem;
   }
+  &__modal{
+    &-title{
+      font-size: 2.8rem;
+      color:var(--color-violet);
+      span{
+        display: block;
+        color:#4B4B4B;
+        font: 700 2rem / 140% var(--Arimo);
+        margin-bottom: 1.2rem;
+      }
+    }
+    &-desc{
+      h3{
+        font: 400 2rem / normal var(--RozhaOne);
+        margin-bottom: 0.8rem;
+      }
+      p{
+        font: 400 1.6rem / 140% var(--Arimo);
+      }
+    }
+  }
+  &__manager{
+    display: flex;
+    gap:1.6rem;
+    align-items: center;
+    h3{
+      white-space: nowrap;
+      font: 400 1.6rem / normal var(--RozhaOne);
+    }
+    &-list{
+      display: flex;
+      gap:1rem;
+      flex-wrap: wrap;
+      & > *{
+        border-radius: 0.8rem;
+        background: var(--color-inactive);
+        padding: 1.2rem 1.6rem;
+        font: 400 1.4rem / normal var(--Arimo);
+      }
+    }
+  }
+  &__clarify{
+    &-manager {
+      display: flex;
+      gap:1rem;
+      flex-wrap: wrap;
+      & > *{
+        padding: 0.6rem 1.6rem;
+        border-radius: 0.8rem;
+        background-color: var(--color-accept);
+      }
+      & > .clarify{
+        background-color: var(--color-clafify);
+      }
+      & > .reject{
+        background-color: var(--color-reject);
+      }
+    }
+    &-text{
+      font: 400 1.4rem / normal var(--Arimo);
+    }
+    &-more{
+      margin: 0 auto;
+    }
+  }
+
 }
 
 .notes {
@@ -703,6 +770,12 @@ input:-webkit-autofill:focus {
     max-height: 90vh;
     transform: translate(-50%, -50%);
     z-index: 6;
+    &-big{
+      max-width: 125.6rem;
+      .modal__overflow{
+        padding: 6rem 6rem 4rem;
+      }
+    }
   }
   &__overflow {
     padding: 6rem 4rem 4rem;
@@ -717,6 +790,24 @@ input:-webkit-autofill:focus {
       background-color: var(--color-primary);
     }
   }
+  &__task{
+    .form__input textarea{
+      height: 11.3rem;
+    }
+    &-clarify{
+      td > *{
+        padding: 1.6rem 2.4rem;
+      }
+      .project__clarify-manager{
+        padding: 1.1rem 2.4rem;
+      }
+
+    }
+  }
+  .project__top-block{
+    gap:3.2rem;
+  }
+
 }
 
 
@@ -1085,6 +1176,7 @@ input:-webkit-autofill:focus {
     gap:1.6rem;
   }
   .modal .project__top-icon {
+    min-width: 4rem;
     width: 4rem;
     height: 4rem;
   }
@@ -1159,6 +1251,58 @@ input:-webkit-autofill:focus {
   }
   .project__progress{
     height: 0.4rem;
+  }
+  .modal .project__top-block{
+    gap:1.6rem;
+  }
+  .project__modal-desc h3{
+    font-size: 1.4rem;
+  }
+  .project__modal-desc p{
+    font-size: 1.2rem;
+  }
+  .form__file-upload label img{
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .form__file-upload label{
+    font-size: 1.2rem;
+  }
+  .modal__task .form__file{
+    flex-direction: column;
+  }
+  .form__input label{
+    font-size: 1.4rem;
+  }
+  .modal__task .form__input textarea{
+    height: 7.6rem;
+  }
+  .project__manager{
+    align-items: flex-start;
+    flex-direction: column;
+    gap:1rem;
+  }
+  .project__manager h3{
+    font-size: 1.4rem;
+  }
+  .project__manager-list > *{
+    padding: 0.6rem  1rem;
+    font-size: 1rem;
+  }
+  .form .section__button{
+    margin-top: 1.4rem;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+  }
+  .modal__close{
+    top:1.2rem;
+    right: 1.2rem;
+    width: 2rem;
+    height: 2rem;
+  }
+  .project__modal-title span{
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
   }
 }
 

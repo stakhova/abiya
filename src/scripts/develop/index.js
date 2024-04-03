@@ -69,6 +69,13 @@ function ajaxSend(form) {
     });
 }
 
+function tab() {
+    $(".tab__header-item").click(function () {
+        $(".tab__header-item").removeClass("active").eq($(this).index()).addClass("active");
+        $(".tab__content-item").hide().eq($(this).index()).fadeIn();
+    }).eq(0).addClass("active");
+}
+
 
 function progressBar(){
     let allTasks = $('.project__task').length
@@ -101,12 +108,12 @@ function changeMob() {
     }
 }
 
-function toogleModal(btn, modal) {
+function toogleModal(btn, modal, ) {
     btn.click(function () {
         modal.show();
         $('body').css('overflow', 'hidden');
         $('.modal__social').css('opacity', '1');
-
+        console.log('btn',$(this))
         return false;
     });
     $('.modal__close').click(function () {
@@ -133,6 +140,10 @@ function toogleModal(btn, modal) {
         }
     });
 }
+
+function addInfoTaskToPopup(btn){
+    console.log('this', btn)
+}
 function uploadFiles(){
     $('#upload').on('change', function(){
         let files = $(this)[0].files;
@@ -141,8 +152,6 @@ function uploadFiles(){
         for(let i= 0; i < files.length; i++){
             let file = files[i];
             let fileName= file.name
-            console.log('fileName',fileName)
-
             fileList.append(`<div class="form__file-item"><h3>Uploaded ${fileName}</h3><button class="notes__file-delete img"><img src="../../img/delete.svg" alt=""></button>`)
 
         }
@@ -172,6 +181,41 @@ function deleteNotes(btn, item, action ){
     })
 }
 
+
+
+function showMobTask(){
+    $('.project__table-task tr:first-child').addClass('active')
+
+
+    function disabledBtn(){
+
+        if(!$('.project__table-task tr:first-child').hasClass('active')){
+            $('.project__task-prev').removeClass('disabled')
+        }else {
+            $('.project__task-prev').addClass('disabled')
+        }
+        if(!$('.project__table-task tr:last-child').hasClass('active')){
+            $('.project__task-next').removeClass('disabled')
+        } else {
+            $('.project__task-next').addClass('disabled')
+        }
+    }
+    $(document).on('click', '.project__task-next', function (){
+        let active = $('.project__table-task tr.active')
+        let next = active.next('.project__table-task tr')
+        active.removeClass('active')
+        next.addClass('active')
+        disabledBtn()
+    })
+    $(document).on('click', '.project__task-prev', function (){
+        let active = $('.project__table-task tr.active')
+        let prev = active.prev('.project__table-task tr')
+        active.removeClass('active')
+        prev.addClass('active')
+        disabledBtn()
+    })
+}
+
 function submitForm(){
 
     let notesForm = $('.form__notes');
@@ -193,10 +237,14 @@ $(document).ready(function(){
     changeMob()
 
     toogleModal($('.notes__button'), $('.modal__notes'));
+    toogleModal($('.project__task.reject'), $('.modal__task'));
+    toogleModal($('.project__task.clarify'), $('.modal__task'));
     uploadFiles()
     deleteNotes('.notes__top-delete','.notes__item', 'delete__notes')
     deleteNotes('.notes__file-delete','.notes__file-item', 'delete__file')
     submitForm();
+    tab();
+    showMobTask()
 });
 
 $(window).load(function(){

@@ -366,11 +366,13 @@
     &-bar{
       background-color: var(--color-violet) ;
       border-radius: 5rem;
-      height: 0.6rem;
+      height: 100%;
     }
   }
   &__table{
     width: 100%;
+    position: relative;
+
     table{
       border: 0.1rem solid var(--color-middle-percent);
       border-collapse: collapse;
@@ -454,10 +456,15 @@
     }
     &.reject{
       background-color: var(--color-reject);
+
       &:hover{
         transition: 0.2s all ease;
         background-color:#F4ABA1;
       }
+    }
+    &.disabled {
+      pointer-events: none;
+      background-color: var(--color-reject);
     }
     &.clarify{
       background-color: var(--color-clafify);
@@ -549,6 +556,31 @@
       border: none;
     }
 
+  }
+  &__task-nav{
+    display: none;
+    & > *{
+      position: absolute;
+      top:1.6rem;
+      padding: 0.8rem;
+      background-color: var(--color-gold);
+      border-radius: 50%;
+      width: 3.2rem;
+      height: 3.2rem;
+      text-align: center;
+      &.disabled{
+        pointer-events: none;
+        opacity: 0.3;
+
+      }
+    }
+
+  }
+  &__task-next{
+    right: 1.6rem;
+  }
+  &__task-prev{
+    left: 1.6rem;
   }
 }
 
@@ -778,8 +810,100 @@ input:-webkit-autofill:focus {
 }
 
 
+.notification{
+  &__table{
+      table{
+        border: none;
+        table-layout: auto;
+      }
+    td{
+      padding: 2rem 2.4rem;
+    }
+  }
+  &__project{
+    font: 700 1.6rem / normal var(--Arimo);
+    text-decoration-line: underline;
+    text-transform: capitalize;
+    color: var(--color-violet);
+  }
+  &__marked{
+    background: rgba(86, 64, 115, 0.15)
+  }
+  &__desc{
+    font: 400 1.6rem / 140% var(--Arimo);
+    span{
+      font-weight: 700;
+      color: var(--color-violet);
+    }
+    &.strong{
+      font-weight: 700;
+    }
+    &.reject{
+      span{
+        color:var(--color-red)
+      }
+    }
+  }
+  &__time{
+    font: 400 1.6rem / 140% var(--Arimo);
+  }
+}
 
+.notification{
+  .project__top{
+    margin-bottom: 4rem;
+  }
+  .container{
+    padding: 6rem 10rem 10rem;
+  }
+  .project__top-icon{
+    width: 10rem;
+    height: 10rem;
 
+  }
+  .project__top-title{
+   font-size: 2.8rem;
+  }
+  &__mob{
+    display: none;
+  }
+}
+
+.tab{
+  &__header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    &-item {
+      font: 700 2rem/normal 'Arimo';
+      position: relative;
+      padding: 1.6rem;
+      width: 30rem;
+      text-align: center;
+      color: var(--color-grey);
+      &.active {
+        color: var(--color-violet);
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 0.2rem;
+          background-color: var(--color-violet);
+        }
+      }
+    }
+  }
+  &__content-item {
+    display: none;
+    &:first-child {
+      display: block;
+    }
+
+  }
+}
 
 
 
@@ -832,7 +956,7 @@ input:-webkit-autofill:focus {
   .project__table-task tr{
     flex-direction: column;
     display: none;
-    &:first-child{
+    &.active{
       display:flex ;
     }
     &.active{
@@ -966,6 +1090,75 @@ input:-webkit-autofill:focus {
   }
   .modal .project__top-title{
     font-size: 1.6rem;
+  }
+  .notification__mob{
+    display: flex;
+    gap:1.6rem;
+    flex-direction: column;
+
+    &-item{
+      border-radius: 1.2rem;
+      border: 0.1rem solid rgba(179, 163, 132, 0.50);
+    }
+  }
+  .notification__flex{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.1rem solid rgba(179, 163, 132, 0.50);
+    & > *{
+      padding: 1.6rem 2.4rem;
+    }
+
+  }
+  .notification__project{
+    width: 70%;
+    border-right: 0.1rem solid rgba(179, 163, 132, 0.50);
+  }
+  .notification__desc{
+    padding: 1.6rem 2.4rem;
+
+  }
+  .notification__table{
+    display: none;
+  }
+  .tab__header-item{
+   font-size: 1.2rem;
+   width:50%;
+  }
+  .notification .project__top{
+    margin-bottom: 2.4rem;
+  }
+  .notification .tab__header{
+    margin-bottom: 2.4rem;
+  }
+  .notification .project__top-icon{
+    width: 6rem;
+    height: 6rem;
+  }
+  .notification .project__top-block{
+    justify-content: flex-start;
+  }
+  .notification .project__top-title{
+   font-size: 2rem;
+  }
+  .notification__flex > *{
+    font-size: 1.4rem;
+  }
+  .notification__desc{
+   font-size: 1.2rem;
+  }
+  .notification .section__button{
+    padding: 1.2rem;
+    margin: 0 auto;
+  }
+  .project__load button{
+    font-size: 1.2rem;
+  }
+  .project__task-nav{
+    display: block;
+  }
+  .project__progress{
+    height: 0.4rem;
   }
 }
 

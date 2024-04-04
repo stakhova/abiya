@@ -81,7 +81,7 @@ function progressBar(){
     let allTasks = $('.project__task').length
     let acceptTasks = $('.project__task.accept').length
     let percent = acceptTasks*100/allTasks
-    $('.project__percent span').text(percent)
+    $('.project__top .project__percent span').text(percent)
     $('.project__progress-bar').css('width', `${percent}%`)
 
 }
@@ -101,70 +101,88 @@ function addPercentStyle(){
 
 function changeMob() {
     if(window.innerWidth <= 666){
-
         let progress = $('.project__progress')
         let wrap = $('.project__top')
         wrap.find('.project__top-block:first-child').after(progress);
+        $('.project__table td').each(function (){
+            if($(this).find('*').length == 0){
+              $(this).closest('td').remove()
+          }
+        })
     }
 }
-
-function toogleModal(btn, modal ) {
+let button
+function toogleModal(btn, modal) {
     btn.click(function () {
-        let button = $(this)
-        function appendToModal(){
-
-            let desc = button.data('desc')
-            let managers = button.data('manager').split(',');
-            let number1 = button.closest('tr').index() + 1
-            let number2 = button.closest('td').index()
-            let part1 = button.closest('tr').find('.project__task-step h3').text()
-            let part2 = button.find('.project__task-title').text()
-            console.log('manager',managers)
-
-
-
-            let managerList = '';
-            managers.forEach(function(manager){
-                managerList += '<span>' + manager.trim() + '</span>';
-            });
-            $('.project__manager-list').html(managerList);
-            $('.project__modal-desc p').text(desc)
-            $('.project__modal-title').html(`<span>Stage ${number1}. ${part1}</span>Step ${number2}. ${part2}`)
-        }
-        appendToModal()
+        button = $(this)
+        openPopupFunction()
         modal.show();
         $('body').css('overflow', 'hidden');
-
         return false;
     });
     $('.modal__close').click(function () {
         $(this).closest(modal).hide();
         $('body').css('overflow', 'visible');
-
+        resetModal()
         return false;
     });
-    $('.modal__ok').click(function () {
+    $('.modal__btn-close').click(function () {
         $(this).closest(modal).hide();
         $('body').css('overflow', 'visible');
+        resetModal()
         return false;
     });
     $(document).keydown(function (e) {
         if (e.keyCode === 27) {
             e.stopPropagation();
+            resetModal()
             $('body').css('overflow', 'visible');
         }
+
     });
     modal.click(function (e) {
         if ($(e.target).closest('.modal__content').length == 0) {
             $(this).hide();
+            resetModal()
             $('body').css('overflow', 'visible');
         }
     });
 }
 
-function addInfoTaskToPopup(btn){
-    console.log('this', btn)
+function appendToModalData(){
+    let desc = button.data('desc')
+    let managers = button.data('manager').split(',');
+    let number1 = button.closest('tr').index() + 1
+    let number2 = button.closest('td').index()
+    let part1 = button.closest('tr').find('.project__task-step h3').text()
+    let part2 = button.find('.project__task-title').text()
+
+    let managerList = '';
+    managers.forEach(function(manager){
+        managerList += '<span>' + manager.trim() + '</span>';
+    });
+
+    $('.project__manager-list').html(managerList);
+    $('.project__modal-desc p').text(desc)
+    $('.project__modal-title').html(`<span>Stage ${number1}. ${part1}</span>Step ${number2}. ${part2}`)
 }
+
+function openPopupFunction(){
+    let cloneFileName = button.closest('.notes__file-item').clone()
+    $('.modal__delete .notes__file-item').remove()
+    $('.modal__delete .modal__btn').before(cloneFileName)
+    if(button.hasClass('project__task')){
+        appendToModalData()
+    }
+    if(button.hasClass('notes__top-delete')){
+        deleteNotes(button,'.notes__item', 'delete__notes')
+    }
+    if(button.hasClass('notes__file-delete')){
+        deleteNotes(button,'.notes__file-item', 'delete__file')
+    }
+}
+
+
 function uploadFiles(){
     $('#upload').on('change', function(){
         let files = $(this)[0].files;
@@ -173,43 +191,18 @@ function uploadFiles(){
         for(let i= 0; i < files.length; i++){
             let file = files[i];
             let fileName= file.name
-            fileList.append(`<div class="form__file-item"><h3>Uploaded ${fileName}</h3><button class="notes__file-delete img"><img src="../../img/delete.svg" alt=""></button>`)
+            fileList.append(`<div class="form__file-item"><h3>Uploaded ${fileName}</h3><button type="button" class="notes__file-delete img"><img src="../../img/delete.svg" alt=""></button>`)
 
         }
     });
 }
-function deleteNotes(btn, item, action ){
-    $(document).on('click',btn, function (){
-        let note = $(this).closest(item)
 
-        let id = note.data('id')
-        note.remove()
-        let obj= {action:action, item_id:id}
-        $.ajax({
-            url: '/wp-admin/admin-ajax.php',
-            data: obj,
-            method: 'POST',
-            success: function () {
-                console.log('success ajax');
-            },
-            error: function (error) {
-                console.log('error ajax');
-            },
-            complete: function (){
-
-            }
-        });
-    })
-}
 
 
 
 function showMobTask(){
     $('.project__table-task tr:first-child').addClass('active')
-
-
     function disabledBtn(){
-
         if(!$('.project__table-task tr:first-child').hasClass('active')){
             $('.project__task-prev').removeClass('disabled')
         }else {
@@ -237,15 +230,56 @@ function showMobTask(){
     })
 }
 
-function submitForm(){
 
+function submitForm(){
     let notesForm = $('.form__notes');
     $(document).on('submit', '.form__notes', function (e){
         e.preventDefault();
         ajaxSend(notesForm,'/wp-admin/admin-ajax.php')
     })
-
 }
+
+
+function deleteNotes(btn, item, action ){
+        let note = btn.closest(item)
+        let id = note.data('id')
+        let obj = {action:action, item_id:id}
+        $(document).off('click','.modal__btn-delete');
+        $(document).on('click','.modal__btn-delete', function (){
+            $.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                data: obj,
+                method: 'POST',
+                success: function () {
+                    console.log('success ajax');
+                    note.remove();
+                    $('.modal__delete').hide();
+                },
+
+                error: function (error) {
+                    console.log('error ajax');
+                    note.remove();
+                    $('.modal__delete').hide();
+                },
+                complete: function (){
+                }
+            });
+        })
+}
+
+
+function openModalDelete(btn, content) {
+    $(document).on('click', btn, function () {
+        $(this).closest('.modal__content').hide();
+        content.show();
+    });
+}
+
+function resetModal(){
+    $('.modal__content-task').show();
+    $('.modal__content-delete').hide();
+}
+
 $(document).ready(function(){
 
     let loginForm = $('.login__form');
@@ -256,16 +290,17 @@ $(document).ready(function(){
     progressBar();
     addPercentStyle();
     changeMob()
-
     toogleModal($('.notes__button'), $('.modal__notes'));
     toogleModal($('.project__task.reject'), $('.modal__task'));
     toogleModal($('.project__task.clarify'), $('.modal__task-clarify'));
-    uploadFiles()
-    deleteNotes('.notes__top-delete','.notes__item', 'delete__notes')
-    deleteNotes('.notes__file-delete','.notes__file-item', 'delete__file')
+    toogleModal($('.notes__file-delete'), $('.modal__delete'));
+    toogleModal($('.notes__top-delete'), $('.modal__delete'));
+
+    uploadFiles();
     submitForm();
     tab();
-    showMobTask()
+    showMobTask();
+    openModalDelete('.notes__file-delete', $('.modal__content-delete'));
 });
 
 $(window).load(function(){

@@ -776,6 +776,9 @@ input:-webkit-autofill:focus {
         padding: 6rem 6rem 4rem;
       }
     }
+    &-delete{
+      display: none;
+    }
   }
   &__overflow {
     padding: 6rem 4rem 4rem;
@@ -807,18 +810,42 @@ input:-webkit-autofill:focus {
   .project__top-block{
     gap:3.2rem;
   }
+  &__btn{
+    display: flex;
+    gap:2.4rem;
+    &-close{
+      background-color: var(--color-grey);
+    }
+    & > *{
+      width: calc( 50% - 1.2rem );
+    }
+  }
+  &__title{
+    font: 400 2.4rem / normal var(--RozhaOne);
+    text-align: center;
+    color:var(--color-violet)
+  }
+  &__delete{
+    .notes__file-item{
+      padding: 1.2rem 2.4rem;
+      border-radius: 0.8rem;
+      background-color: #F7F5F5;
+      .notes__btn{
+        display: none;
+      }
+    }
+  }
+
 
 }
 
 
 
 .form{
-  &__notes{
-    display: flex;
-    flex-direction: column;
-    gap:2.4rem;
-    margin-top: 2.4rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap:2.4rem;
+  margin-top: 2.4rem;
   &__line{
    height: 0.1rem;
     width: 100%;
@@ -938,9 +965,6 @@ input:-webkit-autofill:focus {
   &__time{
     font: 400 1.6rem / 140% var(--Arimo);
   }
-}
-
-.notification{
   .project__top{
     margin-bottom: 4rem;
   }
@@ -953,12 +977,13 @@ input:-webkit-autofill:focus {
 
   }
   .project__top-title{
-   font-size: 2.8rem;
+    font-size: 2.8rem;
   }
   &__mob{
     display: none;
   }
 }
+
 
 .tab{
   &__header {
@@ -1172,7 +1197,7 @@ input:-webkit-autofill:focus {
   .modal__overflow{
     padding: 3rem 1.6rem;
   }
-  .form__notes{
+  .form{
     gap:1.6rem;
   }
   .modal .project__top-icon {
@@ -1196,14 +1221,19 @@ input:-webkit-autofill:focus {
   .notification__flex{
     display: flex;
     justify-content: space-between;
-    border-bottom: 0.1rem solid rgba(179, 163, 132, 0.50);
-    & > *{
+    &:first-child{
+      border-bottom: 0.1rem solid rgba(179, 163, 132, 0.50);
+    }
+    .project__text{
       padding: 1.6rem 2.4rem;
     }
-
+  }
+  .notification__time{
+    padding: 1.6rem 2.4rem;
   }
   .notification__project{
     width: 70%;
+    padding: 1.6rem 2.4rem;
     border-right: 0.1rem solid rgba(179, 163, 132, 0.50);
   }
   .notification__desc{
@@ -1215,8 +1245,14 @@ input:-webkit-autofill:focus {
   }
   .tab__header-item{
    font-size: 1.2rem;
-   width:50%;
+   width:50vw;
   }
+  .tab__header{
+    margin: 0 -1.6rem 2.4rem;
+
+  }
+
+
   .notification .project__top{
     margin-bottom: 2.4rem;
   }
@@ -1235,6 +1271,9 @@ input:-webkit-autofill:focus {
   }
   .notification__flex > *{
     font-size: 1.4rem;
+  }
+  .notification__flex .project__text{
+    font-size: 1.2rem;
   }
   .notification__desc{
    font-size: 1.2rem;
@@ -1304,6 +1343,33 @@ input:-webkit-autofill:focus {
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
   }
+  .modal__title{
+    font-size: 1.6rem;
+  }
+  .modal__btn{
+   gap:1.6rem;
+  }
+  .modal__btn > *{
+    width: calc( 50% - 0.8rem);
+  }
+  .modal__delete .notes__file-item{
+    padding: 1.6rem 2.4rem;
+  }
+  .project__list{
+    display: none;
+  }
+  .notification__mob .project__percent{
+    margin: auto;
+    height: max-content;
+  }
 }
-
+@media only screen and (max-width: 480px) {
+  .modal__btn{
+    flex-direction: column;
+  }
+  .modal__btn > *{
+    margin: 0!important;
+    width: 100%;
+  }
+}
 

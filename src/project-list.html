@@ -14,99 +14,357 @@
                     <button class="section__button">Search</button>
 
                 </form>
-                <div class="project__table project__list">
-                    <table>
-
-                        <colgroup>
-                            <col span="1" style="width: 47%;">
-                            <col span="1" style="width: 18%;">
-                            <col span="1" style="width: 16%;">
-                            <col span="1" style="width: 9%;">
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>Kick Off Date</th>
-                                <th>Duration</th>
-                                <th>Progress</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="project__text">
-                                        <a href="">Project 1</a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__text">
-                                        <p>28/02/2024</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__text">
-                                        <p>4 days</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__percent">
-                                        <span>0</span>%
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="project__text">
-                                        <a href="">Project 2</a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__text">
-                                        <p>28/02/2024</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__text">
-                                        <p>4 days</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__percent">
-                                        <span>20</span>%
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="project__text">
-                                        <a href="">Project 3</a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__text">
-                                        <p>28/02/2024</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__text">
-                                        <p>4 days</p>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="project__percent">
-                                        <span>100</span>%
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="project__load">
-                                <td colspan="4">
-                                    <button class="section__button section__button-secondary ">Load More</button>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                <div class="tab__header">
+                    <button class="tab__header-item active">All projects</button>
+                    <button class="tab__header-item">Awaiting Approval</button>
                 </div>
+                <div class="tab__content">
+                    <div class="tab__content-item">
+                        <div class="project__table project__list">
+                            <table>
+                                <colgroup>
+                                    <col span="1" style="width: 47%;">
+                                    <col span="1" style="width: 18%;">
+                                    <col span="1" style="width: 16%;">
+                                    <col span="1" style="width: 9%;">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>name</th>
+                                    <th>Kick Off Date</th>
+                                    <th>Duration</th>
+                                    <th>Progress</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="project__text">
+                                            <a href="">Project 1</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>28/02/2024</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>4 days</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__percent">
+                                            <span>0</span>%
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project__text">
+                                            <a href="">Project 2</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>28/02/2024</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>4 days</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__percent">
+                                            <span>20</span>%
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project__text">
+                                            <a href="">Project 3</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>28/02/2024</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>4 days</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__percent">
+                                            <span>100</span>%
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="project__load">
+                                    <td colspan="4">
+                                        <button class="section__button section__button-secondary ">Load More</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="project__list-mob notification__mob">
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project__load">
+                                <button class="section__button section__button-secondary ">Load More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab__content-item">
+                        <div class="project__table project__list">
+                            <table>
+
+                                <colgroup>
+                                    <col span="1" style="width: 47%;">
+                                    <col span="1" style="width: 18%;">
+                                    <col span="1" style="width: 16%;">
+                                    <col span="1" style="width: 9%;">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>name</th>
+                                    <th>Kick Off Date</th>
+                                    <th>Duration</th>
+                                    <th>Progress</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="project__text">
+                                            <a href="">Project 1</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>28/02/2024</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>4 days</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__percent">
+                                            <span>0</span>%
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project__text">
+                                            <a href="">Project 2</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>28/02/2024</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>4 days</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__percent">
+                                            <span>20</span>%
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="project__text">
+                                            <a href="">Project 3</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>28/02/2024</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__text">
+                                            <p>4 days</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="project__percent">
+                                            <span>100</span>%
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="project__load">
+                                    <td colspan="4">
+                                        <button class="section__button section__button-secondary ">Load More</button>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="project__list-mob notification__mob">
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification__mob-item">
+                                <div class="notification__flex">
+                                    <a class="notification__project" href="">
+                                        Project 1
+                                    </a>
+                                    <div class="project__percent">
+                                        <span>30</span>%
+                                    </div>
+                                </div>
+                                <div class="notification__flex">
+                                    <div class="project__text">
+                                        <p>28/02/2024</p>
+                                    </div>
+                                    <div class="project__text">
+                                        <p>4 days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project__load">
+                                <button class="section__button section__button-secondary ">Load More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </section>
     </div>

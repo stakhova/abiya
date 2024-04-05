@@ -145,8 +145,85 @@
     padding: 1.2rem;
     min-width: 18.2rem;
   }
-}
+  &__burger {
+    width: 2rem;
+    height: 1.4rem;
+    display: none;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    gap: 0.4rem;
+    &-open {
+      span{
+        display: block;
+        position: absolute;
+        top: 50%;
+        margin: 0;
+        transition: .2s ease;
+        &:nth-child(1) {
+          transform: rotate(-45deg);
+        }
+        &:nth-child(2) {
+          transform: rotate(45deg);
+        }
+        &:nth-child(3) {
+          display: none;
+        }
+      }
 
+    }
+    & > * {
+      display: block;
+      width: 1.8rem;
+      height: 0.2rem;
+      background: var(--color-violet);
+      border-radius: 0.2rem;
+      transition: .2s ease;
+    }
+  }
+  &__menu{
+    display: none;
+    &-logo{
+      width: 12.8rem;
+      height: auto;
+    }
+    &-list{
+      display: flex;
+      flex-direction: column;
+      gap:4rem;
+      & > *{
+        font: 400 2.4rem / normal var(--RozhaOne);
+        color:var(--color-violet);
+        text-align: center;
+      }
+
+    }
+    &-show{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      gap:12vh;
+      background-color: white;
+      width: 100vw;
+      height: calc( 100vh - 5.7rem);
+      top: 5.7rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      position: absolute;
+      padding-bottom: 5rem;
+    }
+  }
+}
+.hidden{
+  overflow: hidden;
+}
 
 
 
@@ -479,11 +556,28 @@
     display: flex;
     justify-content: space-between;
     border-radius: 999.9rem;
-    border: 1px solid var(--Grey, #BFBBBB);
-    padding: 1rem 1rem 1rem 2.4rem;
+    border: 0.1rem solid #BFBBBB;
+    padding: 0.9rem 1rem 0.9rem 2.4rem;
     gap:2rem;
     align-items: center;
     margin: 4rem 0 3rem;
+    z-index: 2;
+    position: relative;
+    background-color: white;
+    &.focused{
+      border: 0.1rem solid  var(--color-violet);
+    }
+    &-list{
+      display: flex;
+      flex-direction: column;
+      gap:2.8rem;
+      & > *{
+        font: 400 1.4rem / normal var(--Arimo);
+      }
+    }
+    &-wrap{
+      position: relative;
+    }
     &-input{
       width: 100%;
     }
@@ -501,6 +595,21 @@
       padding: 1.2rem;
       max-width: 16rem;
     }
+    &-mob{
+      display: none;
+    }
+    &-result{
+      position: absolute;
+      top:3rem;
+      width: 100%;
+      padding: 5rem 2.4rem 1.8rem;
+      border-radius: 0 0 1.2rem 1.2rem;
+      z-index: 1;
+      display: none;
+      border: 0.1rem solid var(--color-violet);
+      background: linear-gradient(0deg, rgba(86, 64, 115, 0.05) 0%, rgba(86, 64, 115, 0.05) 100%), var(--Color-Neutral-0, #FFF);
+    }
+
   }
   &__percent{
     background-color:var(--color-middle-percent);
@@ -1055,6 +1164,7 @@ input:-webkit-autofill:focus {
   }
   .header__logo{
    width: 9.4rem;
+    height: 2.4rem;
   }
   .login__wrap .header{
    height: 6.4rem;
@@ -1251,8 +1361,6 @@ input:-webkit-autofill:focus {
     margin: 0 -1.6rem 2.4rem;
 
   }
-
-
   .notification .project__top{
     margin-bottom: 2.4rem;
   }
@@ -1362,6 +1470,62 @@ input:-webkit-autofill:focus {
     margin: auto;
     height: max-content;
   }
+  .header__burger{
+    display: flex;
+  }
+  .header__logo{
+   position: relative;
+    left: unset;
+    top: unset;
+    transform: none;
+  }
+  .header__mob{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    align-items: center;
+  }
+  .header .container{
+    padding: 1.6rem;
+  }
+  .project__search-list > *{
+    font-size: 1.2rem;
+  }
+  .project__search input{
+    font-size: 1.4rem;
+  }
+  .project__search-desc{
+    display: none;
+  }
+  .project__search-mob{
+    display: block;
+    width: 3.2rem;
+    height: 3.2rem;
+    position: relative;
+    &:after{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 1.6rem;
+      height: 1.6rem;
+      background: url("../img/search.svg") center/1.6rem 1.6rem no-repeat;
+    }
+  }
+  .project__search{
+    padding: 0.8rem 0.8rem 0.8rem 2.4rem;
+    margin: 0 0 2.4rem;
+  }
+  .notification__mob{
+    gap:1.2rem;
+  }
+  .notification__mob .project__percent{
+    font-size: 1.2rem;
+  }
+
+
 }
 @media only screen and (max-width: 480px) {
   .modal__btn{

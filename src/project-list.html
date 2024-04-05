@@ -6,14 +6,24 @@
     <div class="wrap__main ">
         <section class="project">
             <div class="container">
-                <form class="project__search">
+                <div class="project__search-wrap">
+                    <form class="project__search">
+                        <input type="hidden" name="action" value="search">
+                        <div class="project__search-input">
+                            <input type="text" name="search" placeholder="Search for...">
+                        </div>
+                        <button type="submit" class="section__button project__search-desc">Search</button>
+                        <button type="submit" class="section__button project__search-mob"></button>
 
-                    <div class="project__search-input">
-                        <input type="text" placeholder="Search for...">
+                    </form>
+                    <div class="project__search-result">
+                        <div class="project__search-list">
+                            <a href="">Project 1</a>
+                            <a href="">Project 2</a>
+                            <a href="">Project 3</a>
+                        </div>
                     </div>
-                    <button class="section__button">Search</button>
-
-                </form>
+                </div>
                 <div class="tab__header">
                     <button class="tab__header-item active">All projects</button>
                     <button class="tab__header-item">Awaiting Approval</button>

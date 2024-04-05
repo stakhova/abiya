@@ -184,10 +184,9 @@ function openPopupFunction(){
 
 
 function uploadFiles(){
-    $('#upload').on('change', function(){
+    $('#upload').on('change', function(e){
         let files = $(this)[0].files;
         let fileList = $('.form__file-list');
-
         for(let i= 0; i < files.length; i++){
             let file = files[i];
             let fileName= file.name
@@ -195,6 +194,30 @@ function uploadFiles(){
 
         }
     });
+
+
+    // $('#upload').on('change', function(event) {
+    //     let fileList = event.target.files;
+    //     let fileListContainer = $('.form__file-list');
+    //     fileListContainer.empty();
+    //
+    //     $.each(fileList, function(index, file) {
+    //         let fileName = file.name;
+    //         let deleteButton = $('<button>Delete</button>');
+    //         deleteButton.data('index', index); // Set index as data attribute
+    //         deleteButton.on('click', function() {
+    //             let indexToRemove = $(this).data('index');
+    //             let updatedFileList = Array.from(fileList);
+    //             updatedFileList.splice(indexToRemove, 1); // Remove the file from the list
+    //             event.target.files = new FileList(updatedFileList); // Assign the updated file list to input
+    //             $(event.target).trigger('change'); // Trigger change event to update file list
+    //         });
+    //
+    //         let listItem = $('<div></div>').text(fileName).append(deleteButton);
+    //         fileListContainer.append(listItem);
+    //     });
+    // });
+
 }
 
 
@@ -234,11 +257,86 @@ function showMobTask(){
 function submitForm(){
     let notesForm = $('.form__notes');
     $(document).on('submit', '.form__notes', function (e){
+
         e.preventDefault();
-        ajaxSend(notesForm,'/wp-admin/admin-ajax.php')
+        let formData = new FormData($(this)[0]);
+        // formData.append('file', $(this).find('input[type=file]')[0].files[0]);
+        $.ajax({
+            url: '/wp-admin/admin-ajax.php',
+            data: formData,
+            method: 'POST',
+            contentType: false,
+            processData: false,
+            cache: false,
+            success: function () {
+                console.log('success ajax');
+
+            },
+            error: function (error) {
+                console.log('error ajax');
+            },
+            complete: function (){
+
+            }
+        });
     })
 }
 
+function search(){
+    let formData = $('.project__search').serialize();
+
+    let searchText = $('.project__search-input input').val();
+    if (searchText.length < 1){
+        $('.project__search-result').hide()
+    } else{
+        $('.project__search-result').show(300)
+    }
+    $.ajax({
+        url: '/wp-admin/admin-ajax.php',
+        data: formData,
+        method: 'POST',
+        success: function (res) {
+            console.log('success ajax');
+            $('.project__search-list').html(res);
+        },
+        error: function (error) {
+            console.log('error ajax');
+        },
+        complete: function (){
+
+        }
+    });
+}
+
+function showSearch(){
+    $(document).on('keydown', '.project__search-input input', function (){
+        clearTimeout( $(this).data('timer') )
+        let timer = setTimeout(function() {
+            search()
+        }, 500);
+        $(this).data('timer', timer);
+    })
+
+    $(document).on('submit','.project__search', function (e){
+        e.preventDefault()
+        search()
+    })
+
+    $(document).on('input', '.project__search-input input', function (){
+        if($(this).is( ":focus" )){
+            $('.project__search').addClass('focused')
+        }else{
+            $('.project__search').removeClass('focused')
+        }
+    })
+}
+
+
+const openMenu = () => {
+    $('.header__burger').toggleClass("header__burger-open");
+    $('.header__menu').toggleClass('header__menu-show');
+    $('body').toggleClass('hidden');
+};
 
 function deleteNotes(btn, item, action ){
         let note = btn.closest(item)
@@ -276,12 +374,36 @@ function openModalDelete(btn, content) {
 }
 
 function resetModal(){
-    $('.modal__content-task').show();
-    $('.modal__content-delete').hide();
+    // $('.modal__content-task').show();
+    // $('.modal__content-delete').hide();
 }
 
-$(document).ready(function(){
 
+function deleteFileFromModal(){
+    $('#upload').on('change', function(event) {
+        let fileList = event.target.files;
+        let fileListContainer = $('.form__file-list');
+        fileListContainer.empty();
+
+        $.each(fileList, function(index, file) {
+            let fileName = file.name;
+            let deleteButton = $('<button>Delete</button>');
+            deleteButton.data('index', index); // Set index as data attribute
+            deleteButton.on('click', function() {
+                let indexToRemove = $(this).data('index');
+                let updatedFileList = Array.from(fileList);
+                updatedFileList.splice(indexToRemove, 1); // Remove the file from the list
+                event.target.files = new FileList(updatedFileList); // Assign the updated file list to input
+                $(event.target).trigger('change'); // Trigger change event to update file list
+            });
+
+            let listItem = $('<div></div>').text(fileName).append(deleteButton);
+            fileListContainer.append(listItem);
+        });
+    });
+}
+$(document).ready(function(){
+    // deleteFileFromModal()
     let loginForm = $('.login__form');
     validateForm(loginForm, function () {
         ajaxSend(loginForm, '/wp-admin/admin-ajax.php')
@@ -300,7 +422,9 @@ $(document).ready(function(){
     submitForm();
     tab();
     showMobTask();
-    openModalDelete('.notes__file-delete', $('.modal__content-delete'));
+    $('.header__burger').on('click', openMenu);
+    // openModalDelete('.notes__file-delete', $('.modal__content-delete'));
+    showSearch()
 });
 
 $(window).load(function(){

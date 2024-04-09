@@ -132,7 +132,7 @@
   }
   &__button{
     display: flex;
-    gap:2rem;
+    gap:4rem;
     align-items: center;
   }
   &__icon{
@@ -215,7 +215,7 @@
       top: 5.7rem;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 1;
+      z-index: 4;
       position: absolute;
       padding-bottom: 5rem;
     }
@@ -281,7 +281,7 @@
     }
   }
   &__text{
-    font: 400 1.6rem / 140% var(--Arimo);
+    font: 400 1.6rem / normal var(--Arimo);
     text-align: center;
     a{
       font-weight:700;
@@ -480,49 +480,19 @@
       }
     }
   }
-  &__task{
-    display: flex;
-    gap:1.4rem;
-    align-items: center;
-    height: 100%;
-    padding: 2.4rem!important;
-    position: relative;
-    cursor: pointer;
-    &:after{
-      content: '';
-      position: absolute;
-      width: calc(100% + 0.2rem);
-      bottom: -0.2rem;
-      left: -0.1rem;
-      height: 0.2rem;
-      z-index: 1;
-      background-color: #4B4B4B;
-    }
-    &-flex{
-      display: flex;
-    }
-    &-img{
-      width: 2.8rem;
-      min-width: 2.8rem;
-      height: 2.8rem;
-    }
-    &-title{
-      text-align: center;
-      font: 400 1.4rem / normal var(--Arimo);
-    }
-    &-time{
-      font: 500 1.6rem / normal var(--Poppins);
-      text-transform: capitalize;
-      padding: 0 2.4rem;
-    }
-    &-step{
-      font: 500 2.4rem / normal var(--Poppins);
-      text-transform: uppercase;
-      text-align: right;
-      color:var(--color-gold);
-      padding: 0 2.4rem;
-      & > *{
-        font-size: 1.2rem;
+  td{
+    &.task{
+      position: relative;
+      cursor: pointer;
+      &:after{
+        content: '';
+        position: absolute;
+        width: calc(100% + 0.2rem);
+        bottom: -0.2rem;
+        left: -0.1rem;
+        height: 0.2rem;
+        z-index: 1;
+        background-color: #4B4B4B;
       }
     }
     &.accept{
@@ -551,6 +521,54 @@
         background-color:#FFE8CC;
       }
     }
+  }
+  &__task{
+    display: flex;
+    gap:1.4rem;
+    align-items: center;
+    height: 100%;
+    padding: 2.4rem!important;
+    position: relative;
+    cursor: pointer;
+    &-first{
+      display: flex;
+      padding: 1.65rem 2.4rem;
+      align-items: flex-end;
+      gap:3.4rem;
+      justify-content: space-between;
+
+    }
+
+    &-flex{
+      display: flex;
+    }
+    &-img{
+      width: 2.8rem;
+      min-width: 2.8rem;
+      height: 2.8rem;
+    }
+    &-title{
+      text-align: center;
+      width: 100%;
+      font: 400 1.4rem / normal var(--Arimo);
+    }
+    &-time{
+      white-space: nowrap;
+      font: 400 1.2rem / normal var(--Arimo);
+      text-transform: capitalize;
+      //padding: 0 2.4rem;
+    }
+    &-step{
+      font: 500 2.4rem / normal var(--Poppins);
+      text-transform: uppercase;
+      text-align: left;
+      color:var(--color-gold);
+
+      & > *{
+        font-size: 1rem;
+      }
+    }
+
   }
   &__search{
     display: flex;
@@ -640,7 +658,7 @@
     }
   }
   &__text{
-    font: 400 1.6rem / 140% var(--Arimo);
+    font: 400 1.6rem / normal var(--Arimo);
     & > a{
       font-weight: 700;
       position: relative;
@@ -734,6 +752,9 @@
     }
   }
   &__clarify{
+    &-mob{
+      display: none;
+    }
     &-manager {
       display: flex;
       gap:1rem;
@@ -741,6 +762,9 @@
       & > *{
         padding: 0.6rem 1.6rem;
         border-radius: 0.8rem;
+        font: 400 1.2rem / normal var(--Arimo);
+        color:var(--color-text);
+        text-transform: capitalize;
         background-color: var(--color-accept);
       }
       & > .clarify{
@@ -750,17 +774,37 @@
         background-color: var(--color-reject);
       }
     }
+    &-file{
+      font: 400 1.4rem / normal var(--Arimo);
+    }
     &-text{
       font: 400 1.4rem / normal var(--Arimo);
     }
     &-more{
       margin: 0 auto;
     }
+    &-flex{
+      display: flex;
+      gap:0.8rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &-btn{
+      display: flex;
+      gap:0.8rem;
+      & > *{
+        width: 2rem;
+        height: 2rem;
+      }
+    }
   }
 
 }
 
 .notes {
+  .container{
+    padding: 4rem 10rem 10rem ;
+  }
   &__block{
     display: flex;
     flex-direction: column;
@@ -869,6 +913,7 @@ input:-webkit-autofill:focus {
   &__content {
     max-width: 63.4rem;
     width: 100%;
+    overflow: hidden;
     border-radius: 2rem;
     border: 1px solid #E8E8E8;
     background-color: white;
@@ -876,7 +921,7 @@ input:-webkit-autofill:focus {
     margin: 0 auto;
     top: 50%;
     left: 50%;
-    max-height: 90vh;
+    max-height: 95vh;
     transform: translate(-50%, -50%);
     z-index: 6;
     &-big{
@@ -892,7 +937,7 @@ input:-webkit-autofill:focus {
   &__overflow {
     padding: 6rem 4rem 4rem;
     width: 100%;
-    max-height: 90vh;
+    max-height: 95vh;
     overflow: auto;
     &::-webkit-scrollbar {
       background-color: transparent;
@@ -905,6 +950,7 @@ input:-webkit-autofill:focus {
   &__task{
     .form__input textarea{
       height: 11.3rem;
+      max-width: 100%;
     }
     &-clarify{
       td > *{
@@ -964,6 +1010,7 @@ input:-webkit-autofill:focus {
     gap:0.4rem;
     display: flex;
     flex-direction: column;
+    font: 400 1.6rem/140% var(--Arimo);
     input, textarea{
       border-radius: 1.2rem;
       border: 0.1rem solid rgba(179, 163, 132, 0.50);
@@ -971,6 +1018,7 @@ input:-webkit-autofill:focus {
       padding: 1.4rem 2.4rem;
     }
     textarea{
+      max-width: 100%;
       height: 17.3rem;
     }
     label{
@@ -1173,6 +1221,7 @@ input:-webkit-autofill:focus {
     font-size: 1.4rem;
   }
   .login__text-privacy{
+    display: none;
     text-align: left;
   }
   .login__button{
@@ -1234,17 +1283,20 @@ input:-webkit-autofill:focus {
     gap:1rem;
     color:var(--color-text);
     font-size: 2rem;
-    padding: 1.6rem 5rem;
+    padding: 1.7rem 5rem;
   }
   .project__task-step > *{
     font-size: 1.6rem;
+    width: min-content;
   }
   .project__task{
    gap:1.6rem;
     justify-content: center;
   }
   .project__task-time{
-    padding: 1.6rem 2.4rem;
+    padding: 2.4rem;
+    font-size:  1.6rem;
+    font-weight: 500;
     text-align: center;
   }
   .project__table-task table{
@@ -1299,7 +1351,7 @@ input:-webkit-autofill:focus {
     height: 1.6rem;
   }
   .modal__content{
-    width: calc(100vw - 4rem);
+    width: calc(100vw - 3rem);
   }
   .form__file{
     flex-direction: column-reverse;
@@ -1525,7 +1577,110 @@ input:-webkit-autofill:focus {
     font-size: 1.2rem;
   }
 
+  .login__title{
+    font-size: 2.8rem;
+  }
+  .login__text, .login__text> *{
+    font-size: 1.4rem;
+  }
+  .wrap__onlylogo .header__burger{
+    display: none;
+  }
+  .wrap__onlylogo .header__logo{
+    margin: 0 auto;
+  }
+  .wrap__onlylogo .header .container{
+    padding: 2rem;
+  }
+  .wrap__onlylogo .header{
+   height: auto;
+  }
+  .form__input{
+    font-size: 1.4rem;
+  }
+  .form__input input, .form__input textarea{
+    padding: 1.4rem;
+  }
 
+  .section__button{
+   padding: 1.2rem;
+    font-size: 1.2rem;
+  }
+  .project__task-title{
+    width: auto;
+  }
+  .project__task-first{
+   padding: 0;
+    & >*{
+      width: 100%;
+
+    }
+  }
+  .project__table-clarify >  table{
+    display: none;
+  }
+  .modal__content-big .modal__overflow{
+    padding: 3rem 1.6rem;
+  }
+  .clarify__mob-text{
+    font: 400 1.2rem / normal var(--RozhaOne);
+  }
+  .clarify__mob-wrap{
+    margin: 1.6rem 0;
+  }
+  .project__table-clarify{
+   margin: 1.6rem 0 3rem;
+  }
+  .clarify__mob-wrap td:first-child{
+    background-color: #EDE8E0;
+  }
+  .modal__task-clarify td > *{
+    padding: 1.55rem 1rem;
+  }
+  .modal__task-clarify .project__clarify-manager{
+    padding: 1.2rem 1rem;
+  }
+  .project__clarify-mob{
+    display: block;
+  }
+  .form__file-item {
+    gap:2rem;
+  }
+  .form__file-item h3{
+    max-width: 90%;
+    font-size: 1rem;
+  }
+  .clarify__mob-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.6rem;
+    width: 100%;
+    & > *{
+      color:var(--color-gold);
+      font:400 1.2rem/140% var(--Arimo);
+      text-decoration: underline;
+      &.disabled{
+        pointer-events: none;
+        opacity: 0.6;
+      }
+    }
+  }
+  .clarify__mob-wrap tbody{
+    display: none;
+    &.active{
+      display: table-caption;
+    }
+  }
+  .clarify__mob-wrap td:first-child{
+    width: 36%;
+  }
+  .clarify__mob-wrap td:last-child{
+    width: 64%;
+  }
+  .clarify__mob-wrap .project__clarify-text, .clarify__mob-wrap .project__clarify-file, .project__clarify-manager > *{
+    font-size: 1rem;
+  }
 }
 @media only screen and (max-width: 480px) {
   .modal__btn{

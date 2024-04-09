@@ -51,10 +51,10 @@ const validateForm = (form, func) => {
 };
 
 function ajaxSend(form) {
-    let formData = form.serialize();
+    let data = form.serialize();
     $.ajax({
         url: '/wp-admin/admin-ajax.php',
-        data: formData,
+        data: data,
         method: 'POST',
         success: function () {
             console.log('success ajax');
@@ -78,11 +78,13 @@ function tab() {
 
 
 function progressBar(){
-    let allTasks = $('.project__task').length
-    let acceptTasks = $('.project__task.accept').length
+    let allTasks = $('.task').length
+    let acceptTasks = $('.task.accept').length
     let percent = acceptTasks*100/allTasks
-    $('.project__top .project__percent span').text(percent)
-    $('.project__progress-bar').css('width', `${percent}%`)
+    $('.project__wrap .project__top .project__percent span').text(percent)
+    let notesPercent = $('.notes .project__top .project__percent span').text()
+    $('.project__wrap .project__progress-bar').css('width', `${percent}%`)
+    $('.notes .project__progress-bar').css('width', `${notesPercent}%`)
 
 }
 
@@ -109,8 +111,27 @@ function changeMob() {
               $(this).closest('td').remove()
           }
         })
+
+        $('.project__table-task .project__task-time').each(function (){
+
+            $(this).closest('tr').append(`<td></td>`)
+            console.log(1111, $(this).closest('tr td:last-child'))
+            $(this).closest('tr').find('td:last-child').append($(this))
+        })
     }
 }
+
+function resetModal(){
+    $('.modal__content-clarify').show()
+    $('.modal__content-delete').hide()
+
+
+    let project = $('.project__top .project__top-title').text()
+    $('.modal__notes .project__top-title').text(`New Note For "${project}"`)
+    $('.modal__notes input').val("")
+    $('.modal__notes textarea').val("")
+}
+
 let button
 function toogleModal(btn, modal) {
     btn.click(function () {
@@ -150,12 +171,13 @@ function toogleModal(btn, modal) {
 }
 
 function appendToModalData(){
-    let desc = button.data('desc')
-    let managers = button.data('manager').split(',');
-    let number1 = button.closest('tr').index() + 1
-    let number2 = button.closest('td').index()
-    let part1 = button.closest('tr').find('.project__task-step h3').text()
-    let part2 = button.find('.project__task-title').text()
+    let info =  button.find('.project__task ')
+    let desc = info.data('desc')
+    let managers = info.data('manager').split(',');
+    let number1 = info.closest('tr').index() + 1
+    let number2 = info.closest('td').index()
+    let part1 = info.closest('tr').find('.project__task-step h3').text()
+    let part2 = info.find('.project__task-title').text()
 
     let managerList = '';
     managers.forEach(function(manager){
@@ -165,21 +187,60 @@ function appendToModalData(){
     $('.project__manager-list').html(managerList);
     $('.project__modal-desc p').text(desc)
     $('.project__modal-title').html(`<span>Stage ${number1}. ${part1}</span>Step ${number2}. ${part2}`)
+    addMoreFile()
 }
 
 function openPopupFunction(){
     let cloneFileName = button.closest('.notes__file-item').clone()
     $('.modal__delete .notes__file-item').remove()
     $('.modal__delete .modal__btn').before(cloneFileName)
-    if(button.hasClass('project__task')){
+    $('.modal__content-delete .modal__btn').before(cloneFileName)
+
+    if(button.hasClass('task')){
         appendToModalData()
     }
+    if(button.hasClass('notes__top-edit')){
+        editNotes(button)
+    }
     if(button.hasClass('notes__top-delete')){
-        deleteNotes(button,'.notes__item', 'delete__notes')
+        deleteNotesOrFile(button,'.notes__item', 'delete__notes')
     }
     if(button.hasClass('notes__file-delete')){
-        deleteNotes(button,'.notes__file-item', 'delete__file')
+        deleteNotesOrFile(button,'.notes__file-item', 'delete__file-note')
     }
+
+}
+
+let page = 1;
+function loadMore(action, btn){
+    $(document).on('click',btn, function (){
+        let btn = $(this)
+        let wrap = btn.closest('.tab__content-item')
+        let category = wrap.attr('data-category')
+        let page = wrap.attr('data-page')
+        page++
+
+        wrap.attr('data-page', page)
+        let obj = { action, page, category}
+        $.ajax({
+            url: '/wp-admin/admin-ajax.php',
+            data: obj,
+            method: 'POST',
+            success: function () {
+                console.log('success ajax');
+                btn.hide()
+                btn.closest('tbody').append(res);
+                $('.notification__mob').append(res)
+            },
+            error: function (error) {
+                console.log('error ajax');
+            },
+            complete: function (){
+
+            }
+        });
+    })
+
 }
 
 
@@ -194,6 +255,8 @@ function uploadFiles(){
 
         }
     });
+
+
 
 
     // $('#upload').on('change', function(event) {
@@ -221,32 +284,33 @@ function uploadFiles(){
 }
 
 
-
-
-function showMobTask(){
-    $('.project__table-task tr:first-child').addClass('active')
+// .project__table-task
+// .project__task-prev
+// .project__task-next
+function showMobTask(table, elem, prev, next){
+    $(`${table} ${elem}:first-child`).addClass('active')
     function disabledBtn(){
-        if(!$('.project__table-task tr:first-child').hasClass('active')){
-            $('.project__task-prev').removeClass('disabled')
+        if(!$(`${table} ${elem}:first-child`).hasClass('active')){
+            $(prev).removeClass('disabled')
         }else {
-            $('.project__task-prev').addClass('disabled')
+            $(prev).addClass('disabled')
         }
-        if(!$('.project__table-task tr:last-child').hasClass('active')){
-            $('.project__task-next').removeClass('disabled')
+        if(!$(`${table} ${elem}:last-child`).hasClass('active')){
+            $(next).removeClass('disabled')
         } else {
-            $('.project__task-next').addClass('disabled')
+            $(next).addClass('disabled')
         }
     }
-    $(document).on('click', '.project__task-next', function (){
-        let active = $('.project__table-task tr.active')
-        let next = active.next('.project__table-task tr')
+    $(document).on('click', next, function (){
+        let active = $(`${table} ${elem}.active`)
+        let next = active.next(`${table} ${elem}`)
         active.removeClass('active')
         next.addClass('active')
         disabledBtn()
     })
-    $(document).on('click', '.project__task-prev', function (){
-        let active = $('.project__table-task tr.active')
-        let prev = active.prev('.project__table-task tr')
+    $(document).on('click', prev, function (){
+        let active = $(`${table} ${elem}.active`)
+        let prev = active.prev(`${table} ${elem}`)
         active.removeClass('active')
         prev.addClass('active')
         disabledBtn()
@@ -254,10 +318,8 @@ function showMobTask(){
 }
 
 
-function submitForm(){
-    let notesForm = $('.form__notes');
-    $(document).on('submit', '.form__notes', function (e){
-
+function submitFormData(form){
+    $(document).on('submit', form, function (e){
         e.preventDefault();
         let formData = new FormData($(this)[0]);
         // formData.append('file', $(this).find('input[type=file]')[0].files[0]);
@@ -269,11 +331,13 @@ function submitForm(){
             processData: false,
             cache: false,
             success: function () {
-                console.log('success ajax');
+                console.log('success ajax2222');
+                $('.modal').hide()
 
             },
             error: function (error) {
-                console.log('error ajax');
+                console.log('error ajax222');
+                $('.modal').hide()
             },
             complete: function (){
 
@@ -283,8 +347,7 @@ function submitForm(){
 }
 
 function search(){
-    let formData = $('.project__search').serialize();
-
+    let data = $('.project__search').serialize();
     let searchText = $('.project__search-input input').val();
     if (searchText.length < 1){
         $('.project__search-result').hide()
@@ -293,7 +356,7 @@ function search(){
     }
     $.ajax({
         url: '/wp-admin/admin-ajax.php',
-        data: formData,
+        data: data,
         method: 'POST',
         success: function (res) {
             console.log('success ajax');
@@ -321,7 +384,6 @@ function showSearch(){
         e.preventDefault()
         search()
     })
-
     $(document).on('input', '.project__search-input input', function (){
         if($(this).is( ":focus" )){
             $('.project__search').addClass('focused')
@@ -338,7 +400,7 @@ const openMenu = () => {
     $('body').toggleClass('hidden');
 };
 
-function deleteNotes(btn, item, action ){
+function deleteNotesOrFile(btn, item, action ){
         let note = btn.closest(item)
         let id = note.data('id')
         let obj = {action:action, item_id:id}
@@ -349,15 +411,15 @@ function deleteNotes(btn, item, action ){
                 data: obj,
                 method: 'POST',
                 success: function () {
-                    console.log('success ajax');
+                    console.log('success ajax444');
                     note.remove();
-                    $('.modal__delete').hide();
+                    $('.modal').hide();
                 },
 
                 error: function (error) {
-                    console.log('error ajax');
+                    console.log('error ajax444');
                     note.remove();
-                    $('.modal__delete').hide();
+                    $('.modal').hide();
                 },
                 complete: function (){
                 }
@@ -366,44 +428,135 @@ function deleteNotes(btn, item, action ){
 }
 
 
-function openModalDelete(btn, content) {
+
+function addMoreFile(){
+    $(document).on('click','.project__clarify-more',function (){
+        $('.modal__task-clarify').hide()
+        $('.modal__task').show()
+    })
+}
+
+function deleteFileFromModal(btn, content) {
     $(document).on('click', btn, function () {
         $(this).closest('.modal__content').hide();
         content.show();
-    });
-}
-
-function resetModal(){
-    // $('.modal__content-task').show();
-    // $('.modal__content-delete').hide();
-}
-
-
-function deleteFileFromModal(){
-    $('#upload').on('change', function(event) {
-        let fileList = event.target.files;
-        let fileListContainer = $('.form__file-list');
-        fileListContainer.empty();
-
-        $.each(fileList, function(index, file) {
-            let fileName = file.name;
-            let deleteButton = $('<button>Delete</button>');
-            deleteButton.data('index', index); // Set index as data attribute
-            deleteButton.on('click', function() {
-                let indexToRemove = $(this).data('index');
-                let updatedFileList = Array.from(fileList);
-                updatedFileList.splice(indexToRemove, 1); // Remove the file from the list
-                event.target.files = new FileList(updatedFileList); // Assign the updated file list to input
-                $(event.target).trigger('change'); // Trigger change event to update file list
+        let item = $(this).closest('.project__clarify-flex')
+        let id = item.data('id')
+        let obj = {action:'delete__file-clarify', item_id:id}
+        $(document).off('click','.modal__btn-delete');
+        $(document).on('click','.modal__btn-delete', function (){
+            $.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                data: obj,
+                method: 'POST',
+                success: function () {
+                    console.log('success ajax1111');
+                    $(item).closest('tr').remove();
+                    $('.modal__content-delete').hide();
+                    $('.modal__content-clarify').show();
+                },
+                error: function (error) {
+                    console.log('error ajax111');
+                    $(item).closest('tr').remove();
+                    $('.modal__content-delete').hide();
+                    $('.modal__content-clarify').show();
+                },
+                complete: function (){
+                }
             });
-
-            let listItem = $('<div></div>').text(fileName).append(deleteButton);
-            fileListContainer.append(listItem);
-        });
+        })
     });
 }
+
+
+
+function deleteJustUploadFile(){
+
+
+    $(document).on('click','.form__file .notes__file-delete', function (){
+        $(this).closest('.form__file-item').remove()
+
+    })
+    // $('#upload').on('change', function(event) {
+    //     let fileList = event.target.files;
+    //     let fileListContainer = $('.form__file-list');
+    //     fileListContainer.empty();
+    //
+    //     $.each(fileList, function(index, file) {
+    //         let fileName = file.name;
+    //         let deleteButton = $('<button>Delete</button>');
+    //         deleteButton.data('index', index); // Set index as data attribute
+    //         deleteButton.on('click', function() {
+    //             let indexToRemove = $(this).data('index');
+    //             let updatedFileList = Array.from(fileList);
+    //             updatedFileList.splice(indexToRemove, 1); // Remove the file from the list
+    //             event.target.files = new FileList(updatedFileList); // Assign the updated file list to input
+    //             $(event.target).trigger('change'); // Trigger change event to update file list
+    //         });
+    //
+    //         let listItem = $('<div></div>').text(fileName).append(deleteButton);
+    //         fileListContainer.append(listItem);
+    //     });
+    // });
+}
+
+
+function editNotes(btn){
+   let title = btn.closest('.notes__top').find('.notes__title').text()
+   let desc = btn.closest('.notes__item').find('.notes__desc').text().trim()
+   $('.modal__notes input[name="title"]').val(title)
+   $('.modal__notes textarea[name="text"]').val(desc)
+   $('.modal__notes .project__top-title').text(`Edit ${title}`)
+}
+
+
+// function uploadFile(){
+//     <form id="file-form" method="post">
+//         <input id="file-input" type="file" multiple>
+//             <button id="file-submit" type="button">Отправить</button><br/>
+//             <div id="file-container"></div>
+//     </form>
+//     let input = $('#file-input');
+//     let container = $('#file-container');
+//     input.on('change', async function(evt) {
+//         let files = $(this).prop('files');
+//         for (let file of files) {
+//             let elem = $('<div class="file-info"><p>' + file.name + '</p><progress class="progress-bar" max="100" value="0"></progress></div>').appendTo(container);
+//             //добавляем инфу о файле в свойство превью
+//             elem.get(0).file = file;
+//         }
+//         evt.preventDefault();
+//         //пускаем закачку каждого файла параллельно с помощью Promise.all и дожидаемся закачки всех файлов с помощью await.
+//         await Promise.all($('.file-info').map(upload));
+//         console.log('готово');
+//     });
+//
+//     async function upload(index, elem) {
+//         let data = new FormData();
+//         data.append('file', elem.file);
+//         let progress = $(elem).find('.progress-bar');
+//         //ждем ответа об успешной обработке файла на стороне сервера
+//         const res = await $.ajax({
+//             url: '/',
+//             contentType: false,
+//             processData: false,
+//             data: data,
+//             type: 'post',
+//             xhr: function() {
+//                 let xhr = new XMLHttpRequest();
+//                 xhr.upload.onprogress = function(evt) {
+//                     let percent = Math.ceil(evt.loaded / evt.total * 100);
+//                     progress.attr('value', percent);
+//                 }
+//                 return xhr;
+//             }
+//         });
+//     }
+// }
+//
+//
 $(document).ready(function(){
-    // deleteFileFromModal()
+    deleteJustUploadFile()
     let loginForm = $('.login__form');
     validateForm(loginForm, function () {
         ajaxSend(loginForm, '/wp-admin/admin-ajax.php')
@@ -413,18 +566,29 @@ $(document).ready(function(){
     addPercentStyle();
     changeMob()
     toogleModal($('.notes__button'), $('.modal__notes'));
-    toogleModal($('.project__task.reject'), $('.modal__task'));
-    toogleModal($('.project__task.clarify'), $('.modal__task-clarify'));
+    toogleModal($('.notes__top-edit'), $('.modal__notes'));
+
+    if( $('.project__wrap').attr('data-role') == 'manager'){
+        toogleModal($('.project__table-task .clarify'), $('.modal__manager'));
+    } else{
+        toogleModal($('.project__table-task .clarify'), $('.modal__task-clarify'));
+        toogleModal($('.project__table-task .reject'), $('.modal__task'));
+    }
+
     toogleModal($('.notes__file-delete'), $('.modal__delete'));
     toogleModal($('.notes__top-delete'), $('.modal__delete'));
 
     uploadFiles();
-    submitForm();
+    submitFormData('.form__notes');
+    submitFormData('.form__task');
     tab();
-    showMobTask();
     $('.header__burger').on('click', openMenu);
-    // openModalDelete('.notes__file-delete', $('.modal__content-delete'));
-    showSearch()
+    deleteFileFromModal('.project__clarify-delete', $('.modal__content-delete'));
+    showSearch();
+    loadMore('more_project', '.project__wrap .load__more')
+    loadMore('more_notification', '.notification__wrap .load__more')
+    showMobTask('.project__table-task', 'tr' ,'.project__task-prev', '.project__task-next')
+    showMobTask('.clarify__mob-wrap', 'tbody' , '.clarify__mob-prev', '.clarify__mob-next')
 });
 
 $(window).load(function(){

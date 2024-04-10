@@ -1081,6 +1081,7 @@ input:-webkit-autofill:focus {
       display: flex;
       align-items: center;
       gap:5rem;
+      justify-content: space-between;
       position: relative;
       h3{
         -webkit-line-clamp: 1;

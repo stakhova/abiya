@@ -1,3 +1,6 @@
+let button;
+
+
 const validateForm = (form, func) => {
     form.on("submit", function (e) {
         e.preventDefault();
@@ -126,13 +129,22 @@ function resetModal(){
     $('.modal__content-delete').hide()
     $('.modal__content-approve').hide()
 
+    $('form')[0].reset()
+    $('.form__file-list > *').remove();
+    $('#fileInput').val('');
+
     let project = $('.project__top .project__top-title').text()
     $('.modal__notes .project__top-title').text(`New Note For "${project}"`)
     $('.modal__notes input').val("")
     $('.modal__notes textarea').val("")
 }
 
-let button
+
+
+
+
+
+
 function toogleModal(btn, modal) {
     btn.click(function () {
         button = $(this)
@@ -318,11 +330,16 @@ function submitFormData(form){
             success: function () {
                 console.log('success ajax2222');
                 $('.modal').hide()
-
+                $('.form__file-list > *').remove();
+                $('#fileInput').val('');
+                $(form)[0].reset()
             },
             error: function (error) {
                 console.log('error ajax222');
                 $('.modal').hide()
+                $('.form__file-list > *').remove();
+                $('#fileInput').val('');
+                $(form)[0].reset()
             },
             complete: function (){
 
@@ -398,12 +415,14 @@ function deleteNotesOrFile(btn, item, action ){
                 success: function () {
                     console.log('success ajax444');
                     note.remove();
+                    $('body').css('overflow', 'visible');
                     $('.modal').hide();
                 },
 
                 error: function (error) {
                     console.log('error ajax444');
                     note.remove();
+                    $('body').css('overflow', 'visible');
                     $('.modal').hide();
                 },
                 complete: function (){
@@ -436,7 +455,6 @@ function deleteFileFromModal(btn, content) {
                 method: 'POST',
                 success: function () {
                     console.log('success ajax1111');
-
                     if(window.innerWidth <=666){
                         $(item).closest('tbody.active').remove();
                         $('.clarify__mob-wrap tbody:first-child').addClass('active')

@@ -4,34 +4,7 @@
     //= partials/header.html
 
     <div class="wrap__main">
-<!--        <form id="file-form" method="post">-->
-<!--            <input id="file-input" type="file" multiple>-->
-<!--            <button id="file-submit" type="button">Отправить</button><br/>-->
-<!--            <div id="file-container"></div>-->
-<!--        </form>-->
-        <style>
-            .progress {
-                width: 100%;
-                background-color: #f1f1f1;
-            }
-
-            .progressBar {
-                width: 0%;
-                height: 20px;
-                background-color: #4caf50;
-                text-align: center;
-                line-height: 20px;
-                color: white;
-            }
-        </style>
-
-        <form id="fileUploadForm" enctype="multipart/form-data">
-            <input type="file" id="fileInput" multiple>
-            <button type="submit">Upload</button>
-        </form>
-
-        <ul id="fileList"></ul>
-        <section class="project project__wrap" data-role="">
+        <section class="project project__wrap" data-role="manager">
             <div class="container">
                 <div class="project__top">
                     <div class="project__top-block">
@@ -45,9 +18,7 @@
                         <div class="project__percent"><span></span>%</div>
                         <span class="project__top-days">4 days</span>
                     </div>
-
                 </div>
-
                 <div class="project__progress">
                         <div class="project__progress-bar">
                         </div>
@@ -244,23 +215,23 @@
                                 </div>
 
                                 <div class="form__file">
-                                    <div class="form__file-list">
-                                        <!--                                    <div class="form__file-item">-->
+                                    <ul class="form__file-list" id="fileList">
+                                        <!--                                    <li class="form__file-item">-->
                                         <!--                                        <h3>Uploaded file 1.pdf</h3>-->
-                                        <!--                                        <button class="notes__file-delete img">-->
+                                        <!--                                        <button class="notes__file-delete img deleteFile">-->
                                         <!--                                            <img src="./img/delete.svg" alt="">-->
                                         <!--                                        </button>-->
-                                        <!--                                    </div>-->
-                                        <!--                                    <div class="form__file-item">-->
+                                        <!--                                    </li>-->
+                                        <!--                                    <li class="form__file-item">-->
                                         <!--                                        <h3>Uploaded file 2.pdf</h3>-->
-                                        <!--                                        <button class="notes__file-delete img">-->
+                                        <!--                                        <button class="notes__file-delete img deleteFile>-->
                                         <!--                                            <img src="./img/delete.svg" alt="">-->
                                         <!--                                        </button>-->
-                                        <!--                                    </div>-->
-                                    </div>
+                                        <!--                                    </li>-->
+                                    </ul>
                                     <div class="form__file-upload">
-                                        <label for="upload"><img src="./img/upload.svg" alt="">Upload the file</label>
-                                        <input type="file" name='uploadfiles' multiple id="upload" />
+                                        <label for="fileInput"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                        <input type="file" name='file' multiple id="fileInput" />
                                     </div>
                                 </div>
                                 <div class="form__line"></div>
@@ -881,7 +852,6 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-
                                                     <td>
                                                         <div class="clarify__mob-text">
                                                             Your Feedback

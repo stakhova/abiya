@@ -4,7 +4,34 @@
     //= partials/header.html
 
     <div class="wrap__main">
-        <section class="project project__wrap" data-role="manager">
+<!--        <form id="file-form" method="post">-->
+<!--            <input id="file-input" type="file" multiple>-->
+<!--            <button id="file-submit" type="button">Отправить</button><br/>-->
+<!--            <div id="file-container"></div>-->
+<!--        </form>-->
+        <style>
+            .progress {
+                width: 100%;
+                background-color: #f1f1f1;
+            }
+
+            .progressBar {
+                width: 0%;
+                height: 20px;
+                background-color: #4caf50;
+                text-align: center;
+                line-height: 20px;
+                color: white;
+            }
+        </style>
+
+        <form id="fileUploadForm" enctype="multipart/form-data">
+            <input type="file" id="fileInput" multiple>
+            <button type="submit">Upload</button>
+        </form>
+
+        <ul id="fileList"></ul>
+        <section class="project project__wrap" data-role="">
             <div class="container">
                 <div class="project__top">
                     <div class="project__top-block">
@@ -63,7 +90,7 @@
                                     <h3 class="project__task-time">2 days</h3>
                                 </div>
                             </td>
-                            <td class="clarify task">
+                            <td data-taskId="1" class="clarify task">
                                 <div class="project__task " data-desc="1111" data-manager="manager 1,manager 2,manager 3">
 
                                         <div class="project__task-img img">
@@ -73,7 +100,7 @@
                                             Meeting</h3>
                                 </div>
                             </td>
-                            <td class="clarify task">
+                            <td data-taskId="2" class="clarify task">
                                 <div class="project__task" data-desc="6666666666" data-manager="manager 1,manager 2,manager 3">
                                         <div class="project__task-img img">
                                             <img src="./img/table/meeting.svg" alt="">
@@ -82,7 +109,7 @@
                                             Meeting</h3>
                                 </div>
                             </td>
-                            <td class="accept task">
+                            <td data-taskId="3" class="accept task">
                                 <div class="project__task " data-desc="3333" data-manager="manager 1,manager 2,manager 3">
 
                                         <div class="project__task-img img">
@@ -92,7 +119,7 @@
                                             Meeting</h3>
                                 </div>
                             </td>
-                            <td class="accept task">
+                            <td data-taskId="4" class="accept task">
                                 <div class="project__task " data-desc="4444" data-manager="manager 1,manager 2,manager 3">
                                         <div class="project__task-img img">
                                             <img src="./img/table/meeting.svg" alt="">
@@ -117,7 +144,7 @@
                                     <h3 class="project__task-time">2 days</h3>
                                 </div>
                             </td>
-                            <td class="reject task">
+                            <td class="reject task" data-taskId="5">
                                 <div class="project__task" data-desc="5555" data-manager="manager 1,manager 2,manager 3">
                                         <div class="project__task-img img">
                                             <img src="./img/table/meeting.svg" alt="">
@@ -126,7 +153,7 @@
                                             Tender vs/ IFC</h3>
                                 </div>
                             </td>
-                            <td class="reject task">
+                            <td class="reject task" data-taskId="6">
                                 <div class="project__task  " data-desc="6666" data-manager="manager 1,manager 2,manager 3" >
                                         <div class="project__task-img img">
                                             <img src="./img/table/meeting.svg" alt="">
@@ -134,7 +161,7 @@
                                         <h3  class="project__task-title">RFI</h3>
                                 </div>
                             </td>
-                            <td class="reject task">
+                            <td class="reject task" data-taskId="7">
                                 <div class="project__task " data-desc="7777" data-manager="manager 1,manager 2,manager 3,manager 1,manager 2,manager 3">
                                     <div class="project__task-img img">
                                             <img src="./img/table/meeting.svg" alt="">
@@ -148,7 +175,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td >
                                 <div class="project__task-first">
                                     <div class="project__task-step">
                                         03<h3>approval
@@ -157,7 +184,7 @@
                                     <h3 class="project__task-time">2 days</h3>
                                 </div>
                             </td>
-                            <td class="disabled task">
+                            <td data-taskId="8" class="disabled task">
                                 <div class="project__task  " data-desc="88888" data-manager="manager 1">
                                     <div class="project__task-img img">
                                         <img src="./img/table/meeting.svg" alt="">
@@ -166,7 +193,7 @@
                                         Meeting</h3>
                                 </div>
                             </td>
-                            <td class="disabled task">
+                            <td data-taskId="9" class="disabled task">
                                 <div class="project__task"  data-desc="9999" data-manager="manager 1,manager 2">
                                     <div class="project__task-img img">
                                         <img src="./img/table/meeting.svg" alt="">
@@ -175,7 +202,7 @@
                                         Meeting</h3>
                                 </div>
                             </td>
-                            <td class="disabled task">
+                            <td data-taskId="10"  class="disabled task">
                                 <div class="project__task  " data-desc="10101010" data-manager="manager 1,manager 2,manager 3">
                                     <div class="project__task-img img">
                                         <img src="./img/table/meeting.svg" alt="">
@@ -591,9 +618,6 @@
                                                             <a href="./img/notification.svg" download class="project__clarify-download img">
                                                                 <img src="./img/upload.svg" alt="">
                                                             </a>
-                                                            <button class=" project__clarify-delete img">
-                                                                <img src="./img/delete.svg" alt="">
-                                                            </button>
                                                         </div>
                                                     </div>
 
@@ -663,14 +687,14 @@
             </div>
             <div class="modal modal__manager">
                 <div class="modal__wrap">
-                    <div class="modal__content modal__content-clarify modal__content-big">
+                    <div class="modal__content modal__content-clarify">
                         <div class="modal__close img">
                             <img src="./img/close.svg" alt="">
                         </div>
                         <div class="modal__overflow">
                             <div class="project__top-block">
                                 <div class="project__top-icon img">
-                                    <img src="./img/icon-notepad.svg" alt="">
+                                    <img src="./img/icon-edit.svg" alt="">
                                 </div>
                                 <h3 class="project__top-title project__modal-title"></h3>
                             </div>
@@ -685,10 +709,12 @@
                             <div class="project__table project__table-clarify ">
                                 <table>
                                     <colgroup>
-                                        <col span="1" style="width: 10%;">
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 30%;">
-                                        <col span="1" style="width: 26%;">
+                                        <col span="1" style="width: 16%;">
+                                        <col span="1" style="width: 29%;">
+<!--                                        <col span="1" style="width: 18%;">-->
+<!--                                        <col span="1" style="width: 33%;">-->
+                                        <col span="1" style="width: 27%;">
+                                        <col span="1" style="width: 31%;">
                                     </colgroup>
                                     <thead>
 
@@ -701,7 +727,7 @@
                                     </thead>
 
                                     <tbody>
-                                    <tr>
+                                    <tr data-id="111">
                                         <td>
                                             <h4 class="project__clarify-text">
                                                 28/02/2024
@@ -716,9 +742,6 @@
                                                     <a href="./img/notification.svg" download class="project__clarify-download img">
                                                         <img src="./img/upload.svg" alt="">
                                                     </a>
-                                                    <button class=" project__clarify-delete img">
-                                                        <img src="./img/delete.svg" alt="">
-                                                    </button>
                                                 </div>
                                             </div>
 
@@ -730,14 +753,14 @@
                                             </h4>
                                         </td>
                                         <td>
-                                            <div class="project__clarify-manager">
+                                            <div class="project__clarify-manager project__approve-manager">
                                                 <button class="project__approve">Approve</button>
                                                 <button class="project__reject">Reject</button>
                                             </div>
                                         </td>
 
                                     </tr>
-                                    <tr>
+                                    <tr data-id="222">
                                         <td>
                                             <h4 class="project__clarify-text">
                                                 28/02/2024
@@ -752,9 +775,6 @@
                                                     <a href="./img/notification.svg" download class="project__clarify-download img">
                                                         <img src="./img/upload.svg" alt="">
                                                     </a>
-                                                    <button class="project__clarify-delete img">
-                                                        <img src="./img/delete.svg" alt="">
-                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
@@ -764,14 +784,14 @@
                                             </h4>
                                         </td>
                                         <td>
-                                                <div class="project__clarify-manager">
+                                                <div class="project__clarify-manager project__approve-manager">
                                                     <button class="project__approve">Approve</button>
                                                     <button class="project__reject">Reject</button>
                                                 </div>
                                         </td>
 
                                     </tr>
-                                    <tr>
+                                    <tr data-id="333">
                                         <td>
                                             <h4 class="project__clarify-text">
                                                 28/02/2024
@@ -786,9 +806,6 @@
                                                     <a href="./img/notification.svg" download class="project__clarify-download img">
                                                         <img src="./img/upload.svg" alt="">
                                                     </a>
-                                                    <button class=" project__clarify-delete img">
-                                                        <img src="./img/delete.svg" alt="">
-                                                    </button>
                                                 </div>
                                             </div>
                                         </td>
@@ -798,7 +815,7 @@
                                             </h4>
                                         </td>
                                         <td>
-                                                <div class="project__clarify-manager">
+                                                <div class="project__clarify-manager project__approve-manager">
                                                     <button class="project__approve">Approve</button>
                                                     <button class="project__reject">Reject</button>
                                                 </div>
@@ -812,241 +829,226 @@
                                     <div class="form__line"></div>
                                     <div class="clarify__mob-wrap">
                                         <table>
-                                            <!--                                            <colgroup>-->
-                                            <!--                                                <col span="1" style="width: 39%;">-->
-                                            <!--                                                <col span="1" style="width: 61%;">-->
-
-                                            <!--                                            </colgroup>-->
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Date
-                                                    </div>
-
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        28/02/2024
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        File Name
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__clarify-flex" data-id="1">
-                                                        <div class="project__clarify-file">
-                                                            Downloaded file 1.pdf
+                                            <tbody data-id="111">
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Date
                                                         </div>
-                                                        <div class="project__clarify-btn">
-                                                            <a href="./img/notification.svg" download class="project__clarify-download img">
-                                                                <img src="./img/upload.svg" alt="">
-                                                            </a>
-                                                            <button class=" project__clarify-delete img">
-                                                                <img src="./img/delete.svg" alt="">
-                                                            </button>
+
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text">
+                                                            28/02/2024
+                                                        </h4>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            File Name
                                                         </div>
-                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="project__clarify-flex" data-id="1">
+                                                            <div class="project__clarify-file">
+                                                                Downloaded file 1.pdf
+                                                            </div>
+                                                            <div class="project__clarify-btn">
+                                                                <a href="./img/notification.svg" download class="project__clarify-download img">
+                                                                    <img src="./img/upload.svg" alt="">
+                                                                </a>
+                                                            </div>
+                                                        </div>
 
-                                                </td>
+                                                    </td>
 
-                                            </tr>
-                                            <tr>
+                                                </tr>
+                                                <tr>
 
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Notes
-                                                    </div>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Notes
+                                                        </div>
 
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        text text
-                                                    </h4>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text">
+                                                            text text
+                                                        </h4>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                                    </td>
+                                                </tr>
+                                                <tr>
 
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Approved By
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__clarify-manager">
-                                                        <button class="project__approve">Approve</button>
-                                                        <button class="project__reject">Reject</button>
-                                                    </div>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Your Feedback
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="project__clarify-manager project__approve-manager">
+                                                            <button class="project__approve">Approve</button>
+                                                            <button class="project__reject">Reject</button>
+                                                        </div>
 
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                             </tbody>
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Date
-                                                    </div>
-
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        28/02/2024
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        File Name
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__clarify-flex" data-id="1">
-                                                        <div class="project__clarify-file">
-                                                            Downloaded file 2222.pdf
+                                            <tbody data-id="222">
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Date
                                                         </div>
-                                                        <div class="project__clarify-btn">
-                                                            <a href="./img/notification.svg" download class="project__clarify-download img">
-                                                                <img src="./img/upload.svg" alt="">
-                                                            </a>
-                                                            <button class=" project__clarify-delete img">
-                                                                <img src="./img/delete.svg" alt="">
-                                                            </button>
+
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text">
+                                                            28/02/2024
+                                                        </h4>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            File Name
                                                         </div>
-                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="project__clarify-flex" data-id="1">
+                                                            <div class="project__clarify-file">
+                                                                Downloaded file 2222.pdf
+                                                            </div>
+                                                            <div class="project__clarify-btn">
+                                                                <a href="./img/notification.svg" download class="project__clarify-download img">
+                                                                    <img src="./img/upload.svg" alt="">
+                                                                </a>
+                                                            </div>
+                                                        </div>
 
-                                                </td>
+                                                    </td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Notes
-                                                    </div>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Notes
+                                                        </div>
 
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        text text
-                                                    </h4>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text">
+                                                            text text
+                                                        </h4>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                                    </td>
+                                                </tr>
+                                                <tr>
 
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Approved By
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__clarify-manager">
-                                                        <button class="project__approve">Approve</button>
-                                                        <button class="project__reject">Reject</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Your Feedback
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="project__clarify-manager project__approve-manager">
+                                                            <button class="project__approve">Approve</button>
+                                                            <button class="project__reject">Reject</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </tbody>
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Date
-                                                    </div>
-
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        28/02/2024
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        File Name
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__clarify-flex" data-id="1">
-                                                        <div class="project__clarify-file">
-                                                            Downloaded file 1.pdf
+                                            <tbody data-id="333">
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Date
                                                         </div>
-                                                        <div class="project__clarify-btn">
-                                                            <a href="./img/notification.svg" download class="project__clarify-download img">
-                                                                <img src="./img/upload.svg" alt="">
-                                                            </a>
-                                                            <button class=" project__clarify-delete img">
-                                                                <img src="./img/delete.svg" alt="">
-                                                            </button>
+
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text">
+                                                            28/02/2024
+                                                        </h4>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            File Name
                                                         </div>
-                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="project__clarify-flex" data-id="1">
+                                                            <div class="project__clarify-file">
+                                                                Downloaded file 1.pdf
+                                                            </div>
+                                                            <div class="project__clarify-btn">
+                                                                <a href="./img/notification.svg" download class="project__clarify-download img">
+                                                                    <img src="./img/upload.svg" alt="">
+                                                                </a>
+                                                            </div>
+                                                        </div>
 
-                                                </td>
+                                                    </td>
 
-                                            </tr>
-                                            <tr>
+                                                </tr>
+                                                <tr>
 
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Notes
-                                                    </div>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Notes
+                                                        </div>
 
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        text text
-                                                    </h4>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text">
+                                                            text text
+                                                        </h4>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
+                                                    </td>
+                                                </tr>
+                                                <tr>
 
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Approved By
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__clarify-manager">
-                                                        <button class="project__approve">Approve</button>
-                                                        <button class="project__reject">Reject</button>
-                                                    </div>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Your Feedback
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="project__clarify-manager project__approve-manager">
+                                                            <button class="project__approve">Approve</button>
+                                                            <button class="project__reject">Reject</button>
+                                                        </div>
 
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
-                                        <div class="clarify__mob-nav">
+                                        <div class="clarify__mob-nav ">
                                             <button class="clarify__mob-prev">Prev Check</button>
                                             <button class="clarify__mob-next">Next Check</button>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal__content modal__content-delete">
+                    <div class="modal__content modal__content-approve">
                         <div class="modal__close img">
                             <img src="./img/close.svg" alt="">
                         </div>
                         <div class="modal__overflow">
                             <div class="form">
-                                <h3 class="modal__title">Are you sure you want to delete this item?</h3>
+                                <h3 class="modal__title">Do you want to <span> </span> this file?</h3>
                                 <div class="form__line"></div>
                                 <div class="modal__btn">
                                     <button class="section__button modal__btn-close">Close</button>
-                                    <button class="section__button modal__btn-delete">Delete</button>
+                                    <button class="section__button modal__btn-approve">Yes, I'm sure</button>
                                 </div>
                             </div>
                         </div>

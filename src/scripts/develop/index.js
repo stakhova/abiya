@@ -28,6 +28,15 @@ const validateForm = (form, func) => {
             password: {
                 required: true,
             },
+            passwordNew: {
+                required: true,
+                minlength: 8
+            },
+            passwordNewRepeat: {
+                required: true,
+                minlength: 8,
+                equalTo: "#passwordNew"
+            }
 
         },
         messages: {
@@ -44,6 +53,14 @@ const validateForm = (form, func) => {
                 minlength: "First name can't be shorter than 2 characters",
                 maxLength: "First name can't be longer than 100 characters "
             },
+            passwordNew: {
+                required: "This field is required",
+                minlength: "Password can't be shorter than 8 characters"
+            },
+            passwordNew_confirm: {
+                required: "This field is required",
+                equalTo: "Password not equal"
+            }
 
         },
         submitHandler: function () {
@@ -53,18 +70,19 @@ const validateForm = (form, func) => {
     });
 };
 
-function ajaxSend(form) {
+function ajaxSend(form, funcSuccess,funcError ) {
     let data = form.serialize();
     $.ajax({
         url: '/wp-admin/admin-ajax.php',
         data: data,
         method: 'POST',
-        success: function () {
+        success: function (res) {
             console.log('success ajax');
-
+            funcSuccess(res)
         },
         error: function (error) {
             console.log('error ajax');
+            funcError(error)
         },
         complete: function (){
 
@@ -680,12 +698,48 @@ function uploadAndDeleteFiles(){
     }
 }
 
+
+function loginPopupChange(){
+    $(document).on('click','.login__forget', function (){
+        $(this).closest('.login__form').removeClass('active');
+        $('.login__form-forget').addClass('active')
+    })
+    $(document).on('click','.login__remember', function (){
+        $(this).closest('.login__form').removeClass('active');
+        $('.login__signin').addClass('active')
+    })
+    if(window.location.href.includes('set_new_password')){
+        $('.login__form').removeClass('active')
+        $('.login__form-recovery').addClass('active')
+    } else{
+        $('.login__signin').addClass('active')
+    }
+}
 $(document).ready(function(){
+    loginPopupChange()
     deleteJustUploadFile()
-    let loginForm = $('.login__form');
+    let loginForm = $('.login__signin');
     validateForm(loginForm, function () {
         ajaxSend(loginForm, '/wp-admin/admin-ajax.php')
     });
+
+    let loginForget = $('.login__form-forget');
+    validateForm(loginForget, function () {
+        ajaxSend(loginForget, '/wp-admin/admin-ajax.php', function (){
+            $('.login__form-forget').removeClass('active');
+            $('.login__form-success').addClass('active')
+        }, function (){
+            $('.login__form-forget').removeClass('active');
+            $('.login__form-success').addClass('active')
+        })
+    });
+
+    let passwordReset = $('.login__form-recovery');
+    validateForm(passwordReset, function () {
+        ajaxSend(passwordReset, '/wp-admin/admin-ajax.php')
+    });
+
+
     progressBar();
     addPercentStyle();
     changeMob()

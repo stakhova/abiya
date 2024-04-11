@@ -9,7 +9,8 @@
                 <img src="img/img-back.png" alt="">
             </div>
             <div class="login__block">
-                <form action="" class="login__form">
+                <form action="" class="login__form login__signin">
+                    <input type="hidden" name="action" value="login" >
                     <h2 class="login__title">Log in</h2>
                     <div class="login__input">
                         <label for="username">Username</label>
@@ -25,10 +26,45 @@
                         Remember me
                     </label>
                     <button class="login__button section__button">Log In</button>
-                    <p class="login__text">
-                        <a>Forget your password</a>
+                    <p class="login__text login__forget">
+                        <span>Forget your password</span>
                     </p>
                 </form>
+                <form action="" class="login__form login__form-forget">
+                    <input type="hidden" name="action" value="password_forget" >
+                    <h2 class="login__title">Password Recovery</h2>
+                    <div class="login__input">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email" >
+                    </div>
+
+                    <button class="login__button section__button">Next</button>
+                    <p class="login__text login__remember">
+                        Remembered a password?<span> Log In</span>
+                    </p>
+                </form>
+                <div class="login__form login__form-success">
+                    <div class="login__form-icon img">
+                        <img src="./img/email.svg" alt="">
+                    </div>
+                    <h2 class="login__title">Check Your Email</h2>
+                    <p class="login__text"> We have send a reset password to your email address</p>
+                    <button type="button" class="login__button section__button login__remember">Go Back</button>
+                </div>
+                <form action="" class=" login__form login__form-recovery">
+                    <input type="hidden" name="action" value="password_set_new" >
+                    <h2 class="login__title">Password Recovery</h2>
+                    <div class="login__input">
+                        <label for="passwordNew">Enter New Password</label>
+                        <input type="password" name="passwordNew" id="passwordNew" >
+                    </div>
+                    <div class="login__input">
+                        <label for="passwordNewRepeat">Repeat New Password</label>
+                        <input type="password" name="passwordNewRepeat" id="passwordNewRepeat" >
+                    </div>
+                    <button class="login__button section__button">Set New Password</button>
+                </form>
+
             </div>
         </section>
     </div>

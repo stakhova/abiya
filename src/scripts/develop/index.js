@@ -586,6 +586,7 @@ function editNotes(btn){
    $('.modal__notes input[name="notes__id"]').val(noteId)
    $('.modal__notes textarea[name="text"]').val(desc)
    $('.modal__notes .project__top-title').text(`Edit ${title}`)
+    console.log(1111111)
 }
 
 

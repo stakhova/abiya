@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rozha+One&display=swap" rel="stylesheet">
+    <style>
+        main{
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            background: white;
+        }
+        a{
+            text-decoration: none;
+            color:#4B4B4B;
+            display: block;
+        }
+        p, h2, pre, h3{
+            margin: 0;
+        }
+        .email__logo{
+            margin: 0 auto 60px;
+            width: 238px;
+            height: auto;
+        }
+        .email__logo img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+
+        }
+        .email__subtitle{
+            font:  400 28px / 39px 'Rozha One';
+            color:#564073;
+            margin-bottom: 24px;
+        }
+        .email__desc h3{
+            font:  600 16px / 24px 'Poppins';
+            margin-bottom: 8px;
+            color:#111;
+        }
+        .email__desc p{
+            font:  400 14px / 21px 'Poppins';
+            color:#111;
+        }
+        .email__approvals{
+            margin:60px auto;
+        }
+        .email__approvals h3{
+            font:  600 16px / 24px 'Poppins';
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .email__approvals p{
+            font:  400 20px / 28px 'Rozha One';
+            text-align: center;
+        }
+        .email__regards span{
+            font:  400 14px / 21px 'Poppins';
+            margin-bottom: 8px;
+            display: block;
+        }
+        .email__regards a{
+            font:  700 14px / 22px 'Arimo';
+            color:#B3A384;
+            text-decoration: underline;
+        }
+
+        table{
+            width: 100%;
+        }
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media only screen and (max-width: 666px) {
+            body{
+                margin: 0;
+            }
+            main{
+                padding: 30px 20px;
+            }
+            .email__subtitle{
+                font-size: 22px;
+            }
+            .email__desc{
+                margin: 30px 0;
+            }
+            .email__logo{
+             margin-bottom: 40px;
+            }
+            .email__logo{
+                width: 200px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <main>
+        <div class="email__logo">
+            <img src="./img/logo.svg" alt="">
+        </div>
+        <h3 class="email__subtitle">
+            Dear Engineer,
+        </h3>
+        <div class="email__desc">
+            <h3>Step xyz has been approved by Name of Manager…</h3>
+            <p>Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. </p>
+        </div>
+        <div class="email__approvals">
+            <h3>Please get approvals from managers:</h3>
+            <p>Name of manager 2</p>
+            <p>Name of manager 3</p>
+        </div>
+        <div class="email__regards">
+            <span>Regards,</span>
+            <a href="">Approve/Reject “Project Name” <br>
+                Step 3. Client’s Tender Drawing </a>
+        </div>
+
+    </main>
+</body>
+</html>

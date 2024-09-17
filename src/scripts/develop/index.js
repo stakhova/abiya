@@ -4,9 +4,6 @@ let button;
 const validateForm = (form, func) => {
     form.on("submit", function (e) {
         e.preventDefault();
-
-        console.log(1212121,form.has('.modal__calendar'))
-
     });
     $.validator.addMethod("goodMessage", function (value, element) {
         return this.optional(element) || /^[\sаА-яЯіІєЄїЇґҐa-zA-Z0-9._-]{2,100}$/i.test(value);
@@ -66,33 +63,12 @@ const validateForm = (form, func) => {
 
         },
         submitHandler: function () {
-
-
-            if( form.has('.modal__calendar') ){
-                let startDate = new Date($('.calendar__start .date').text().split('/').reverse().join('/'));
-                let endDate = new Date($('.calendar__end .date').text().split('/').reverse().join('/'));
-                let inputDate = new Date($('#date_add').val().split('/').reverse().join('/'));
-                if (inputDate < startDate || inputDate > endDate) {
-                    $('#date_add').after(`<p class="error">The date must be within the range of ${formatDate(startDate)} and ${formatDate(endDate)}</p>`)
-                    return false;
-                }else{
-                    $('p.error').remove()
-                    func();
-                }
-            }else{
-                func();
-            }
+            func();
             form[0].reset();
         }
     });
-
 };
-function formatDate(date) {
-    let day = String(date.getDate()).padStart(2, '0');
-    let month = String(date.getMonth() + 1).padStart(2, '0');
-    let year = date.getFullYear();
-    return day + '/' + month + '/' + year;
-}
+
 function ajaxSend(form, funcSuccess, funcError) {
     let data = form.serialize();
     $.ajax({
@@ -165,20 +141,17 @@ function resetModal() {
     $('.modal__content-delete').hide();
     $('.modal__content-approve').hide();
 
-
+    // $('form')[0].reset();
     $('.form__file-list > *').remove();
     $('#fileInput').val('');
-    $('.form__file-upload').removeClass('disabled')
 
+    $('.form__file-upload').removeClass('disabled')
     $('.form__check > *').remove()
 
     let project = $('.project__top .project__top-title').text();
     $('.modal__notes .project__top-title').text(`New Note For "${project}"`);
-    $('.form__input input:not(".modal__datepicker")').val("");
+    $('.form__input input').val("");
     $('.form__input textarea').val("");
-
-    $('.location__more-block').hide();
-    $('.location__more').show();
 }
 
 function toogleModal(btn, modal) {
@@ -261,7 +234,7 @@ function appendToModalData() {
     let subtasks = info.data('subtasks');
 
 
-    if(subtasks){
+    if(subtasks.length > 0){
         checkbox(subtasks)
     }
 
@@ -395,17 +368,17 @@ function loadMore(action, btn) {
 let fileListContainer = $('.form__file-list');
 
 function updateFileListDisplay(fileList) {
-    fileListContainer.empty();
+    fileListContainer.empty(); // Clear previous list
     $.each(fileList, function (index, file) {
         let fileName = file.name;
         let deleteButton = $(`<button type="button" class="notes__file-delete img"><img src="${url}delete.svg" alt=""></button>`);
-        deleteButton.data('index', index);
+        deleteButton.data('index', index); // Set index as data attribute
         deleteButton.on('click', function () {
             let indexToRemove = $(this).data('index');
             let updatedFileList = Array.from(fileList);
-            updatedFileList.splice(indexToRemove, 1);
-            $(this).closest('.form__file-item').remove();
-            event.target.files = new FileList(updatedFileList);
+            updatedFileList.splice(indexToRemove, 1); // Remove the file from the list
+            $(this).closest('.form__file-item').remove(); // Remove the file item from display
+            event.target.files = new FileList(updatedFileList); // Update the input's file list
         });
 
 
@@ -419,6 +392,8 @@ function showMobTask(table, elem, prev, next) {
     $(`${table} ${elem}:first-child`).addClass('active');
 
     $(prev).addClass('disabled');
+
+
 
     function disabledBtn() {
         if (!$(`${table} ${elem}:first-child`).hasClass('active')) {
@@ -455,13 +430,13 @@ function successFormData(){
 
 function submitFormDataProject(form) {
     $(document).on('submit', form, function (e) {
-        console.log(1122)
         e.preventDefault();
         let taskId = $(this).find('input[name=task_id]').val()
         let currentTask
         $('.task').each(function (){
             if($(this).attr('data-taskId') == taskId){
                 currentTask = $(this)
+
             }
         })
         let fileProject = $('.modal__task input[type=file]')
@@ -487,10 +462,10 @@ function submitFormDataProject(form) {
                     formData.delete(key);
                 }
             });
+            $('.preloader__wrap').show()
             uploadedFiles.forEach(function(file, index) {
                 formData.append('file[]', file);
             });
-            $('.preloader__wrap').show()
 
             $.ajax({
                 url: '/wp-admin/admin-ajax.php',
@@ -901,8 +876,6 @@ function appendInfoAboutClarify(button) {
             $('.project__table-clarify').replaceWith(res);
 
             if( $('.clarify__mob-wrap tbody').length/2 == 1 ){
-
-
                 $('.clarify__mob-next').addClass('disabled');
             }
         },
@@ -917,13 +890,12 @@ function appendInfoAboutClarify(button) {
 let uploadedFiles = []
 function uploadAndDeleteFiles() {
     // <div className="form__file-item"><h3>Uploaded ${fileName}</h3><button type="button" className="notes__file-delete img"><img src="../../img/delete.svg" alt=""></button>
-    let list
-    $('.file__input').on('change', function () {
+
+    $('#fileInput').on('change', function () {
         let files = $(this)[0].files;
         for (var i = 0; i < files.length; i++) {
             uploadFile(files[i]);
         }
-        list = $(this).closest('.form').find('.file__list')
     });
 
     $(document).on('click', '.deleteFile', function () {
@@ -936,7 +908,7 @@ function uploadAndDeleteFiles() {
         let progress = 0;
         let progressBar = $('<div class="progressBar"></div>');
         let listItem = $('<li class="form__file-item"> <h3>' + file.name + '</h3></li>').append(progressBar);
-        list.append(listItem);
+        $('#fileList').append(listItem);
 
         let uploadInterval = setInterval(function () {
             progress += Math.random() * 10;
@@ -952,10 +924,10 @@ function uploadAndDeleteFiles() {
         }, 20);
     }
     function updateFileList() {
-        list.empty();
+        $('#fileList').empty();
         for (let i = 0; i < uploadedFiles.length; i++) {
             let fileName = uploadedFiles[i].name;
-            list.append(`<li class="form__file-item"> <h3>${fileName}</h3><button class="deleteFile notes__file-delete img" data-index="${i}">  <img src="${url}delete.svg" alt=""></button></li>`);
+            $('#fileList').append(`<li class="form__file-item"> <h3>${fileName}</h3><button class="deleteFile notes__file-delete img" data-index="${i}">  <img src="${url}delete.svg" alt=""></button></li>`);
         }
     }
 }

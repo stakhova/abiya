@@ -479,6 +479,75 @@ table{
   font: 400 1.6rem / normal var(--RozhaOne);
   text-transform: capitalize;
 }
+
+.modal__managers-tracker .project__table th {
+  border:none;
+}
+
+.drop{
+  position: relative;
+  width: max-content;
+
+  &__btn{
+    padding:0.6rem 3.2rem 0.6rem 1.6rem;
+    position: relative;
+    cursor: pointer;
+    font: 400 1.2rem / normal var(--Arimo);
+    color:#4B4B4B;
+    width: max-content;
+    min-width: 12.7rem;
+    border-radius: 0.8rem;
+    &:after{
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right:1.6rem;
+      width: 1.4rem;
+      height:0.7rem;
+      background: url(../img/triangle.svg) center/1.4rem 0.7rem no-repeat;
+    }
+  }
+  &__menu{
+    z-index: 5;
+    left: 50%;
+    width: 100%;
+    top: 2.8rem;
+    transform: translateX(-50%);
+    position: absolute;
+    border-radius: 0.8rem;
+    box-shadow: 0 0.5rem 1.46rem 0 rgba(0, 0, 0, 0.25);
+    background-color: var(--color-white);
+    overflow: hidden;
+    display: none;
+    &-flex{
+      display: flex;
+      flex-direction: column;
+      & > *{
+        text-align: left;
+        padding: 1rem 1.6rem;
+        font: 400 1.2rem / normal var(--Arimo);
+        transition: 0.2s ease;
+        white-space: nowrap;
+        cursor: pointer;
+        &[data-status="1"]:hover {
+          background-color: rgba(183, 226, 182, 0.50);
+        }
+        &[data-status="2"]:hover {
+          background-color: #F0C5BF;
+        }
+        &[data-status="3"]:hover {
+          background-color: #FFE8CC;
+        }
+        &[data-status="4"]:hover {
+          background-color: #E8E8E8;
+        }
+      }
+    }
+  }
+}
+
+
 @media only screen and (max-width: 1440px) {
   .modal__content-biggest{
     max-width: 90%;

@@ -27,6 +27,30 @@ const validateForm = (form, func) => {
                 goodEmail: true,
                 email: true
             },
+            category:{
+                required: true,
+            },
+            name:{
+                required: true,
+            },
+            phone:{
+                required: true,
+            },
+            location_name:{
+                required: true,
+            },
+            location:{
+                required: true,
+            },
+            link: {
+                required: true,
+            },
+            date:{
+                required: true,
+            },
+            note: {
+                required: true,
+            },
             password: {
                 required: true
             },
@@ -38,6 +62,12 @@ const validateForm = (form, func) => {
                 required: true,
                 minlength: 8,
                 equalTo: "#passwordNew"
+            },
+            terms:{
+                required: true,
+            },
+            percentage:{
+                required: true,
             }
 
         },
@@ -62,13 +92,43 @@ const validateForm = (form, func) => {
             passwordNew_confirm: {
                 required: "This field is required",
                 equalTo: "Password not equal"
+            },
+            location_name:{
+                required: "This field is required",
+            },
+            location:{
+                required: "This field is required",
+            },
+            link:{
+                required: "This field is required",
+            },
+            category:{
+                required: "This field is required",
+            },
+            name:{
+                required: "This field is required",
+            },
+            phone:{
+                required: "This field is required",
+            },
+            date:{
+                required: "This field is required",
+            },
+            note: {
+                required: "This field is required",
+            },
+            terms:{
+                required: "This field is required",
+            },
+            percentage:{
+                required: "This field is required",
             }
 
         },
         submitHandler: function () {
 
 
-            if( form.has('.modal__calendar') ){
+            if( form.hasClass('.modal__calendar') ){
                 let startDate = new Date($('.calendar__start .date').text().split('/').reverse().join('/'));
                 let endDate = new Date($('.calendar__end .date').text().split('/').reverse().join('/'));
                 let inputDate = new Date($('#date_add').val().split('/').reverse().join('/'));
@@ -83,7 +143,11 @@ const validateForm = (form, func) => {
                 func();
             }
             form[0].reset();
+            // form.find('select').val(null).trigger('change');
         }
+    });
+    form.find('select').on('change', function () {
+        $(this).valid(); // Trigger validation for the select element
     });
 
 };
@@ -416,20 +480,25 @@ function updateFileListDisplay(fileList) {
 }
 
 function showMobTask(table, elem, prev, next) {
-    $(`${table} ${elem}:first-child`).addClass('active');
+    $(`${table} ${elem}:first-of-type`).addClass('active');
 
     $(prev).addClass('disabled');
+
 
     function disabledBtn() {
         if (!$(`${table} ${elem}:first-child`).hasClass('active')) {
             $(prev).removeClass('disabled');
+            console.log(1111)
         } else {
             $(prev).addClass('disabled');
+            console.log(2222)
         }
         if (!$(`${table} ${elem}:last-child`).hasClass('active')) {
             $(next).removeClass('disabled');
+            console.log(3333)
         } else {
             $(next).addClass('disabled');
+            console.log(4444)
         }
     }
     $(document).on('click', next, function () {
@@ -464,11 +533,9 @@ function submitFormDataProject(form) {
                 currentTask = $(this)
             }
         })
-        let fileProject = $('.modal__task input[type=file]')
-        let messageProject = $('.modal__task #notes')
+        let fileProject = $(this).closest('.modal__task').find('input[type="file"]')
+        let messageProject = $(this).closest('.modal__task').find('input[name="notes"]')
         let required = false
-
-
 
 
 
@@ -479,7 +546,7 @@ function submitFormDataProject(form) {
             $('.modal__task .form__file-hint').remove()
             required = true;
         }
-
+        console.log(11111,fileProject.val(), fileProject.length > 0 , fileProject.val()!=="" , required)
         if(fileProject.length > 0 && fileProject.val()!=="" && required){
             let formData = new FormData($(this)[0]);
             formData.forEach(function(value, key) {
@@ -1138,6 +1205,7 @@ $(document).ready(function () {
 
     submitFormDataNotes('.form__notes');
     submitFormDataProject('.form__task');
+
     tab();
     $('.header__burger').on('click', openMenu);
     deleteFileFromModal('.project__clarify-delete', $('.modal__content-delete'));

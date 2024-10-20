@@ -43,6 +43,129 @@ function openManagerPopup(btn, modal) {
 
 
 
+function spline() {
+    const ctxList = document.querySelectorAll('.chart');
+
+    ctxList.forEach((ctx) => {
+        // Get chart data from the data-chart attribute and parse it
+        const chartData = JSON.parse(ctx.getAttribute('data-chart'));
+
+        // Construct the dataset for the Chart.js instance
+        const data = {
+            labels: ['Project Value', 'Material Cost', 'Labour Cost', 'Misc. Cost'],
+            datasets: [{
+                label: 'My Dataset',
+                data: chartData.data,
+                backgroundColor: [
+                    '#564073',
+                    '#C4BCCE',
+                    '#EDE8E0',
+                    '#B3A384'
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        // Initialize the chart
+        new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false,
+                        // position: 'right',
+                    },
+                },
+            }
+        });
+
+    });
+    const canvas = document.getElementById('chart__line')
+
+    const labels = JSON.parse(canvas.getAttribute('data-labels'));
+    const datasets = JSON.parse(canvas.getAttribute('data-datasets'));
+
+    const ctx = canvas.getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets.map(dataset => ({
+                label: dataset.label,
+                data: dataset.data,
+                backgroundColor: dataset.backgroundColor,
+                borderWidth: 2,
+                fill: false
+            }))
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10,
+                        min: 0
+                    }
+                },
+                x: {
+                    ticks: {
+                        stepSize: 1,
+                    }
+                }
+            }
+        }
+    });
+
+
+    // Bar Chart
+    document.querySelectorAll('.chart__bar').forEach(function(chartDiv) {
+        // Extract data from data-attr and labels
+        let data = chartDiv.getAttribute('data-attr').split(',');
+        let labels = chartDiv.getAttribute('data-labels').split(',');
+        let canvasId = chartDiv.getAttribute('data-canvas-id');
+        var bgColors = chartDiv.getAttribute('data-bg-colors').split(',');
+        // Get the corresponding canvas
+        let ctx = document.getElementById(canvasId).getContext('2d');
+
+        // Create a bar chart using Chart.js
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Dataset for ' + canvasId,
+                    data: data.map(Number),
+                    backgroundColor: bgColors,
+                    borderColor: bgColors.map(color => color.replace('0.2', '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                    },
+                },
+            }
+        });
+    });
+}
+
 function moreLocation(){
     $(document).on('click','.location__more', function (){
         let modal = $(this).closest('.modal')
@@ -180,41 +303,7 @@ function calendar() {
     });
 }
 
-// function getPositionDate() {
-//     let lineWidth = $('.calendar__illustrate').width();
-//     let points = $('.calendar__date .calendar__point');
-//     let itemLength = points.length;
-//
-//     console.log('Line width:', lineWidth);
-//     console.log('Number of points:', itemLength);
-//
-//     if (itemLength > 1) {
-//         // Початкова і кінцева точки фіксовані
-//         // points.first().css({
-//         //     'position': 'absolute',
-//         //     'left': '0'
-//         // });
-//         //
-//         // points.last().css({
-//         //     'position': 'absolute',
-//         //     'left': (lineWidth - points.last().width()) + 'px'
-//         // });
-//
-//         // Розміщення проміжних точок
-//         let availableWidth = lineWidth - points.first().width() - points.last().width();
-//         let step = availableWidth / (itemLength - 1);
-//
-//         points.each(function (index) {
-//             if (index > 0 && index < itemLength - 1) { // Проміжні точки
-//                 let position = step * index;
-//                 $(this).css({
-//                     'position': 'absolute',
-//                     'left': (position + points.first().width()) + 'px'
-//                 });
-//             }
-//         });
-//     }
-// }
+
 
 function getPositionDate(){
     let lineWidth = $('.calendar__illustrate').width()
@@ -281,6 +370,18 @@ function removeDate(){
     })
 }
 
+function chartTransfer(){
+    if (window.innerWidth <= 666) {
+        let clarifyItems = $('.chart__wrap .clarify__mob-wrap');
+        let chartItems = $('.chart__item');
+        // Переміщаємо кожен блок .chart__item після відповідного .clarify__mob-wrap
+
+        clarifyItems.each(function(index) {
+            $(this).after(chartItems.eq(index));
+        });
+    }
+}
+
 
 $(document).ready(function(){
     removeDate()
@@ -296,8 +397,18 @@ $(document).ready(function(){
     let locationForm = $('.location__form');
     validateForm(locationForm, function () {
         ajaxSend(locationForm, function () {
+            $('.location__more-block').hide();
+            $('.location__more').show();
+        }, function (error){
+            // $('.location__more-block').hide();
+            // $('.location__more').show();
+        });
+    });
 
-            ('.location__more-block').hide();
+    let minutesForm = $('.minutes__form');
+    validateForm(locationForm, function () {
+        ajaxSend(locationForm, function () {
+            $('.location__more-block').hide();
             $('.location__more').show();
         }, function (error){
             // $('.location__more-block').hide();
@@ -310,7 +421,7 @@ $(document).ready(function(){
     validateForm(contractForm, function () {
         let form__input = $('.contract__form .form__input input').val()
         ajaxSend(contractForm, function () {
-            ('.location__more-block').hide();
+            $('.location__more-block').hide();
             $('.location__more').show();
 
         }, function (error){
@@ -346,6 +457,19 @@ $(document).ready(function(){
         });
     });
 
+    // let nominationLetter = $('.nomination-letter__form');
+    // validateForm(nominationLetter, function () {
+    //     ajaxSend(nominationLetter, function () {
+    //         $('.location__more-block').hide();
+    //         $('.location__more').show();
+    //     }, function (error){
+    //         // $('.location__more-block').hide();
+    //         // $('.location__more').show();
+    //     });
+    // });
+
+
+
     let dateForm = $('.calendar__form');
     validateForm(dateForm, function () {
         // let date_add = $('#date_add').val()
@@ -366,7 +490,14 @@ $(document).ready(function(){
     });
 
     $('.select').select2({})
-
+    chartTransfer()
+    spline()
+    submitFormDataProject('.inspections__form');
+    submitFormDataProject('.nomination-letter__form');
+    submitFormDataProject('.completion_certificate__form');
+    submitFormDataProject('.misc_letters__form');
+    submitFormDataProject('.legal__form');
+    // submitFormDataProject('.inspections__form');
 
 });
 

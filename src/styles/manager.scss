@@ -376,15 +376,125 @@ table{
     background: url("../img/close.svg") center / 1.5rem 1.5rem no-repeat;
   }
 }
+.modal__content-big .form__file-item h3{
+  max-width: 100%;
+}
 
+.modal__content-biggest{
+  max-width: 154rem;
+  .modal__overflow{
+    padding: 6rem;
+  }
+}
+.chart__list{
+  display: flex;
+  gap:4rem;
+}
+
+.chart__item{
+  width: calc((100% - 8rem)/3);
+  display: flex;
+  flex-direction: column;
+  gap:2rem;
+}
+.chart__flex{
+  display: flex;
+  gap:4rem;
+  align-items: center;
+}
+.chart__info{
+  display: flex;
+  flex-direction: column;
+  gap:0.8rem;
+}
+.chart__info-item{
+  display: flex;
+  gap:6rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2.4rem;
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  &:first-child:after{
+    background-color: #564073;
+  }
+  &:nth-child(2):after{
+    background-color: #C4BCCE;
+  }
+  &:nth-child(3):after{
+    background-color: #EDE8E0;
+  }
+  &:nth-child(4):after{
+    background-color: #B3A384;
+  }
+  &:last-child{
+    padding-left: 0;
+    margin-top: 0.4rem;
+    padding-top: 1.2rem;
+    border-top:0.1rem solid rgba(87, 66, 117, 0.50);
+  }
+}
+.chart__info{
+  max-width: 50%;
+  width: 100%;
+}
+.chart__info-item span {
+
+}
+
+.chart__wrap table tbody tr:last-child{
+  background: rgba(86, 64, 115, 0.10);
+  .project__clarify-text{
+    font-weight: 700;
+  }
+}
+
+.chart__wrap{
+  margin-bottom: 6.4rem;
+}
+
+.chart{
+  width: 18rem!important;
+  height:18rem!important;
+}
+.chart__info-item h3{
+  font: 400 1.2rem / normal var(--Arimo);
+
+}
+.chart__info-item h4{
+  color:#564073;
+  font: 700 1.2rem / normal var(--Arimo);
+  text-transform: uppercase;
+
+}
+.chart__item > h3{
+  font: 400 1.6rem / normal var(--RozhaOne);
+  text-transform: capitalize;
+}
+@media only screen and (max-width: 1440px) {
+  .modal__content-biggest{
+    max-width: 90%;
+  }
+  .chart__info-item{
+   gap:1rem;
+  }
+}
 
 @media only screen and (max-width: 666px) {
   .project__table-manager{
     margin: 1.6rem 0;
   }
   .delete__item {
-    right: 0rem;
-    width: 2.5rem;
+    right: -1.8rem;
+    width: 2rem;
   }
   .modal__managers .clarify__mob-wrap {
     margin-top: 3rem;
@@ -396,6 +506,90 @@ table{
   .modal__managers .project__top-icon img{
     width: 2rem;
     height: 2rem;
+  }
+
+
+  .chart__wrap .clarify__mob-wrap tbody.active{
+    display: contents;
+  }
+
+  .chart__wrap .clarify__mob-wrap td:first-child{
+    background-color: transparent;
+  }
+  .chart__wrap  .clarify__mob-text{
+    font: 400 1rem / normal var(--Arimo);
+  }
+
+  .chart__flex{
+    flex-direction:column ;
+    padding: 0 2.4rem;
+  }
+
+  .chart__list{
+    flex-direction: column;
+  }
+  .chart__item{
+    width: 100%;
+  }
+
+  .chart__info{
+    max-width: 100%;
+
+  }
+  .chart__item > h3{
+    display: none;
+  }
+  .modal__content-biggest .modal__overflow{
+    padding: 4rem 1.6rem;
+  }
+
+  .modal__managers td > *{
+    padding: 2rem 1rem;
+  }
+
+  .chart__wrap tbody tr:last-of-type .clarify__mob-text {
+    font: 400 1.2rem / normal var(--RozhaOne);
+  }
+  .chart__wrap.project__table-clarify th{
+    padding: 2rem 1rem;
+    font-size: 1.2rem;
+  }
+  .clarify__mob-wrap .form__line{
+    margin-bottom: 1.6rem;
+  }
+  .chart__wrap{
+   margin: 0;
+  }
+  .form__input.half{
+    width: 100%;
+  }
+  label.error{
+    font-size: 1.2rem;
+    bottom: -2.2rem;
+  }
+  .contact__form > *{
+    width: 100%!important;
+  }
+  .select2-container .select2-selection--single{
+    padding: 1.4rem 1.2rem;
+    height: 4.4rem;
+  }
+  .modal__managers .form__input input, .modal__managers .form__input textarea{
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    padding: 1.4rem;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__rendered{
+    padding-left: 0;
+    font-size: 1.2rem;
+    border-radius: 0;
+    height: 4.4rem;
+    line-height: 1.4rem;
+  }
+  .select2-results__option{
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
   }
 
 }

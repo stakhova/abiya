@@ -1,12 +1,11 @@
-let url = window.location.origin + '/wp-content/themes/Abiya/img/'
+let url = window.location.origin + '/wp-content/themes/Abiya/img/';
 let button;
 
-const validateForm = (form, func) => {
+const validateForm = (form, func, noreset) => {
     form.on("submit", function (e) {
         e.preventDefault();
 
-        console.log(1212121,form.has('.modal__calendar'))
-
+        console.log(1212121, form.has('.modal__calendar'));
     });
     $.validator.addMethod("goodMessage", function (value, element) {
         return this.optional(element) || /^[\sаА-яЯіІєЄїЇґҐa-zA-Z0-9._-]{2,100}$/i.test(value);
@@ -27,29 +26,29 @@ const validateForm = (form, func) => {
                 goodEmail: true,
                 email: true
             },
-            category:{
-                required: true,
+            category: {
+                required: true
             },
-            name:{
-                required: true,
+            name: {
+                required: true
             },
-            phone:{
-                required: true,
+            phone: {
+                required: true
             },
-            location_name:{
-                required: true,
+            location_name: {
+                required: true
             },
-            location:{
-                required: true,
+            location: {
+                required: true
             },
             link: {
-                required: true,
+                required: true
             },
-            date:{
-                required: true,
+            date: {
+                required: true
             },
             note: {
-                required: true,
+                required: true
             },
             password: {
                 required: true
@@ -63,11 +62,11 @@ const validateForm = (form, func) => {
                 minlength: 8,
                 equalTo: "#passwordNew"
             },
-            terms:{
-                required: true,
+            terms: {
+                required: true
             },
-            percentage:{
-                required: true,
+            percentage: {
+                required: true
             }
 
         },
@@ -93,63 +92,61 @@ const validateForm = (form, func) => {
                 required: "This field is required",
                 equalTo: "Password not equal"
             },
-            location_name:{
-                required: "This field is required",
+            location_name: {
+                required: "This field is required"
             },
-            location:{
-                required: "This field is required",
+            location: {
+                required: "This field is required"
             },
-            link:{
-                required: "This field is required",
+            link: {
+                required: "This field is required"
             },
-            category:{
-                required: "This field is required",
+            category: {
+                required: "This field is required"
             },
-            name:{
-                required: "This field is required",
+            name: {
+                required: "This field is required"
             },
-            phone:{
-                required: "This field is required",
+            phone: {
+                required: "This field is required"
             },
-            date:{
-                required: "This field is required",
+            date: {
+                required: "This field is required"
             },
             note: {
-                required: "This field is required",
+                required: "This field is required"
             },
-            terms:{
-                required: "This field is required",
+            terms: {
+                required: "This field is required"
             },
-            percentage:{
-                required: "This field is required",
+            percentage: {
+                required: "This field is required"
             }
 
         },
         submitHandler: function () {
 
-
-            if( form.hasClass('.modal__calendar') ){
+            if (form.hasClass('.modal__calendar')) {
                 let startDate = new Date($('.calendar__start .date').text().split('/').reverse().join('/'));
                 let endDate = new Date($('.calendar__end .date').text().split('/').reverse().join('/'));
                 let inputDate = new Date($('#date_add').val().split('/').reverse().join('/'));
                 if (inputDate < startDate || inputDate > endDate) {
-                    $('#date_add').after(`<p class="error">The date must be within the range of ${formatDate(startDate)} and ${formatDate(endDate)}</p>`)
+                    $('#date_add').after(`<p class="error">The date must be within the range of ${formatDate(startDate)} and ${formatDate(endDate)}</p>`);
                     return false;
-                }else{
-                    $('p.error').remove()
+                } else {
+                    $('p.error').remove();
                     func();
                 }
-            }else{
+            } else {
                 func();
             }
-            form[0].reset();
+            noreset ? null : form[0].reset();
             // form.find('select').val(null).trigger('change');
         }
     });
     form.find('select').on('change', function () {
         $(this).valid(); // Trigger validation for the select element
     });
-
 };
 function formatDate(date) {
     let day = String(date.getDate()).padStart(2, '0');
@@ -229,12 +226,11 @@ function resetModal() {
     $('.modal__content-delete').hide();
     $('.modal__content-approve').hide();
 
-
     $('.form__file-list > *').remove();
     $('.file__input').val('');
-    $('.form__file-upload').removeClass('disabled')
+    $('.form__file-upload').removeClass('disabled');
 
-    $('.form__check > *').remove()
+    $('.form__check > *').remove();
 
     let project = $('.project__top .project__top-title').text();
     $('.modal__notes .project__top-title').text(`New Note For "${project}"`);
@@ -280,9 +276,9 @@ function toogleModal(btn, modal) {
         }
     });
 }
-function checkbox(subtasks){
+function checkbox(subtasks) {
     let checkWrap = $('.form__check');
-    subtasks.forEach(function(subtask, index) {
+    subtasks.forEach(function (subtask, index) {
         let itemHtml = `
                     <div class="form__check-item">
                         <input type="checkbox" id="check${index + 1}">
@@ -291,13 +287,13 @@ function checkbox(subtasks){
                 `;
         checkWrap.append(itemHtml);
     });
-    $('.form__check').append(`<p class="form__file-hint" >Selection is required</p>`)
+    $('.form__check').append(`<p class="form__file-hint" >Selection is required</p>`);
 
-    $('.form__file-upload').addClass('disabled')
-    $('.form__check input[type="checkbox"]').on('change', function() {
+    $('.form__file-upload').addClass('disabled');
+    $('.form__check input[type="checkbox"]').on('change', function () {
         let allChecked = true;
 
-        $('.form__check input[type="checkbox"]').each(function() {
+        $('.form__check input[type="checkbox"]').each(function () {
             if (!$(this).is(':checked')) {
                 allChecked = false;
                 return false;
@@ -305,18 +301,18 @@ function checkbox(subtasks){
         });
 
         if (allChecked) {
-            $('.form__file-upload').removeClass('disabled')
+            $('.form__file-upload').removeClass('disabled');
             $('.form__check .form__file-hint').remove();
         } else {
-            $('.form__check').append(`<p class="form__file-hint" > Selection is required</p>`)
-            $('.form__file-upload').addClass('disabled')
+            $('.form__check').append(`<p class="form__file-hint" > Selection is required</p>`);
+            $('.form__file-upload').addClass('disabled');
         }
     });
 }
 function appendToModalData() {
     let info = button.find('.project__task ');
     let task_id = button.attr('data-taskId');
-    $('input[name="task_id"]').val(task_id)
+    $('input[name="task_id"]').val(task_id);
 
     let desc = info.data('desc');
     let img = info.data('img');
@@ -324,11 +320,9 @@ function appendToModalData() {
     let instruction = info.data('instruction');
     let subtasks = info.data('subtasks');
 
-
-    if(subtasks){
-        checkbox(subtasks)
+    if (subtasks) {
+        checkbox(subtasks);
     }
-
 
     let managers = info.data('manager').split(',');
     let number1 = info.closest('tr').index() + 1;
@@ -343,18 +337,16 @@ function appendToModalData() {
 
     $('.project__manager-list').html(managerList);
 
-    if(template !== ''){
+    if (template !== '') {
 
         $('.modal .project__top-template').attr('href', template).addClass('show');
     }
 
-    if(instruction !== ''){
+    if (instruction !== '') {
         $('.modal .project__top-info').attr('data-url', instruction).addClass('show');;
-
-    }else{
+    } else {
         $('.modal .project__top-info').attr('data-url', '').removeClass('show');
     }
-
 
     $('.modal .project__top-icon img').attr('src', img);
     $('.project__modal-desc p').text(desc);
@@ -362,37 +354,32 @@ function appendToModalData() {
     addMoreFile();
 }
 
+function showInstruction() {
+    $(document).on('click', '.project__top-info', function () {
+        let url = $(this).attr('data-url');
+        $('.modal__video source').attr('src', url);
+        $('.modal__video video')[0].load();
 
-function showInstruction(){
-    $(document).on('click','.project__top-info',function (){
-        let url = $(this).attr('data-url')
-        $('.modal__video source').attr('src',url)
-        $('.modal__video video')[0].load()
-
-        let modal =  $('.modal__instruction')
+        let modal = $('.modal__instruction');
         modal.show();
 
         $('.modal__close').click(function () {
             $(this).closest(modal).hide();
             $('video').trigger('pause');
-
         });
         $(document).keydown(function (e) {
             if (e.keyCode === 27) {
                 $('video').trigger('pause');
                 e.stopPropagation();
-
             }
         });
         modal.click(function (e) {
             if ($(e.target).closest('.modal__content').length == 0) {
                 $('video').trigger('pause');
                 $(this).hide();
-
             }
         });
-
-    })
+    });
 }
 
 function openPopupFunction() {
@@ -404,7 +391,7 @@ function openPopupFunction() {
     if (button.hasClass('task')) {
         appendToModalData();
     }
-    if (button.hasClass('clarify') || button.hasClass('accept') ) {
+    if (button.hasClass('clarify') || button.hasClass('accept')) {
         appendInfoAboutClarify(button);
     }
     if (button.hasClass('notes__top-edit')) {
@@ -417,12 +404,11 @@ function openPopupFunction() {
         deleteNotesOrFile(button, '.notes__file-item', 'delete__file-note');
     }
     if (button.hasClass('notes__button')) {
-        $('.modal__notes input[name=note_id]').val('')
-        $('.project__top-title').text('Add new note')
+        $('.modal__notes input[name=note_id]').val('');
+        $('.project__top-title').text('Add new note');
         $('.form__input input').val("");
         $('.form__input textarea').val("");
     }
-
 }
 
 let page = 1;
@@ -435,10 +421,10 @@ function loadMore(action, btn) {
         page++;
 
         let mob;
-        window.innerWidth > 666 ? mob = 0 : mob = 1
+        window.innerWidth > 666 ? mob = 0 : mob = 1;
 
         wrap.attr('data-page', page);
-        let obj = { action, page, category, mob};
+        let obj = { action, page, category, mob };
         $.ajax({
             url: '/wp-admin/admin-ajax.php',
             data: obj,
@@ -472,8 +458,6 @@ function updateFileListDisplay(fileList) {
             event.target.files = new FileList(updatedFileList);
         });
 
-
-
         let listItem = $(`<div class="form__file-item"><h3>Uploaded ${fileName}</h3></div>`).append(deleteButton);
         fileListContainer.append(listItem);
     });
@@ -484,21 +468,20 @@ function showMobTask(table, elem, prev, next) {
 
     $(prev).addClass('disabled');
 
-
     function disabledBtn() {
         if (!$(`${table} ${elem}:first-child`).hasClass('active')) {
             $(prev).removeClass('disabled');
-            console.log(1111)
+            console.log(1111);
         } else {
             $(prev).addClass('disabled');
-            console.log(2222)
+            console.log(2222);
         }
         if (!$(`${table} ${elem}:last-child`).hasClass('active')) {
             $(next).removeClass('disabled');
-            console.log(3333)
+            console.log(3333);
         } else {
             $(next).addClass('disabled');
-            console.log(4444)
+            console.log(4444);
         }
     }
     $(document).on('click', next, function () {
@@ -515,49 +498,51 @@ function showMobTask(table, elem, prev, next) {
         prev.addClass('active');
         disabledBtn();
     });
+
+    $('.clarify__mob-wrap').each(function (){
+      if($(this).find('tbody').length==1){
+          $(this).find('.clarify__mob-nav').hide()
+      }
+    })
+
 }
 
-
-function successFormData(){
-
-}
+function successFormData() {}
 
 function submitFormDataProject(form) {
     $(document).on('submit', form, function (e) {
-        console.log(1122)
+
         e.preventDefault();
-        let taskId = $(this).find('input[name=task_id]').val()
-        let currentTask
-        $('.task').each(function (){
-            if($(this).attr('data-taskId') == taskId){
-                currentTask = $(this)
+        let taskId = $(this).find('input[name=task_id]').val();
+        let currentTask;
+        $('.task').each(function () {
+            if ($(this).attr('data-taskId') == taskId) {
+                currentTask = $(this);
             }
-        })
-        let fileProject = $(this).closest('.modal__task').find('input[type="file"]')
-        let messageProject = $(this).closest('.modal__task').find('input[name="notes"]')
-        let required = false
-
-
+        });
+        let fileProject = $(this).closest('.modal').find('input[type="file"]');
+        let messageProject = $(this).closest('.modal').find('input[name="notes"]');
+        let required = false;
 
         if (!messageProject.val()) {
             e.preventDefault();
-            $('.modal__task .form__input').append(`<p class="form__file-hint" >Notes is required</p>`)
+            messageProject.closest('.form__input').append(`<p class="form__file-hint" >Notes is required</p>`);
         } else {
-            $('.modal__task .form__file-hint').remove()
+            $('.modal .form__file-hint').remove();
             required = true;
         }
-        console.log(11111,fileProject.val(), fileProject.length > 0 , fileProject.val()!=="" , required)
-        if(fileProject.length > 0 && fileProject.val()!=="" && required){
+        console.log(11111, fileProject.val(), fileProject.length > 0, fileProject.val() !== "", required);
+        if (fileProject.length > 0 && fileProject.val() !== "" && required) {
             let formData = new FormData($(this)[0]);
-            formData.forEach(function(value, key) {
+            formData.forEach(function (value, key) {
                 if (key === 'file[]') {
                     formData.delete(key);
                 }
             });
-            uploadedFiles.forEach(function(file, index) {
+            uploadedFiles.forEach(function (file, index) {
                 formData.append('file[]', file);
             });
-            $('.preloader__wrap').show()
+            $('.preloader__wrap').show();
 
             $.ajax({
                 url: '/wp-admin/admin-ajax.php',
@@ -568,15 +553,15 @@ function submitFormDataProject(form) {
                 cache: false,
                 success: function (res) {
 
-                    let newStatus = res.data.status
+                    let newStatus = res.data.status;
                     let classes = currentTask.attr('class').split(' ');
-                    for(let i = 0; i < classes.length; i++){
-                        if(classes[i] !== 'task'){
-                            let classDelete = classes[i]
+                    for (let i = 0; i < classes.length; i++) {
+                        if (classes[i] !== 'task') {
+                            let classDelete = classes[i];
                             currentTask.removeClass(classDelete);
                         }
                     }
-                    currentTask.addClass(newStatus)
+                    currentTask.addClass(newStatus);
 
                     $('.modal').hide();
                     $('body').removeClass('hidden');
@@ -584,64 +569,58 @@ function submitFormDataProject(form) {
                     $('.file__input').val('');
                     $('.form__input input').val("");
                     $('.form__input textarea').val("");
-                    uploadedFiles = []
+                    uploadedFiles = [];
                     $('.form__check > *').remove();
-                    $('.preloader__wrap').hide()
+                    $('.preloader__wrap').hide();
                 },
                 error: function (error) {
                     console.log('error ajax222');
-
-                },
+                }
             });
-        } else{
-            if($('.form__file-upload .form__file-hint').length == 1){
-                $('.form__file-upload .form__file-hint').remove()
+        } else {
+            if ($('.form__file-upload .form__file-hint').length == 1) {
+                $('.form__file-upload .form__file-hint').remove();
             }
-            if($('.form__file-upload .form__file-hint').length == 0  && fileProject.val()==""){
-                $('.form__file-upload').append(`<p class="form__file-hint" > File is required</p>`)
+            if ($('.form__file-upload .form__file-hint').length == 0 && fileProject.val() == "") {
+                $('.form__file-upload').append(`<p class="form__file-hint" > File is required</p>`);
             }
-
         }
-
-
     });
-    $(document).on('change','.modal__task input[type=file]', function (){
-        $('.form__file-hint').remove()
-    })
+    $(document).on('change', '.modal__task input[type=file]', function () {
+        $('.form__file-hint').remove();
+    });
 }
 function submitFormDataNotes(form) {
 
-
-
     $(document).on('submit', form, function (e) {
         e.preventDefault();
-        let title = $(this).find('input[name="title"]')
-        let text = $(this).find('textarea[name="text"]')
+        let title = $(this).find('input[name="title"]');
+        let text = $(this).find('textarea[name="text"]');
 
-        $(document).on('input','.modal__notes input[name="title"], .modal__notes textarea[name="text"]', function (){
-            if($(this).val()!==""){
-                $(this).closest('.form__input').find('.form__file-hint').remove()
-            } else{
-                $(this).closest('.form__input').append(`<p class="form__file-hint" >Title is required</p>`)
+        $(document).on('input', '.modal__notes input[name="title"], .modal__notes textarea[name="text"]', function () {
+            if ($(this).val() !== "") {
+                $(this).closest('.form__input').find('.form__file-hint').remove();
+            } else {
+                $(this).closest('.form__input').append(`<p class="form__file-hint" >Title is required</p>`);
             }
-        })
+        });
 
-        if(title.val() == ""){
-            title.closest('.form__input').append(`<p class="form__file-hint" >Title is required</p>`)
+        if (title.val() == "") {
+            title.closest('.form__input').append(`<p class="form__file-hint" >Title is required</p>`);
         }
-        if(text.val() == ""){
-            text.closest('.form__input').append(`<p class="form__file-hint" >Text is required</p>`)
+        if (text.val() == "") {
+            text.closest('.form__input').append(`<p class="form__file-hint" >Text is required</p>`);
         }
 
-        if(title.val() !=="" && text.val() !==""){
-            let nodeId = $(form).find($('input[name="note_id"]')).val()
+        if (title.val() !== "" && text.val() !== "") {
+            let nodeId = $(form).find($('input[name="note_id"]')).val();
             let formData = new FormData($(this)[0]);
-            formData.forEach(function(value, key) {
+            formData.forEach(function (value, key) {
                 if (key === 'file[]') {
                     formData.delete(key);
                 }
             });
-            uploadedFiles.forEach(function(file, index) {
+            uploadedFiles.forEach(function (file, index) {
                 formData.append('file[]', file);
             });
             $.ajax({
@@ -657,33 +636,31 @@ function submitFormDataNotes(form) {
                     $('body').removeClass('hidden');
                     $('.form__file-list > *').remove();
                     $('.file__input').val('');
-                    uploadedFiles = []
+                    uploadedFiles = [];
                     // $(form)[0].reset();
 
                     // if($('.notes').length > 0){
                     $('.form__input input').val("");
                     $('.form__input textarea').val("");
 
-                    if (nodeId == ''){
+                    if (nodeId == '') {
 
                         $('.notes__block').prepend(res);
-                    } else{
-                        $('.notes__item').each(function (){
-                            if($(this).attr('data-id')  == nodeId){
-                                $(this).replaceWith(res)
+                    } else {
+                        $('.notes__item').each(function () {
+                            if ($(this).attr('data-id') == nodeId) {
+                                $(this).replaceWith(res);
                             }
-                        })
+                        });
                     }
                     openPopupFunction();
                     toogleModal($('.notes__top-edit'), $('.modal__notes'));
                     toogleModal($('.notes__top-delete'), $('.modal__delete'));
                     // }
-
                 },
                 error: function (error) {
                     console.log('error ajax222');
-
-                },
+                }
             });
         }
     });
@@ -712,11 +689,10 @@ function search() {
     });
 }
 
-
-function showLogOut(){
-    $(document).on('click','.header__user-img', function (){
-        $('.header__user-wrap').toggleClass('show')
-    })
+function showLogOut() {
+    $(document).on('click', '.header__user-img', function () {
+        $('.header__user-wrap').toggleClass('show');
+    });
 }
 function showSearch() {
     $(document).on('keydown', '.project__search-input input', function () {
@@ -749,7 +725,7 @@ const openMenu = () => {
 function deleteNotesOrFile(btn, item, action) {
     let note = btn.closest(item);
     let id = note.data('id');
-    let note_id = btn.closest('.notes__item').data('id')
+    let note_id = btn.closest('.notes__item').data('id');
     let obj = { action: action, item_id: id, note_id };
     $(document).off('click', '.modal__btn-delete');
     $(document).on('click', '.modal__btn-delete', function () {
@@ -837,7 +813,7 @@ function approveFile(btn, content) {
         let id = item.data('id');
         let choice = currentButton.text();
         $('.modal__manager .modal__title span').text(choice);
-        let task_id = $(this).closest('.modal').find('input[name="task_id"]').val()
+        let task_id = $(this).closest('.modal').find('input[name="task_id"]').val();
         let obj = { action: 'aprove-reject-file', item_id: id, task_id, choice };
 
         $(document).off('click', '.modal__btn-approve');
@@ -861,7 +837,7 @@ function approveFile(btn, content) {
                     currentButton.addClass('active');
                     currentButton.nextAll().remove();
                     currentButton.prevAll().remove();
-                },
+                }
             });
         });
     });
@@ -949,13 +925,12 @@ function editNotes(btn) {
 function appendInfoAboutClarify(button) {
     let task_id = button.attr('data-taskId');
     let role = $('.project__wrap').attr('data-role');
-    $('input[name="task_id"]').val(task_id)
+    $('input[name="task_id"]').val(task_id);
 
-
-    if((button).hasClass('accept')){
-        $('.project__clarify-more').hide()
-    }else{
-        $('.project__clarify-more').show()
+    if (button.hasClass('accept')) {
+        $('.project__clarify-more').hide();
+    } else {
+        $('.project__clarify-more').show();
     }
 
     let obj = { action: 'append-clarify-info', task_id, role };
@@ -967,8 +942,7 @@ function appendInfoAboutClarify(button) {
             console.log('success ajax-append');
             $('.project__table-clarify').replaceWith(res);
 
-            if( $('.clarify__mob-wrap tbody').length/2 == 1 ){
-
+            if ($('.clarify__mob-wrap tbody').length / 2 == 1) {
 
                 $('.clarify__mob-next').addClass('disabled');
             }
@@ -976,18 +950,17 @@ function appendInfoAboutClarify(button) {
         error: function (error) {
             console.log('error ajax-append');
             $('.project__table-clarify').replaceWith(res);
-        },
+        }
     });
 }
 
-
-let uploadedFiles = []
+let uploadedFiles = [];
 function uploadAndDeleteFiles() {
     // <div className="form__file-item"><h3>Uploaded ${fileName}</h3><button type="button" className="notes__file-delete img"><img src="../../img/delete.svg" alt=""></button>
-    let list
+    let list;
     $('.file__input').on('change', function () {
         let files = $(this)[0].files;
-        list = $(this).closest('.form').find('.file__list')
+        list = $(this).closest('.form').find('.file__list');
         for (let i = 0; i < files.length; i++) {
             uploadFile(files[i]);
         }
@@ -1012,7 +985,6 @@ function uploadAndDeleteFiles() {
                 progressBar.css('display', 'none');
                 listItem.append(`<button class="deleteFile notes__file-delete img" data-index="' + uploadedFiles.length + '"><img src="${url}delete.svg" alt=""></button>`);
                 uploadedFiles.push(file);
-
             } else {
                 progressBar.css('width', progress + '%');
             }
@@ -1066,17 +1038,16 @@ function closeModal(modal) {
     });
 }
 
-function openModalFromEmail(){
-    if(window.location.href.includes('task_id')){
+function openModalFromEmail() {
+    if (window.location.href.includes('task_id')) {
         let urlString = location.href;
         let url = new URL(urlString);
         let task_id = url.searchParams.get("task_id");
 
-
-        let modal = $('.modal__task-clarify')
+        let modal = $('.modal__task-clarify');
 
         let role = $('.project__wrap').attr('data-role');
-        $('input[name="task_id"]').val(task_id)
+        $('input[name="task_id"]').val(task_id);
 
         let obj = { action: 'append-clarify-info', task_id, role };
         $.ajax({
@@ -1093,13 +1064,12 @@ function openModalFromEmail(){
             }
         });
 
+        $('.task').each(function () {
 
-        $('.task').each(function (){
-
-            if($(this).attr('data-taskId') == task_id){
+            if ($(this).attr('data-taskId') == task_id) {
                 let info = $(this).find('.project__task ');
                 // let task_id = $(this).attr('data-taskId');
-                $('input[name="task_id"]').val(task_id)
+                $('input[name="task_id"]').val(task_id);
 
                 let desc = info.data('desc');
                 let template = info.data('template_link');
@@ -1121,16 +1091,13 @@ function openModalFromEmail(){
                 $('.project__modal-desc p').text(desc);
                 $('.project__modal-title').html(`<span>Stage ${number1}. ${part1}</span>Step ${number2}. ${part2}`);
             }
-        })
-
+        });
 
         modal.show();
 
         addMoreFile();
 
-
-
-        closeModal(modal)
+        closeModal(modal);
     }
 }
 $(document).ready(function () {
@@ -1138,17 +1105,16 @@ $(document).ready(function () {
     deleteJustUploadFile();
     let loginForm = $('.login__signin');
     validateForm(loginForm, function () {
-        ajaxSend(loginForm, function (res){
+        ajaxSend(loginForm, function (res) {
             window.location.href = res.data.redirect_url;
-        }, function (error){
-            let errorrr =  error.responseJSON.data.error
+        }, function (error) {
+            let errorrr = error.responseJSON.data.error;
 
-            $('.login__signin').append(`<p class="login__signin-error">${errorrr}</p>`)
-            setTimeout(function (){
-                $('.login__signin-error').remove()
-            },3000)
+            $('.login__signin').append(`<p class="login__signin-error">${errorrr}</p>`);
+            setTimeout(function () {
+                $('.login__signin-error').remove();
+            }, 3000);
         });
-
     });
 
     let loginForget = $('.login__form-forget');
@@ -1156,26 +1122,25 @@ $(document).ready(function () {
         ajaxSend(loginForget, function () {
             $('.login__form-forget').removeClass('active');
             $('.login__form-success').addClass('active');
-
-        }, function (error){
-            let errorrr =  error.responseJSON.data[0]
-            $('.login__form-forget').append(`<p class="login__signin-error">${errorrr}</p>`)
-            setTimeout(function (){
-                $('.login__signin-error').remove()
-            },3000)
+        }, function (error) {
+            let errorrr = error.responseJSON.data[0];
+            $('.login__form-forget').append(`<p class="login__signin-error">${errorrr}</p>`);
+            setTimeout(function () {
+                $('.login__signin-error').remove();
+            }, 3000);
         });
     });
 
     let passwordReset = $('.login__form-recovery');
     validateForm(passwordReset, function () {
-        ajaxSend(passwordReset, function (res){
+        ajaxSend(passwordReset, function (res) {
             window.location.href = res.data.redirect_url;
-        }, function (error){
-            let errorrr =  error.responseJSON.data[0]
-            $('.login__form-recovery').append(`<p class="login__signin-error">${errorrr}</p>`)
-            setTimeout(function (){
-                $('.login__signin-error').remove()
-            },3000)
+        }, function (error) {
+            let errorrr = error.responseJSON.data[0];
+            $('.login__form-recovery').append(`<p class="login__signin-error">${errorrr}</p>`);
+            setTimeout(function () {
+                $('.login__signin-error').remove();
+            }, 3000);
         });
     });
 
@@ -1216,13 +1181,14 @@ $(document).ready(function () {
     showMobTask('.project__table-task', 'tr', '.project__task-prev', '.project__task-next');
     showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
     uploadAndDeleteFiles();
-    openModalFromEmail()
-    showLogOut()
-    showInstruction()
+    openModalFromEmail();
+    showLogOut();
+    showInstruction();
 });
 
 $(window).load(function () {});
 
 $(window).resize(function () {});
 $(window).scroll(function () {});
+//# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

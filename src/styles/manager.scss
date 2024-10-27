@@ -546,8 +546,46 @@ table{
     }
   }
 }
+.project__input{
+ //padding: 1.6rem 0.8rem!important;
+}
+.project__input input{
+  width: -webkit-fill-available;
+  font: 400 1.4rem / normal var(--Arimo);
+  border: none;
+  //text-align: center;
+}
 
 
+.total{
+  background-color: rgba(86, 64, 115, 0.1);
+  border: 0.1rem solid rgba(87, 66, 117, 0.50);
+  td{
+    //text-align: center;
+    font-weight: 700;
+    border: 0.1rem solid rgba(87, 66, 117, 0.50);
+    &:first-child{
+      & > *{
+        text-align: left;
+        font: 400 1.6rem / normal var(--RozhaOne);
+      }
+    }
+  }
+}
+.location__more-block .drop__btn{
+  padding: 1.5rem 3.2rem 1.5rem 1.6rem;
+  font: 400 1.6rem / 2.6rem var(--Arimo);
+  width: 100%;
+}
+.location__more-block .drop__menu{
+  top:7rem;
+}
+.location__more-block  .drop__menu-flex > *{
+  font: 400 1.6rem / 2.6rem var(--Arimo);
+}
+.location__more-block .drop{
+  min-width: 19rem;
+}
 @media only screen and (max-width: 1440px) {
   .modal__content-biggest{
     max-width: 90%;
@@ -556,21 +594,95 @@ table{
    gap:1rem;
   }
 }
+.modal__content-invoices{
+  max-width: 135.5rem;
+}
+.modal__content-guarantees{
+  max-width: 145.5rem;
+}
+.modal__content-invoices .modal__overflow{
+  padding: 6rem 4rem 4rem;
 
+}
+.modal__content-invoices .project__table th {
+  font-size: 1.6rem;
+}
+.modal__content-invoices .project__table-clarify th{
+  padding: 0.6rem 2rem;
+}
+
+.location__more.disabled{
+  pointer-events: none;
+  opacity: 0.5;
+
+}
+
+
+.supplier{
+  display: flex;
+  flex-wrap: wrap;
+  gap:0.4rem;
+
+  //&__wrap{
+  //  gap:2rem;
+  //  display: flex;
+  //  flex-wrap: wrap;
+  //  align-items: center;
+  //  & > *{
+  //    font: 400 1.4rem / normal var(--Arimo);
+  //  }
+  //}
+  h3{
+    margin-right: 1.6rem;
+    font: 400 1.4rem / normal var(--Arimo);
+  }
+  & > span{
+    padding: 0.6rem 1.6rem;
+    border-radius: 0.8rem;
+    background:  #E8E8E8;
+    font: 400 1rem / normal var(--Arimo);
+  }
+}
 @media only screen and (max-width: 666px) {
   .project__table-manager{
     margin: 1.6rem 0;
   }
   .delete__item {
-    right: -1.8rem;
+    right: -1rem;
     width: 2rem;
+
   }
   .modal__managers .clarify__mob-wrap {
     margin-top: 3rem;
   }
   .clarify__mob-wrap .delete__item{
     transform: none;
+    top:0.5rem;
+  }
+  .project__table-manager tr{
+    position: relative;
+  }
+  .project__table-manager  .delete__item{
+    right: 0;
+  }
+  .project__clarify-mob{
+    position: relative;
+  }
+  .change__table .delete__item{
+    transform: none;
     top:-3rem;
+  }
+  .clarify__mob-wrap table{
+    position: unset;
+  }
+  .project__table-manager th{
+    font-size: 1.2rem;
+  }
+  .modal__managers td > *{
+    font-size: 1rem;
+  }
+  .project__clarify-file{
+    font-size: 1rem;
   }
   .modal__managers .project__top-icon img{
     width: 2rem;
@@ -657,6 +769,49 @@ table{
   }
   .select2-results__option{
     padding: 0.8rem;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+  .location__more-block .drop__btn{
+
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+  .project__input input{
+    font-size: 1rem;
+  }
+  .total__mob-wrap tbody{
+    display: contents!important;
+  }
+  .total__title{
+    margin: 3rem 0 0.8rem;
+    font: 400 1.4rem / normal var(--RozhaOne);
+  }
+  .total td:first-child > *{
+
+    background: rgba(87, 66, 117, 0.30);
+    font-size: 1.2rem;
+  }
+  .total{
+  background-color: var(--color-white);
+  }
+  .clarify__mob-wrap  .total td:first-child{
+    border: 1px solid rgba(87, 66, 117, 0.50);
+  }
+
+  tr{
+    position: unset;
+  }
+  .modal__content-invoices .modal__overflow{
+    padding:4rem 1.6rem ;
+  }
+  .modal__managers .change__table  td > *{
+    padding: 1rem;
+  }
+  .location__more-block .drop__menu {
+    top: 5rem;
+  }
+  .location__more-block .drop__menu-flex > *{
     font-size: 1.2rem;
     line-height: 1.4rem;
   }

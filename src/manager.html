@@ -23,7 +23,7 @@
                         <div class="project__progress-bar">
                         </div>
                 </div>
-                <div class="project__table project__table-task">
+                <div class="project__table project__table-task" data-project-id="222">
                     <div class="project__task-nav">
                         <button class="project__task-prev disabled">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@
                             </svg>
                         </button>
                     </div>
-                  <table>
+                  <table >
                     <thead>
                         <tr>
                             <th>Stage/Duration</th>
@@ -506,6 +506,57 @@
                                             </button>
                                         </td>
                                     </tr>
+                                    <tr data-item-id="3">
+                                        <td>
+                                            <div class="project__clarify-flex" data-id="2">
+                                                <div class="project__clarify-file">
+                                                    Downloaded file 1.pdf
+                                                </div>
+                                                <div class="project__clarify-btn">
+                                                    <a href="./img/notification.svg" download class="project__clarify-download img">
+                                                        <img src="./img/upload.svg" alt="">
+                                                    </a>
+                                                    <button class="project__clarify-delete img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                text text
+                                            </h4>
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
+                                        </td>
+
+                                    </tr>
+                                    <tr data-item-id="4">
+                                        <td>
+                                            <div class="project__clarify-flex" data-id="3">
+                                                <div class="project__clarify-file">
+                                                    Downloaded file 1.pdf
+                                                </div>
+                                                <div class="project__clarify-btn">
+                                                    <a href="./img/notification.svg" download class="project__clarify-download img">
+                                                        <img src="./img/upload.svg" alt="">
+                                                    </a>
+                                                    <button class=" project__clarify-delete img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                text text
+                                            </h4>
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
+                                        </td>
+                                    </tr>
 
                                     </tbody>
                                 </table>
@@ -776,8 +827,8 @@
                                             </tbody>
                                         </table>
                                         <div class="clarify__mob-nav">
-                                            <button class="clarify__mob-prev">Prev Check</button>
-                                            <button class="clarify__mob-next">Next Check</button>
+                                            <button class="clarify__mob-prev">Prev </button>
+                                            <button class="clarify__mob-next">Next </button>
 
                                         </div>
                                     </div>
@@ -1134,8 +1185,8 @@
 
                                         </table>
                                         <div class="clarify__mob-nav">
-                                            <button class="clarify__mob-prev">Prev Check</button>
-                                            <button class="clarify__mob-next">Next Check</button>
+                                            <button class="clarify__mob-prev">Prev</button>
+                                            <button class="clarify__mob-next">Next</button>
 
                                         </div>
                                     </div>
@@ -1599,8 +1650,8 @@
 
                                         </table>
                                         <div class="clarify__mob-nav">
-                                            <button class="clarify__mob-prev disabled">Prev Check</button>
-                                            <button class="clarify__mob-next">Next Check</button>
+                                            <button class="clarify__mob-prev disabled">Prev</button>
+                                            <button class="clarify__mob-next">Next</button>
 
                                         </div>
                                     </div>
@@ -1682,10 +1733,10 @@
                                     <p></p>
                                 </div>
                             </div>
-                            <form action="" class=" form contract__form">
+                            <form action="" class=" form contract__form" data-contract="">
                                 <input type="hidden" name="action" value="add_value_contract">
                                 <div class="form__input">
-                                    <label for="amount_contract">Amount Of the contract</label>
+                                    <label for="amount_contract" >Amount Of the contract</label>
                                     <input type="number" name="amount_contract" id="amount_contract">
                                 </div>
                                 <div class="modal__managers-btn big">
@@ -1853,9 +1904,9 @@
                 </div>
             </div>
 
-            <div class="modal modal__managers" data-modal="3_3" data-action="delete-payment-invoices">
+            <div class="modal modal__managers" data-modal="3_3" data-action="delete-payment-invoices" data-action-change="change_invoices" data-project-amount="200">
                 <div class="modal__wrap">
-                    <div class="modal__content modal__content-big modal__content-clarify ">
+                    <div class="modal__content modal__content-invoices modal__content-clarify ">
                         <div class="modal__close img">
                             <img src="./img/close.svg" alt="">
                         </div>
@@ -1875,16 +1926,16 @@
                             </div>
 
                             <div class="project__table project__table-clarify ">
-                                <table>
+                                <table class="change__table">
                                     <colgroup>
+                                        <col span="1" style="width: 17%;">
+                                        <col span="1" style="width: 22%;">
                                         <col span="1" style="width: 16%;">
-                                        <col span="1" style="width: 16%;">
-                                        <col span="1" style="width: 16%;">
-                                        <col span="1" style="width: 9%;">
                                         <col span="1" style="width: 8%;">
-                                        <col span="1" style="width: 9%;">
                                         <col span="1" style="width: 8%;">
-                                        <col span="1" style="width: 18%;">
+                                        <col span="1" style="width: 8%;">
+                                        <col span="1" style="width: 8%;">
+                                        <col span="1" style="width: 13%;">
                                     </colgroup>
                                     <thead>
 
@@ -1905,10 +1956,1263 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
+                                        <tr data-item-id="111111">
+                                            <td>
+                                                <h4 class="project__clarify-text">
+                                                    text text2
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <div class="project__clarify-flex" data-id="1">
+                                                    <div class="project__clarify-file">
+                                                        Downloaded file 1.pdf
+                                                    </div>
+                                                    <div class="project__clarify-btn">
+                                                        <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                            <img src="./img/upload.svg" alt="">
+                                                        </a>
+                                                        <button class=" project__clarify-delete img">
+                                                            <img src="./img/delete.svg" alt="">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h4 class="project__clarify-text">
+                                                    Vorem ipsum dolor sit
+                                                </h4>
+                                            </td>
+                                            <td class="wrap__amount">
+                                                <div class="project__input" data-type="invoice">
+                                                    <input type="number" value="100000">
+                                                </div>
+
+                                            </td>
+                                            <td class="wrap__percent">
+                                                <h4 class="project__clarify-text percent amount__percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td class="wrap__amount">
+                                                <div class="project__input" data-type="received">
+                                                    <input type="number" name="" value="1000">
+                                                </div>
+                                            </td>
+                                            <td class="wrap__percent">
+                                                <h4 class="project__clarify-text  percent received__percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <div class="drop-wrap">
+                                                    <div class="drop">
+                                                        <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                        <div class="drop__menu">
+                                                            <div class="drop__menu-flex">
+                                                                <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <button class="delete__item img">
+                                                    <img src="./img/delete.svg" alt="">
+                                                </button>
+                                        </td>
+                                        </tr>
+                                        <tr data-item-id="22222">
+                                            <td>
+                                                <h4 class="project__clarify-text">
+                                                    text text2
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <div class="project__clarify-flex" data-id="1">
+                                                    <div class="project__clarify-file">
+                                                        Downloaded file 1.pdf
+                                                    </div>
+                                                    <div class="project__clarify-btn">
+                                                        <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                            <img src="./img/upload.svg" alt="">
+                                                        </a>
+                                                        <button class=" project__clarify-delete img">
+                                                            <img src="./img/delete.svg" alt="">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h4 class="project__clarify-text">
+                                                    Vorem ipsum dolor sit
+                                                </h4>
+                                            </td>
+                                            <td class="wrap__amount">
+                                                <div class="project__input" data-type="invoice">
+                                                    <input type="number" value="100000">
+                                                </div>
+
+                                            </td>
+                                            <td class="wrap__percent">
+                                                <h4 class="project__clarify-text percent amount__percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td class="wrap__amount">
+                                                <div class="project__input" data-type="received">
+                                                    <input type="number" name="" value="1000">
+                                                </div>
+                                            </td>
+                                            <td class="wrap__percent">
+                                                <h4 class="project__clarify-text  percent received__percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <div class="drop-wrap">
+                                                    <div class="drop">
+                                                        <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                        <div class="drop__menu">
+                                                            <div class="drop__menu-flex">
+                                                                <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <button class="delete__item img">
+                                                    <img src="./img/delete.svg" alt="">
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr data-item-id="33333">
+                                            <td>
+                                                <h4 class="project__clarify-text">
+                                                    text text2
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <div class="project__clarify-flex" data-id="1">
+                                                    <div class="project__clarify-file">
+                                                        Downloaded file 1.pdf
+                                                    </div>
+                                                    <div class="project__clarify-btn">
+                                                        <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                            <img src="./img/upload.svg" alt="">
+                                                        </a>
+                                                        <button class=" project__clarify-delete img">
+                                                            <img src="./img/delete.svg" alt="">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <h4 class="project__clarify-text">
+                                                    Vorem ipsum dolor sit
+                                                </h4>
+                                            </td>
+                                            <td class="wrap__amount">
+                                                <div class="project__input" data-type="invoice">
+                                                    <input type="number" value="100000">
+                                                </div>
+
+                                            </td>
+                                            <td class="wrap__percent">
+                                                <h4 class="project__clarify-text percent amount__percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td class="wrap__amount">
+                                                <div class="project__input" data-type="received">
+                                                    <input type="number" name="" value="1000">
+                                                </div>
+                                            </td>
+                                            <td class="wrap__percent">
+                                                <h4 class="project__clarify-text  percent received__percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <div class="drop-wrap">
+                                                    <div class="drop">
+                                                        <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                        <div class="drop__menu">
+                                                            <div class="drop__menu-flex">
+                                                                <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <button class="delete__item img">
+                                                    <img src="./img/delete.svg" alt="">
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>
+                                                <h4 class="project__clarify-text total__value" >
+                                                    Total
+                                                </h4>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <h4 class="project__clarify-text" data-type="invoice">
+                                                    400000
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <h4 class="project__clarify-text total__invoice-percent"   >
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <h4 class="project__clarify-text" data-type="received">
+                                                    64000
+                                                </h4>
+                                            </td>
+                                            <td>
+                                                <h4 class="project__clarify-text total__received-percent">
+                                                    <span>10</span>%
+                                                </h4>
+                                            </td>
+                                            <td></td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="project__clarify-mob change__table">
+                                    <div class="form__line"></div>
+                                    <div class="clarify__mob-wrap">
+                                        <table>
+
+                                            <tbody class="active" data-item-id="111111" >
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Invoice #1
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        File
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-flex" data-id="1">
+                                                        <div class="project__clarify-file">
+                                                            Uploaded file 1.pdf
+                                                        </div>
+                                                        <div class="project__clarify-btn">
+                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                                <img src="./img/upload.svg" alt="">
+                                                            </a>
+                                                            <button class=" project__clarify-delete img">
+                                                                <img src="./img/delete.svg" alt="">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Notes
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="invoice">
+                                                        <input type="number" value="100000">
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent amount__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Received
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="received">
+                                                        <input type="number" value="100000">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent received__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Status
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <button class="delete__item img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody class="" data-item-id="22222">
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Invoice #1
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        File
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-flex" data-id="1">
+                                                        <div class="project__clarify-file">
+                                                            Uploaded file 1.pdf
+                                                        </div>
+                                                        <div class="project__clarify-btn">
+                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                                <img src="./img/upload.svg" alt="">
+                                                            </a>
+                                                            <button class=" project__clarify-delete img">
+                                                                <img src="./img/delete.svg" alt="">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Notes
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="invoice">
+                                                        <input type="number" value="100000">
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent amount__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Received
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="received">
+                                                        <input type="number" value="100000">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent received__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Status
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <button class="delete__item img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <div class="clarify__mob-nav">
+                                            <button class="clarify__mob-prev disabled">Prev</button>
+                                            <button class="clarify__mob-next">Next</button>
+                                        </div>
+
+                                        <div class="total__mob-wrap">
+                                            <div class="total__title">Total</div>
+                                            <table class="total">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Invoice Amount
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="invoice">
+                                                            100000
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            % of
+                                                            contract
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text total__invoice-percent">
+                                                            <span>10</span>%
+                                                        </h4>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Received
+                                                            Amount
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="received">
+                                                            100000
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            % of
+                                                            contract
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text total__received-percent">
+                                                            <span>10</span>%
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="location__more-block">
+                                <form action="" class="form invoices__form">
+                                    <input type="hidden" name="action" value="add_invoice">
+                                    <input type="hidden" name="project_id" value="<?php echo $this->project_id; ?>">
+                                    <div class="form__line"></div>
+                                    <div class="form__file">
+                                        <ul class="form__file-list file__list">
+
+                                        </ul>
+                                        <div class="form__file-upload">
+                                            <label for="fileInput3333"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput3333">
+                                        </div>
+                                    </div>
+                                    <div class="form__line"></div>
+                                    <div class="form__input">
+                                        <label for="notes3333">Status</label>
+                                        <div class="drop-wrap">
+                                            <div class="drop">
+                                                <input type="hidden" name="status" value="Not Initiated">
+                                                <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                <div class="drop__menu">
+                                                    <div class="drop__menu-flex">
+                                                        <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                        <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                        <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                        <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form__input">
+                                        <label for="notes3333">Invoice name</label>
+                                        <input type="text" name="invoice_name" id="notes3333">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="notes33334">Notes</label>
+                                        <input type="text" name="notes" id="notes33334">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="invoice-amount1">Invoice Amount</label>
+                                        <input type="text" name="invoice_amount" id="invoice-amount1">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="received-amount1">Received Amount</label>
+                                        <input type="text" name="received_amount" id="received-amount1">
+                                    </div>
+
+                                    <div class="modal__managers-btn big">
+                                        <button class=" section__button location__save">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal__managers-btn big">
+                                <button class="section__button-secondary section__button location__more ">Add Invoices</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal modal__managers" data-modal="3_4" data-action="delete-purchases" data-action-change="change_purchases" data-project-amount="200">
+                <div class="modal__wrap">
+                    <div class="modal__content modal__content-invoices modal__content-clarify ">
+                        <div class="modal__close img">
+                            <img src="./img/close.svg" alt="">
+                        </div>
+                        <div class="modal__overflow">
+                            <div class="project__top-block">
+                                <div class="project__top-icon img">
+                                    <img src="./img/icon-notepad.svg" alt="">
+                                </div>
+                                <h3 class="project__top-title project__modal-title"></h3>
+                            </div>
+                            <div class="form">
+                                <div class="form__line"></div>
+                                <div class="project__modal-desc">
+                                    <h3></h3>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <div class="project__table project__table-clarify ">
+                                <table class="change__table">
+                                    <colgroup>
+                                        <col span="1" style="width: 16%;">
+                                        <col span="1" style="width: 28%;">
+                                        <col span="1" style="width: 28%;">
+                                        <col span="1" style="width: 28%;">
+                                    </colgroup>
+                                    <thead>
+
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Budget</th>
+                                        <th>Engineering</th>
+                                        <th>Management</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr data-item-id="111111">
                                         <td>
                                             <h4 class="project__clarify-text">
-                                                text text2
+                                                Aluminum Sheet
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier">
+                                                <h3>10000</h3>
+                                                <span>Supplier1</span>
+                                                <span>Supplier2</span>
+                                                <span>Supplier3</span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier">
+                                                <h3>10000 <span>(-300)</span></h3>
+                                                <span>Supplier1</span>
+                                                <span>Supplier2</span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier">
+                                                <h3>10000 <span>(-300)</span></h3>
+                                                <span>Supplier1</span>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr data-item-id="22222">
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                MS Profile 50*50
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier">
+                                                <h3>10000</h3>
+                                                <span>Supplier1</span>
+                                                <span>Supplier2</span>
+                                                <span>Supplier3</span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier">
+                                                <h3>10000 <span>(-300)</span></h3>
+                                                <span>Supplier1</span>
+                                                <span>Supplier2</span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier">
+                                                <h3>10000 <span>(-300)</span></h3>
+                                                <span>Supplier1</span>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>
+                                            <h4 class="project__clarify-text total__value" >
+                                                Total Material Cost
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                4700
+                                            </h4>
+                                        </td>
+
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                4700
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                4700
+                                            </h4>
+                                        </td>
+
+                                    </tr>
+                                    <tr class="total">
+                                        <td>
+                                            <h4 class="project__clarify-text total__value" >
+                                                Savings/Losts
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+
+                                            </h4>
+                                        </td>
+
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                +300
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                               -500
+                                            </h4>
+                                        </td>
+
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="project__clarify-mob change__table">
+                                    <div class="form__line"></div>
+                                    <div class="clarify__mob-wrap">
+                                        <table>
+
+                                            <tbody class="active" data-item-id="111111" >
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Invoice #1
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        File
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-flex" data-id="1">
+                                                        <div class="project__clarify-file">
+                                                            Uploaded file 1.pdf
+                                                        </div>
+                                                        <div class="project__clarify-btn">
+                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                                <img src="./img/upload.svg" alt="">
+                                                            </a>
+                                                            <button class=" project__clarify-delete img">
+                                                                <img src="./img/delete.svg" alt="">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Notes
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="invoice">
+                                                        <input type="number" value="100000">
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent amount__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Received
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="received">
+                                                        <input type="number" value="100000">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent received__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Status
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <button class="delete__item img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                            <tbody class="" data-item-id="22222">
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Invoice #1
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        File
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-flex" data-id="1">
+                                                        <div class="project__clarify-file">
+                                                            Uploaded file 1.pdf
+                                                        </div>
+                                                        <div class="project__clarify-btn">
+                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                                <img src="./img/upload.svg" alt="">
+                                                            </a>
+                                                            <button class=" project__clarify-delete img">
+                                                                <img src="./img/delete.svg" alt="">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Notes
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="invoice">
+                                                        <input type="number" value="100000">
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent amount__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Received
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="received">
+                                                        <input type="number" value="100000">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent received__percent">
+                                                        <span>10</span>%
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Status
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <button class="delete__item img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <div class="clarify__mob-nav">
+                                            <button class="clarify__mob-prev disabled">Prev</button>
+                                            <button class="clarify__mob-next">Next</button>
+                                        </div>
+
+                                        <div class="total__mob-wrap">
+                                            <div class="total__title">Total</div>
+                                            <table class="total">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Invoice Amount
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="invoice">
+                                                            100000
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            % of
+                                                            contract
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text total__invoice-percent">
+                                                            <span>10</span>%
+                                                        </h4>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Received
+                                                            Amount
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="received">
+                                                            100000
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            % of
+                                                            contract
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text total__received-percent">
+                                                            <span>10</span>%
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="location__more-block">
+                                <form action="" class="form invoices__form">
+                                    <input type="hidden" name="action" value="add_invoice">
+                                    <input type="hidden" name="project_id" value="<?php echo $this->project_id; ?>">
+                                    <div class="form__line"></div>
+                                    <div class="form__file">
+                                        <ul class="form__file-list file__list">
+
+                                        </ul>
+                                        <div class="form__file-upload">
+                                            <label for="fileInput3333"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput3333">
+                                        </div>
+                                    </div>
+                                    <div class="form__line"></div>
+                                    <div class="form__input">
+                                        <label for="notes3333">Status</label>
+                                        <div class="drop-wrap">
+                                            <div class="drop">
+                                                <input type="hidden" name="status" value="Not Initiated">
+                                                <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                <div class="drop__menu">
+                                                    <div class="drop__menu-flex">
+                                                        <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                        <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                        <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                        <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form__input">
+                                        <label for="notes3333">Invoice name</label>
+                                        <input type="text" name="invoice_name" id="notes3333">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="notes33334">Notes</label>
+                                        <input type="text" name="notes" id="notes33334">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="invoice-amount1">Invoice Amount</label>
+                                        <input type="text" name="invoice_amount" id="invoice-amount1">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="received-amount1">Received Amount</label>
+                                        <input type="text" name="received_amount" id="received-amount1">
+                                    </div>
+
+                                    <div class="modal__managers-btn big">
+                                        <button class=" section__button location__save">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal__managers-btn big">
+                                <button class="section__button-secondary section__button location__more ">Add Invoices</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal modal__managers" data-modal="3_5" data-action="delete-variations" data-action-change="change_variations" data-project-amount="200">
+                <div class="modal__wrap">
+                    <div class="modal__content modal__content-invoices modal__content-clarify ">
+                        <div class="modal__close img">
+                            <img src="./img/close.svg" alt="">
+                        </div>
+                        <div class="modal__overflow">
+                            <div class="project__top-block">
+                                <div class="project__top-icon img">
+                                    <img src="./img/icon-notepad.svg" alt="">
+                                </div>
+                                <h3 class="project__top-title project__modal-title"></h3>
+                            </div>
+                            <div class="form">
+                                <div class="form__line"></div>
+                                <div class="project__modal-desc">
+                                    <h3></h3>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <div class="project__table project__table-clarify ">
+                                <table class="change__table">
+                                    <colgroup>
+                                        <col span="1" style="width: 17%;">
+                                        <col span="1" style="width: 22%;">
+                                        <col span="1" style="width: 16%;">
+                                        <col span="1" style="width: 8%;">
+                                        <col span="1" style="width: 8%;">
+                                        <col span="1" style="width: 8%;">
+                                        <col span="1" style="width: 8%;">
+                                        <col span="1" style="width: 13%;">
+                                    </colgroup>
+                                    <thead>
+
+                                    <tr>
+                                        <th>Payment/Variation Invoice</th>
+                                        <th>File</th>
+                                        <th>Notes</th>
+                                        <th>Invoice
+                                            Amount</th>
+                                        <th>% of
+                                            contract</th>
+                                        <th>Received
+                                            Amount</th>
+                                        <th>% of
+                                            contract</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr data-item-id="111">
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                Variation #1
                                             </h4>
                                         </td>
                                         <td>
@@ -1931,24 +3235,25 @@
                                                 Vorem ipsum dolor sit
                                             </h4>
                                         </td>
-                                        <td>
-                                            <h4 class="project__clarify-text">
-                                                100,000
+                                        <td class="wrap__amount">
+                                            <div class="project__input" data-type="invoice">
+                                                <input type="number" value="100000">
+                                            </div>
+
+                                        </td>
+                                        <td class="wrap__percent">
+                                            <h4 class="project__clarify-text percent amount__percent">
+                                                <span>10</span>%
                                             </h4>
                                         </td>
-                                        <td>
-                                            <h4 class="project__clarify-text">
-                                                10%
-                                            </h4>
+                                        <td class="wrap__amount">
+                                            <div class="project__input" data-type="received">
+                                                <input type="number" name="" value="1000">
+                                            </div>
                                         </td>
-                                        <td>
-                                            <h4 class="project__clarify-text">
-                                                1,000
-                                            </h4>
-                                        </td>
-                                        <td>
-                                            <h4 class="project__clarify-text">
-                                                10%
+                                        <td class="wrap__percent">
+                                            <h4 class="project__clarify-text  percent received__percent">
+                                                <span>10</span>%
                                             </h4>
                                         </td>
                                         <td>
@@ -1972,158 +3277,140 @@
                                             </button>
                                         </td>
                                     </tr>
-                                        <tr>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    text text2
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <div class="project__clarify-flex" data-id="1">
-                                                    <div class="project__clarify-file">
-                                                        Downloaded file 1.pdf
-                                                    </div>
-                                                    <div class="project__clarify-btn">
-                                                        <a href="./img/notification.svg" download="" class="project__clarify-download img">
-                                                            <img src="./img/upload.svg" alt="">
-                                                        </a>
-                                                        <button class=" project__clarify-delete img">
-                                                            <img src="./img/delete.svg" alt="">
-                                                        </button>
-                                                    </div>
+                                    <tr data-item-id="3333">
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                Variation #1
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-flex" data-id="1">
+                                                <div class="project__clarify-file">
+                                                    Downloaded file 1.pdf
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    Vorem ipsum dolor sit
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    100,000
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    10%
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    1,000
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    10%
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <div class="drop-wrap">
-                                                    <div class="drop">
-                                                        <div class="drop__btn" data-status="4"> Not Initiated</div>
-                                                        <div class="drop__menu">
-                                                            <div class="drop__menu-flex">
-                                                                <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
-                                                                <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
-                                                                <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
-                                                                <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
-                                                            </div>
+                                                <div class="project__clarify-btn">
+                                                    <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                        <img src="./img/upload.svg" alt="">
+                                                    </a>
+                                                    <button class=" project__clarify-delete img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                Vorem ipsum dolor sit
+                                            </h4>
+                                        </td>
+                                        <td class="wrap__amount">
+                                            <div class="project__input" data-type="invoice">
+                                                <input type="number" value="100000">
+                                            </div>
+
+                                        </td>
+                                        <td class="wrap__percent">
+                                            <h4 class="project__clarify-text percent amount__percent">
+                                                <span>10</span>%
+                                            </h4>
+                                        </td>
+                                        <td class="wrap__amount">
+                                            <div class="project__input" data-type="received">
+                                                <input type="number" name="" value="1000">
+                                            </div>
+                                        </td>
+                                        <td class="wrap__percent">
+                                            <h4 class="project__clarify-text  percent received__percent">
+                                                <span>10</span>%
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="drop-wrap">
+                                                <div class="drop">
+                                                    <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                    <div class="drop__menu">
+                                                        <div class="drop__menu-flex">
+                                                            <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                            <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                            <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                            <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <button class="delete__item img">
-                                                    <img src="./img/delete.svg" alt="">
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    text text2
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <div class="project__clarify-flex" data-id="1">
-                                                    <div class="project__clarify-file">
-                                                        Downloaded file 1.pdf
-                                                    </div>
-                                                    <div class="project__clarify-btn">
-                                                        <a href="./img/notification.svg" download="" class="project__clarify-download img">
-                                                            <img src="./img/upload.svg" alt="">
-                                                        </a>
-                                                        <button class=" project__clarify-delete img">
-                                                            <img src="./img/delete.svg" alt="">
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    Vorem ipsum dolor sit
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    100,000
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    10%
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    1,000
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <h4 class="project__clarify-text">
-                                                    10%
-                                                </h4>
-                                            </td>
-                                            <td>
-                                                <div class="drop-wrap">
-                                                    <div class="drop">
-                                                        <div class="drop__btn" data-status="4"> Not Initiated</div>
-                                                        <div class="drop__menu">
-                                                            <div class="drop__menu-flex">
-                                                                <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
-                                                                <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
-                                                                <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
-                                                                <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                <button class="delete__item img">
-                                                    <img src="./img/delete.svg" alt="">
-                                                </button>
-                                            </td>
-                                        </tr>
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="total">
+                                        <td>
+                                            <h4 class="project__clarify-text total__value" >
+                                                Total
+                                            </h4>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <h4 class="project__clarify-text" data-type="invoice">
+                                                400000
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text total__invoice-percent"   >
+                                                <span>10</span>%
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text" data-type="received">
+                                                64000
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text total__received-percent">
+                                                <span>10</span>%
+                                            </h4>
+                                        </td>
+                                        <td></td>
+
+                                    </tr>
+
 
                                     </tbody>
                                 </table>
-                                <div class="project__clarify-mob">
+                                <div class="project__clarify-mob change__table">
                                     <div class="form__line"></div>
                                     <div class="clarify__mob-wrap">
                                         <table>
-                                            <tbody class="active" data-item-id="1">
 
+                                            <tbody class="active" data-item-id="111111" >
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Delivery Note
+                                                        Variation
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Variation #1
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        File
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="project__clarify-flex" data-id="1">
                                                         <div class="project__clarify-file">
-                                                            Downloaded file 1.pdf
+                                                            Uploaded file 1.pdf
                                                         </div>
                                                         <div class="project__clarify-btn">
                                                             <a href="./img/notification.svg" download="" class="project__clarify-download img">
@@ -2133,11 +3420,7 @@
                                                                 <img src="./img/delete.svg" alt="">
                                                             </button>
                                                         </div>
-                                                        <button class="delete__item img">
-                                                            <img src="./img/delete.svg" alt="">
-                                                        </button>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                             <tr>
@@ -2148,63 +3431,117 @@
                                                 </td>
                                                 <td>
                                                     <h4 class="project__clarify-text">
-                                                        Text Text
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="invoice">
+                                                        <input type="number" value="100000">
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent amount__percent">
+                                                        <span>10</span>%
                                                     </h4>
 
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Received
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="received">
+                                                        <input type="number" value="100000">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent received__percent">
+                                                        <span>10</span>%
+                                                    </h4>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Date on delivery note
+                                                        Status
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h4 class="project__clarify-text">
-                                                        01/01/2024
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Sign Date
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        01/01/2024
-                                                    </h4>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Upload Date
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        01/01/2024
-                                                    </h4>
 
+                                                    <button class="delete__item img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tbody data-item-id="2">
+                                            <tbody class="" data-item-id="22222" >
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Delivery Note
+                                                        Variation
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Variation #1
+                                                    </h4>
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        File
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="project__clarify-flex" data-id="1">
                                                         <div class="project__clarify-file">
-                                                            Downloaded file 1.pdf
+                                                            Uploaded file 1.pdf
                                                         </div>
                                                         <div class="project__clarify-btn">
                                                             <a href="./img/notification.svg" download="" class="project__clarify-download img">
@@ -2214,11 +3551,7 @@
                                                                 <img src="./img/delete.svg" alt="">
                                                             </button>
                                                         </div>
-                                                        <button class="delete__item img">
-                                                            <img src="./img/delete.svg" alt="">
-                                                        </button>>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                             <tr>
@@ -2229,94 +3562,605 @@
                                                 </td>
                                                 <td>
                                                     <h4 class="project__clarify-text">
-                                                        Text Text
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Invoice
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="invoice">
+                                                        <input type="number" value="100000">
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent amount__percent">
+                                                        <span>10</span>%
                                                     </h4>
 
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__amount">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Received
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__input" data-type="received">
+                                                        <input type="number" value="100000">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        % of
+                                                        contract
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text percent received__percent">
+                                                        <span>10</span>%
+                                                    </h4>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Date on delivery note
+                                                        Status
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h4 class="project__clarify-text">
-                                                        01/01/2024
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Sign Date
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        01/01/2024
-                                                    </h4>
 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Upload Date
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        01/01/2024
-                                                    </h4>
 
+                                                    <button class="delete__item img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
                                                 </td>
                                             </tr>
                                             </tbody>
 
                                         </table>
                                         <div class="clarify__mob-nav">
-                                            <button class="clarify__mob-prev disabled">Prev Check</button>
-                                            <button class="clarify__mob-next">Next Check</button>
-
+                                            <button class="clarify__mob-prev disabled">Prev</button>
+                                            <button class="clarify__mob-next">Next</button>
                                         </div>
+
+                                        <div class="total__mob-wrap">
+                                            <div class="total__title">Total</div>
+                                            <table class="total">
+                                                <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Invoice Amount
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="invoice">
+                                                            100000
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            % of
+                                                            contract
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text total__invoice-percent">
+                                                            <span>10</span>%
+                                                        </h4>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            Received
+                                                            Amount
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="received">
+                                                            100000
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="clarify__mob-text">
+                                                            % of
+                                                            contract
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text total__received-percent">
+                                                            <span>10</span>%
+                                                        </h4>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
                             <div class="location__more-block">
-                                <form action="" class="form delivery__form">
-                                    <input type="hidden" name="action" value="add_invoice">
-                                    <input type="hidden" name="upload_date" value="">
+                                <form action="" class="form variations__form">
+                                    <input type="hidden" name="action" value="add_variations">
+                                    <input type="hidden" name="project_id" value="<?php echo $this->project_id; ?>">
                                     <div class="form__line"></div>
-
                                     <div class="form__file">
                                         <ul class="form__file-list file__list">
 
                                         </ul>
                                         <div class="form__file-upload">
-                                            <label for="fileInput3333"><img src="./img/upload.svg" alt="">Upload the file</label>
-                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput3333">
+                                            <label for="fileInput33336"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput33336">
                                         </div>
                                     </div>
                                     <div class="form__line"></div>
                                     <div class="form__input">
-                                        <label for="notes3333">Notes</label>
-                                        <input type="text" name="notes" id="notes3333">
+                                        <label for="notes3333">Status</label>
+                                        <div class="drop-wrap">
+                                            <div class="drop">
+                                                <input type="hidden" name="status" value="Not Initiated">
+                                                <div class="drop__btn" data-status="4"> Not Initiated</div>
+                                                <div class="drop__menu">
+                                                    <div class="drop__menu-flex">
+                                                        <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
+                                                        <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
+                                                        <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
+                                                        <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <div class="form__input">
+                                        <label for="notes33336">Invoice name</label>
+                                        <input type="text" name="invoice_name" id="notes33336">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="notes333347">Notes</label>
+                                        <input type="text" name="notes" id="notes333347">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="invoice-amount12">Invoice Amount</label>
+                                        <input type="text" name="invoice_amount" id="invoice-amount12">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="received-amount12">Received Amount</label>
+                                        <input type="text" name="received_amount" id="received-amount12">
+                                    </div>
+
                                     <div class="modal__managers-btn big">
                                         <button class=" section__button location__save">Save</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal__managers-btn big">
-                                <button class="section__button-secondary section__button location__more ">Add New Invoices</button>
+                                <button class="section__button-secondary section__button location__more ">Add Invoices</button>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+
+            <div class="modal modal__managers" data-modal="3_6" data-action="delete-guarantees" >
+                <div class="modal__wrap">
+                    <div class="modal__content modal__content-invoices  modal__content-guarantees modal__content-clarify ">
+                        <div class="modal__close img">
+                            <img src="./img/close.svg" alt="">
+                        </div>
+                        <div class="modal__overflow">
+                            <div class="project__top-block">
+                                <div class="project__top-icon img">
+                                    <img src="./img/icon-notepad.svg" alt="">
+                                </div>
+                                <h3 class="project__top-title project__modal-title"></h3>
+                            </div>
+                            <div class="form">
+                                <div class="form__line"></div>
+                                <div class="project__modal-desc">
+                                    <h3></h3>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <div class="project__table project__table-clarify ">
+                                <table>
+                                    <colgroup>
+                                        <col span="1" style="width: 18%;">
+                                        <col span="1" style="width: 17%;">
+                                        <col span="1" style="width: 17%;">
+                                        <col span="1" style="width: 7%;">
+                                        <col span="1" style="width: 7%;">
+                                        <col span="1" style="width: 11%;">
+                                        <col span="1" style="width: 8%;">
+                                    </colgroup>
+                                    <thead>
+
+                                    <tr>
+                                        <th>Variations/Add-Ons</th>
+                                        <th>Notes</th>
+                                        <th>Return Upon</th>
+                                        <th>Amount</th>
+                                        <th>Dates of
+                                            Return</th>
+                                        <th>Returned (yes/No)</th>
+                                        <th>Dates of
+                                            Submission</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr data-item-id="111">
+                                        <td>
+                                            <div class="project__clarify-flex" data-id="1">
+                                                <div class="project__clarify-file">
+                                                    Downloaded file 1.pdf
+                                                </div>
+                                                <div class="project__clarify-btn">
+                                                    <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                        <img src="./img/upload.svg" alt="">
+                                                    </a>
+                                                    <button class=" project__clarify-delete img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                Vorem ipsum dolor sit
+                                            </h4>
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                Return on MIR
+                                            </h4>
+
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                100000
+                                            </h4>
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                03/05/24
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="drop-wrap">
+                                                <div class="drop">
+                                                    <div class="drop__btn" data-status="1">Yes</div>
+                                                    <div class="drop__menu">
+                                                        <div class="drop__menu-flex">
+                                                            <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Yes</span>
+                                                            <span data-status="2" data-status-color="#F0C5BF" >No</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                03/05/24
+                                            </h4>
+                                        </td>
+
+                                    </tr>
+                                    <tr data-item-id="2222">
+                                        <td>
+                                            <div class="project__clarify-flex" data-id="1">
+                                                <div class="project__clarify-file">
+                                                    Downloaded file 1.pdf
+                                                </div>
+                                                <div class="project__clarify-btn">
+                                                    <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                        <img src="./img/upload.svg" alt="">
+                                                    </a>
+                                                    <button class=" project__clarify-delete img">
+                                                        <img src="./img/delete.svg" alt="">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                Vorem ipsum dolor sit
+                                            </h4>
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                Return on MIR
+                                            </h4>
+
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                100000
+                                            </h4>
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                03/05/24
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="drop-wrap">
+                                                <div class="drop">
+                                                    <div class="drop__btn" data-status="1">Yes</div>
+                                                    <div class="drop__menu">
+                                                        <div class="drop__menu-flex">
+                                                            <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Yes</span>
+                                                            <span data-status="2" data-status-color="#F0C5BF" >No</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
+                                        </td>
+                                        <td >
+                                            <h4 class="project__clarify-text">
+                                                03/05/24
+                                            </h4>
+                                        </td>
+
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="project__clarify-mob ">
+                                    <div class="form__line"></div>
+                                    <div class="clarify__mob-wrap">
+                                        <table>
+
+                                            <tbody class="active" data-item-id="111111" >
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Variations/
+                                                        Add-Ons
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-flex" data-id="1">
+                                                        <div class="project__clarify-file">
+                                                            Uploaded file 1.pdf
+                                                        </div>
+                                                        <div class="project__clarify-btn">
+                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
+                                                                <img src="./img/upload.svg" alt="">
+                                                            </a>
+                                                            <button class=" project__clarify-delete img">
+                                                                <img src="./img/delete.svg" alt="">
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Notes
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Vorem ipsum dolor sit
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Return Upon
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        Return on MIR
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Amount
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        111111
+                                                    </h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Date
+                                                        of return
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        03/08/2024
+                                                    </h4>
+                                                </td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Returned (yes/No)
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="drop-wrap">
+                                                        <div class="drop">
+                                                            <div class="drop__btn" data-status="1"> Yes</div>
+                                                            <div class="drop__menu">
+                                                                <div class="drop__menu-flex">
+                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Yes</span>
+                                                                    <span data-status="2" data-status-color="#F0C5BF" >No</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Date
+                                                        of submission
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <h4 class="project__clarify-text">
+                                                        03/08/2024
+                                                    </h4>
+                                                </td>
+                                                <button class="delete__item img">
+                                                    <img src="./img/delete.svg" alt="">
+                                                </button>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <div class="clarify__mob-nav">
+                                            <button class="clarify__mob-prev disabled">Prev</button>
+                                            <button class="clarify__mob-next">Next</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="location__more-block">
+                                <form action="" class="form guarantees__form">
+                                    <input type="hidden" name="action" value="add_guarantees">
+                                    <input type="hidden" name="project_id" value="<?php echo $this->project_id; ?>">
+                                    <div class="form__line"></div>
+                                    <div class="form__file">
+                                        <ul class="form__file-list file__list">
+
+                                        </ul>
+                                        <div class="form__file-upload">
+                                            <label for="fileInput366"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput366">
+                                        </div>
+                                    </div>
+                                    <div class="form__line"></div>
+                                    <div class="form__input">
+                                        <label for="notes366">Notes</label>
+                                        <input type="text" name="notes" id="notes366">
+                                    </div>
+
+                                    <div class="form__input">
+                                        <label for="return">Return Upon</label>
+                                        <input type="text" name="return_upon" id="return">
+                                    </div>
+
+                                    <div class="form__input">
+                                        <label for="invoice-amount126">Amount</label>
+                                        <input type="text" name="amount" id="invoice-amount126">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="date36">Date of return</label>
+                                        <input type="text" name="date_of_return" id="date36" class="modal__datepicker">
+                                    </div>
+                                    <div class="form__input">
+                                        <label >Returned</label>
+                                        <div class="drop-wrap">
+                                            <div class="drop">
+                                                <input type="hidden" name="returned" value="yes">
+                                                <div class="drop__btn" data-status="1">Yes</div>
+                                                <div class="drop__menu">
+                                                    <div class="drop__menu-flex">
+                                                        <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Yes</span>
+                                                        <span data-status="2" data-status-color="#F0C5BF" >No</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="date366">Dates of Submission</label>
+                                        <input type="text" name="date_of_submission" id="date366" class="modal__datepicker">
+                                    </div>
+
+                                    <div class="modal__managers-btn big">
+                                        <button class=" section__button location__save">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal__managers-btn big">
+                                <button class="section__button-secondary section__button location__more ">Add Guarantees</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
 
 
             <div class="modal modal__task modal__managers" data-modal="4_1" data-action="delete-minutes-of-meeting">
@@ -2342,8 +4186,8 @@
                             <div class="project__table project__table-manager ">
                                 <table>
                                     <colgroup>
-                                        <col span="1" style="width: 25%;">
-                                        <col span="1" style="width: 40%;">
+                                        <col span="1" style="width: 35%;">
+                                        <col span="1" style="width: 30%;">
                                         <col span="1" style="width: 35%;">
                                     </colgroup>
                                     <thead>

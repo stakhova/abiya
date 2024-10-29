@@ -550,12 +550,19 @@ table{
  //padding: 1.6rem 0.8rem!important;
 }
 .project__input input{
-  width: -webkit-fill-available;
+  //width: -webkit-fill-available;
   font: 400 1.4rem / normal var(--Arimo);
   border: none;
   //text-align: center;
 }
 
+.total .project__clarify-text{
+  font-weight: 700;
+}
+.form__input-row{
+  display: flex;
+  gap:0.8rem;
+}
 
 .total{
   background-color: rgba(86, 64, 115, 0.1);
@@ -601,7 +608,7 @@ table{
 .financial__input input{
   font: 400 1.4rem / normal var(--Arimo);
   border: none;
-  width: 6rem;
+  width: 8rem;
 }
 .modal__content-invoices{
   max-width: 135.5rem;
@@ -625,6 +632,16 @@ table{
   opacity: 0.5;
 
 }
+
+.total__mob-wrap{
+  display: flex;
+  flex-direction: column;
+  gap:1.5rem;
+}
+.purchases__modal{
+
+}
+
 
 .supplier{
   display: flex;
@@ -663,7 +680,7 @@ table{
 }
 
 @media only screen and (max-width: 666px) {
-  .project__table-manager{
+  .project__table-manager {
     margin: 1.6rem 0;
   }
   .delete__item {
@@ -674,166 +691,193 @@ table{
   .modal__managers .clarify__mob-wrap {
     margin-top: 3rem;
   }
-  .clarify__mob-wrap .delete__item{
+  .clarify__mob-wrap .delete__item {
     transform: none;
-    top:0.5rem;
+    top: 0.5rem;
   }
-  .project__table-manager tr{
+  .project__table-manager tr {
     position: relative;
   }
-  .project__table-manager  .delete__item{
+  .project__table-manager .delete__item {
     right: 0;
   }
-  .project__clarify-mob{
+  .project__clarify-mob {
     position: relative;
   }
-  .change__table .delete__item{
+  .change__table .delete__item {
     transform: none;
-    top:-3rem;
+    top: -3rem;
   }
-  .clarify__mob-wrap table{
+  .clarify__mob-wrap table {
     position: unset;
   }
-  .project__table-manager th{
+  .project__table-manager th {
     font-size: 1.2rem;
   }
-  .modal__managers td > *{
+  .modal__managers td > * {
     font-size: 1rem;
   }
-  .project__clarify-file{
+  .project__clarify-file {
     font-size: 1rem;
   }
-  .modal__managers .project__top-icon img{
+  .modal__managers .project__top-icon img {
     width: 2rem;
     height: 2rem;
   }
 
 
-  .chart__wrap .clarify__mob-wrap tbody.active{
+  .chart__wrap .clarify__mob-wrap tbody.active {
     display: contents;
   }
 
-  .chart__wrap .clarify__mob-wrap td:first-child{
+  .chart__wrap .clarify__mob-wrap td:first-child {
     background-color: transparent;
   }
-  .chart__wrap  .clarify__mob-text{
+  .chart__wrap .clarify__mob-text {
     font: 400 1rem / normal var(--Arimo);
   }
 
-  .chart__flex{
-    flex-direction:column ;
+  .chart__flex {
+    flex-direction: column;
     padding: 0 2.4rem;
   }
 
-  .chart__list{
+  .chart__list {
     flex-direction: column;
   }
-  .chart__item{
+  .chart__item {
     width: 100%;
   }
 
-  .chart__info{
+  .chart__info {
     max-width: 100%;
 
   }
-  .chart__item > h3{
+  .chart__item > h3 {
     display: none;
   }
-  .modal__content-biggest .modal__overflow{
+  .modal__content-biggest .modal__overflow {
     padding: 4rem 1.6rem;
   }
 
-  .modal__managers td > *{
+  .modal__managers td > * {
     padding: 2rem 1rem;
   }
 
   .chart__wrap tbody tr:last-of-type .clarify__mob-text {
     font: 400 1.2rem / normal var(--RozhaOne);
   }
-  .chart__wrap.project__table-clarify th{
+  .chart__wrap.project__table-clarify th {
     padding: 2rem 1rem;
     font-size: 1.2rem;
   }
-  .clarify__mob-wrap .form__line{
+  .clarify__mob-wrap .form__line {
     margin-bottom: 1.6rem;
   }
-  .chart__wrap{
-   margin: 0;
+  .chart__wrap {
+    margin: 0;
   }
-  .form__input.half{
+  .form__input.half {
     width: 100%;
   }
-  label.error{
+  label.error {
     font-size: 1.2rem;
     bottom: -2.2rem;
   }
-  .contact__form > *{
-    width: 100%!important;
+  .contact__form > * {
+    width: 100% !important;
   }
-  .select2-container .select2-selection--single{
+  .select2-container .select2-selection--single {
     padding: 1.4rem 1.2rem;
     height: 4.4rem;
   }
-  .modal__managers .form__input input, .modal__managers .form__input textarea{
+  .modal__managers .form__input input, .modal__managers .form__input textarea {
     font-size: 1.2rem;
     line-height: 1.4rem;
     padding: 1.4rem;
   }
-  .select2-container--default .select2-selection--single .select2-selection__rendered{
+  .select2-container--default .select2-selection--single .select2-selection__rendered {
     padding-left: 0;
     font-size: 1.2rem;
     border-radius: 0;
     height: 4.4rem;
     line-height: 1.4rem;
   }
-  .select2-results__option{
+  .select2-results__option {
     padding: 0.8rem;
     font-size: 1.2rem;
     line-height: 1.4rem;
   }
-  .location__more-block .drop__btn{
+  .location__more-block .drop__btn {
 
     font-size: 1.2rem;
     line-height: 1.4rem;
   }
-  .project__input input{
+  .project__input input {
     font-size: 1rem;
   }
-  .total__mob-wrap tbody{
-    display: contents!important;
+  .total__mob-wrap tbody {
+    display: contents !important;
   }
-  .total__title{
-    margin: 3rem 0 0.8rem;
+  .total__mob-wrap{
+    margin-top: 3rem;
+  }
+  .total__title {
     font: 400 1.4rem / normal var(--RozhaOne);
   }
-  .total td:first-child > *{
+  .total td:first-child > * {
 
     background: rgba(87, 66, 117, 0.30);
     font-size: 1.2rem;
   }
-  .total{
-  background-color: var(--color-white);
+  .total {
+    background-color: var(--color-white);
   }
-  .clarify__mob-wrap  .total td:first-child{
+  .clarify__mob-wrap .total td:first-child {
     border: 1px solid rgba(87, 66, 117, 0.50);
   }
 
-  tr{
+  tr {
     position: unset;
   }
-  .modal__content-invoices .modal__overflow{
-    padding:4rem 1.6rem ;
+  .modal__content-invoices .modal__overflow {
+    padding: 4rem 1.6rem;
   }
-  .modal__managers .change__table  td > *{
+  .modal__managers .change__table td > * {
     padding: 1rem;
   }
   .location__more-block .drop__menu {
     top: 5rem;
   }
-  .location__more-block .drop__menu-flex > *{
+  .location__more-block .drop__menu-flex > * {
     font-size: 1.2rem;
     line-height: 1.4rem;
   }
 
+  .purchases__modal .project__table-clarify th {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  .purchases__modal .project__table thead {
+    background-color: rgba(87, 66, 117, 0.30);
+  }
+  .purchases__modal .total td:first-child > *, .purchases__modal .clarify__mob-wrap td:first-child {
+    background: transparent;
+  }
+  .purchases__modal .total td{
+    font-weight: 400;
+  }
+  .financial__input input, .financial__input-wrap span{
+    font-size: 1rem;
+  }
+  .supplier > span{
+    padding: 0.6rem 1.2rem;
+  }
+  .total .project__clarify-text{
+    font-weight: 400;
+  }
+  .purchases__modal .total td:first-child > *{
+    font: 400 1rem / normal var(--Arimo);
+  }
 }
 

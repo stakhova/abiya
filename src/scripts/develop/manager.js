@@ -505,177 +505,75 @@ function editDataAmount() {
 }
 
 
-// function editDataAmount(){
-//     $(document).on('change', '.project__input input', function () {
-//         let project_id = $('.project__table-task').data('project-id');
-//         let invoice_id = $(this).closest('[data-item-id]').data('item-id')
-//         let amount = +$(this).val();
-//         let type = $(this).closest('.project__input').data('type');
-//
-//         let currentModal = $(this).closest('.modal');
-//         let action = currentModal.data('action-change');
-//         let totalAmountProject = +currentModal.data('project-amount');
-//         let obj = { action, project_id, invoice_id,  type, amount };
-//
-//
-//         let invoiceAmount = $(this).closest('[data-item-id]').find('[data-type="invoice"]').find('input').val();
-//         let invoiceReceived = $(this).closest('[data-item-id]').find('[data-type="received"]').find('input').val();
-//
-//         let invoicePercent = $(this).closest('[data-item-id]').find('.amount__percent').find('span');
-//         let receivedPercent = $(this).closest('[data-item-id]').find('.received__percent').find('span');
-//
-//         let percentAmount = ((invoiceAmount / totalAmountProject) * 100).toFixed(2);
-//         let percentReceived = ((invoiceReceived / invoiceAmount) * 100).toFixed(2);
-//
-//         if (totalAmountProject) {
-//             invoicePercent.text(percentAmount);
-//             receivedPercent.text(percentReceived);
-//         }
-//
-//         function calculateTotals(selector) {
-//             let totalInvoice = 0;
-//             let totalReceived = 0;
-//             let totalPercentInvoice = 0;
-//             let totalPercentReceived = 0;
-//
-//             $(selector).find('.project__input[data-type="invoice"] input').each(function () {
-//                 totalInvoice += parseFloat($(this).val()) || 0;
-//             });
-//
-//             $(selector).find('.project__input[data-type="received"] input').each(function () {
-//                 totalReceived += parseFloat($(this).val()) || 0;
-//             });
-//
-//             $(selector).find('.amount__percent span').each(function () {
-//                 totalPercentInvoice += parseFloat($(this).text()) || 0;
-//             });
-//
-//             $(selector).find('.received__percent span').each(function () {
-//                 totalPercentReceived += parseFloat($(this).text()) || 0;
-//             });
-//
-//             if(totalPercentInvoice > 100){
-//                 $(selector).find('.total__invoice-percent').css('color', 'red');
-//             }else{
-//                 $(selector).find('.total__invoice-percent').css('color', 'inherit');
-//             }
-//             if(totalPercentReceived > 100){
-//                 $(selector).find('.total__received-percent').css('color', 'red');
-//             } else{
-//                 $(selector).find('.total__received-percent ').css('color', 'inherit');
-//             }
-//
-//             $(selector).find('.total h4[data-type="invoice"]').text(totalInvoice);
-//             $(selector).find('.total h4[data-type="received"]').text(totalReceived);
-//             $(selector).find('.total__invoice-percent span').text(totalPercentInvoice);
-//             $(selector).find('.total__received-percent span').text(totalPercentReceived);
-//         }
-//
-//         function successEdit() {
-//             calculateTotals(currentModal.find('table.change__table'));
-//             calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
-//         }
-//
-//         $.ajax({
-//             url: '/wp-admin/admin-ajax.php',
-//             data: obj,
-//             method: 'POST',
-//             success: function (res) {
-//                 successEdit();
-//             },
-//             error: function (error) {
-//                 successEdit();
-//             },
-//         });
-//     });
-// }
 
 
 
-
-function editDataPurchases(){
+function editDataPurchases() {
     $(document).on('change', '.financial__input input', function () {
         let project_id = $('.project__table-task').data('project-id');
-        let purchases_id = $(this).closest('[data-item-id]').data('item-id')
+        let purchases_id = $(this).closest('[data-item-id]').data('item-id');
         let amount = +$(this).val();
         let type = $(this).closest('.supplier').data('type');
         let currentModal = $(this).closest('.modal');
         let action = currentModal.data('action-change');
 
+        let obj = { action, project_id, purchases_id, type, amount };
 
-        // let totalAmountProject = +currentModal.data('project-amount');
-        let obj = { action, project_id, purchases_id,  type, amount };
+        // Function to update differences for a specified container
+        function updateDifferences(container) {
+            $(container).find('[data-item-id]').each(function () {
+                let budgetAmount = +$(this).find('[data-type="budget"] input').val() || 0;
 
+                // Update difference for Engineering
+                updateDifferenceForType($(this), "engineering", budgetAmount);
 
-
-
-
-        let budgetAmount = $(this).closest('[data-item-id]').find('[data-type="budget"]').find('input').val();
-        let engineeringAmount = $(this).closest('[data-item-id]').find('[data-type="engineering"]').find('input').val();
-        let managementAmount = $(this).closest('[data-item-id]').find('[data-type="management"]').find('input').val();
-
-        let diff = $(this).closest('.financial__input-wrap').find('span')
-        let diffCount = budgetAmount - amount
-        if(diff){
-            amount > budgetAmount ? diff.text(`+ `):diff.text(`- `);
+                // Update difference for Management
+                updateDifferenceForType($(this), "management", budgetAmount);
+            });
         }
 
-
-        let invoicePercent = $(this).closest('[data-item-id]').find('.amount__percent').find('span');
-        let receivedPercent = $(this).closest('[data-item-id]').find('.received__percent').find('span');
-
-        let percentAmount = ((invoiceAmount / totalAmountProject) * 100).toFixed(2);
-        let percentReceived = ((invoiceReceived / invoiceAmount) * 100).toFixed(2);
-
-        if (totalAmountProject) {
-            invoicePercent.text(percentAmount);
-            receivedPercent.text(percentReceived);
+        // Helper function to update difference for a specific type (e.g., Engineering, Management)
+        function updateDifferenceForType(item, type, budgetAmount) {
+            let typeInput = item.find(`[data-type="${type}"] input`);
+            let typeAmount = +typeInput.val() || 0;
+            let typeDiff = typeAmount - budgetAmount;
+            item.find(`[data-type="${type}"] .financial__input-wrap span`).text(
+                typeDiff >= 0 ? `(+${typeDiff})` : `(${typeDiff})`
+            );
         }
 
-        function calculateTotals(selector) {
-            let totalInvoice = 0;
-            let totalReceived = 0;
-            let totalPercentInvoice = 0;
-            let totalPercentReceived = 0;
+        // Function to recalculate totals within a specific container
+        function recalculateTotals(container) {
+            let totalBudget = 0;
+            let totalEngineering = 0;
+            let totalManagement = 0;
 
-            $(selector).find('.project__input[data-type="invoice"] input').each(function () {
-                totalInvoice += parseFloat($(this).val()) || 0;
+            // Accumulate totals based on inputs within the specified container
+            $(container).find('[data-item-id]').each(function () {
+                totalBudget += +$(this).find('[data-type="budget"] input').val() || 0;
+                totalEngineering += +$(this).find('[data-type="engineering"] input').val() || 0;
+                totalManagement += +$(this).find('[data-type="management"] input').val() || 0;
             });
 
-            $(selector).find('.project__input[data-type="received"] input').each(function () {
-                totalReceived += parseFloat($(this).val()) || 0;
-            });
+            // Update the Total Material Cost row in the specified container
+            $(container).find('.total [data-type="budget"]').text(totalBudget);
+            $(container).find('.total [data-type="engineering"]').text(totalEngineering);
+            $(container).find('.total [data-type="management"]').text(totalManagement);
 
-            $(selector).find('.amount__percent span').each(function () {
-                totalPercentInvoice += parseFloat($(this).text()) || 0;
-            });
-
-            $(selector).find('.received__percent span').each(function () {
-                totalPercentReceived += parseFloat($(this).text()) || 0;
-            });
-
-            if(totalPercentInvoice > 100){
-                $(selector).find('.total__invoice-percent').css('color', 'red');
-            }else{
-                $(selector).find('.total__invoice-percent').css('color', 'inherit');
-            }
-            if(totalPercentReceived > 100){
-                $(selector).find('.total__received-percent').css('color', 'red');
-            } else{
-                $(selector).find('.total__received-percent ').css('color', 'inherit');
-            }
-
-            $(selector).find('.total h4[data-type="invoice"]').text(totalInvoice);
-            $(selector).find('.total h4[data-type="received"]').text(totalReceived);
-            $(selector).find('.total__invoice-percent span').text(totalPercentInvoice);
-            $(selector).find('.total__received-percent span').text(totalPercentReceived);
+            // Calculate and update Savings/Losses row
+            let savingsEngineering = totalEngineering - totalBudget;
+            let savingsManagement = totalManagement - totalBudget;
+            $(container).find('.total__save [data-type="engineering"]').text(savingsEngineering >= 0 ? `+${savingsEngineering}` : savingsEngineering);
+            $(container).find('.total__save [data-type="management"]').text(savingsManagement >= 0 ? `+${savingsManagement}` : savingsManagement);
         }
 
-        function successEdit() {
-            calculateTotals(currentModal.find('table.change__table'));
-            calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
-        }
+        // Call update functions for both desktop and mobile tables
+        updateDifferences('table.change__table');
+        recalculateTotals('table.change__table');
+        updateDifferences('.project__clarify-mob');
+        recalculateTotals('.project__clarify-mob');
 
+        // AJAX request to update the server with new values
         $.ajax({
             url: '/wp-admin/admin-ajax.php',
             data: obj,
@@ -690,6 +588,20 @@ function editDataPurchases(){
     });
 }
 
+function adjustInputWidth() {
+    $('.financial__input input, .project__input input').each(function () {
+        // Create a temporary element to measure the width of the input value
+        let tempSpan = $('<span>').text($(this).val()).css({
+            'font-size': $(this).css('font-size'),
+            'font-family': $(this).css('font-family'),
+            'visibility': 'hidden',
+            'white-space': 'nowrap'
+        }).appendTo('body');
+
+        $(this).width(tempSpan.width() + 15); //
+        tempSpan.remove();
+    });
+}
 $(document).ready(function () {
     editDataAmount()
     removeDate();
@@ -748,6 +660,17 @@ $(document).ready(function () {
         });
     });
 
+    let purchaseForm = $('.purchase__form');
+    validateForm(purchaseForm, function () {
+        ajaxSend(purchaseForm, function () {
+            $('.location__more-block').hide();
+            $('.location__more').show();
+        }, function (error) {
+            // $('.location__more-block').hide();
+            // $('.location__more').show();
+        });
+    });
+
 
 
     let dateForm = $('.calendar__form');
@@ -793,7 +716,9 @@ $(document).ready(function () {
     submitFormDataProject('.variations__form');
     submitFormDataProject('.minutes__form');
 
-
+    editDataPurchases()
+    adjustInputWidth()
+    $(document).on('input', '.financial__input input', adjustInputWidth);
 });
 
 $(window).load(function () {});

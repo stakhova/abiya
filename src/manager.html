@@ -2597,7 +2597,7 @@
                 </div>
             </div>
 
-            <div class="modal modal__managers" data-modal="3_4" data-action="delete-purchases" data-action-change="change_purchases" data-project-amount="200">
+            <div class="modal modal__managers purchases__modal"  data-modal="3_4" data-action="delete-purchases" data-action-change="change_purchases" data-project-amount="200">
                 <div class="modal__wrap">
                     <div class="modal__content modal__content-invoices modal__content-clarify ">
                         <div class="modal__close img">
@@ -2646,7 +2646,7 @@
                                         <td>
                                             <div class="project__clarify-text supplier" data-type="budget">
                                                 <div class="financial__input" data-type="budget">
-                                                    <input type="number" value="100000">
+                                                    <input type="number" value="1000">
                                                 </div>
                                                 <span>Supplier1</span>
                                                 <span>Supplier2</span>
@@ -2658,7 +2658,7 @@
                                             <div class="project__clarify-text supplier compare" data-type="engineering">
                                                 <div class="financial__input-wrap">
                                                     <div class="financial__input">
-                                                        <input type="number" value="100000">
+                                                        <input type="number" value="700">
                                                     </div>
                                                     <span>(-300)</span>
                                                 </div>
@@ -2671,13 +2671,63 @@
                                             <div class="project__clarify-text supplier compare" data-type="management">
                                                 <div class="financial__input-wrap">
                                                     <div class="financial__input" >
-                                                        <input type="number" value="100000">
+                                                        <input type="number" value="1300">
                                                     </div>
-                                                    <span>(-300)</span>
+                                                    <span>(+300)</span>
                                                 </div>
                                                 <span>Supplier1</span>
 
                                             </div>
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                    <tr data-item-id="22222">
+                                        <td>
+                                            <h4 class="project__clarify-text">
+                                                Aluminum Sheet
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier" data-type="budget">
+                                                <div class="financial__input" data-type="budget">
+                                                    <input type="number" value="1000">
+                                                </div>
+                                                <span>Supplier1</span>
+                                                <span>Supplier2</span>
+                                                <span>Supplier3</span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier compare" data-type="engineering">
+                                                <div class="financial__input-wrap">
+                                                    <div class="financial__input">
+                                                        <input type="number" value="700">
+                                                    </div>
+                                                    <span>(-300)</span>
+                                                </div>
+                                                <span>Supplier1</span>
+                                                <span>Supplier2</span>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <div class="project__clarify-text supplier compare" data-type="management">
+                                                <div class="financial__input-wrap">
+                                                    <div class="financial__input" >
+                                                        <input type="number" value="1300">
+                                                    </div>
+                                                    <span>(+300)</span>
+                                                </div>
+                                                <span>Supplier1</span>
+
+                                            </div>
+                                            <button class="delete__item img">
+                                                <img src="./img/delete.svg" alt="">
+                                            </button>
 
                                         </td>
                                     </tr>
@@ -2690,24 +2740,24 @@
                                             </h4>
                                         </td>
                                         <td>
-                                            <h4 class="project__clarify-text">
-                                                4700
+                                            <h4 class="project__clarify-text" data-type="budget" >
+                                                1000
                                             </h4>
                                         </td>
 
                                         <td>
-                                            <h4 class="project__clarify-text">
-                                                4700
+                                            <h4 class="project__clarify-text" data-type="engineering" >
+                                                700
                                             </h4>
                                         </td>
                                         <td>
-                                            <h4 class="project__clarify-text">
-                                                4700
+                                            <h4 class="project__clarify-text"  data-type="management">
+                                                1300
                                             </h4>
                                         </td>
 
                                     </tr>
-                                    <tr class="total">
+                                    <tr class="total total__save">
                                         <td>
                                             <h4 class="project__clarify-text total__value" >
                                                 Savings/Losts
@@ -2720,13 +2770,13 @@
                                         </td>
 
                                         <td>
-                                            <h4 class="project__clarify-text">
-                                                +300
+                                            <h4 class="project__clarify-text" data-type="engineering">
+                                                -300
                                             </h4>
                                         </td>
                                         <td>
-                                            <h4 class="project__clarify-text">
-                                               -500
+                                            <h4 class="project__clarify-text" data-type="management">
+                                               +300
                                             </h4>
                                         </td>
 
@@ -2744,7 +2794,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Invoice
+                                                        Item
                                                     </div>
                                                 </td>
                                                 <td>
@@ -2757,130 +2807,73 @@
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        File
+                                                        Budget
                                                     </div>
-
                                                 </td>
                                                 <td>
-                                                    <div class="project__clarify-flex" data-id="1">
-                                                        <div class="project__clarify-file">
-                                                            Uploaded file 1.pdf
+                                                    <div class="project__clarify-text supplier" data-type="budget">
+                                                        <div class="financial__input" data-type="budget">
+                                                            <input type="number" value="1000">
                                                         </div>
-                                                        <div class="project__clarify-btn">
-                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
-                                                                <img src="./img/upload.svg" alt="">
-                                                            </a>
-                                                            <button class=" project__clarify-delete img">
-                                                                <img src="./img/delete.svg" alt="">
-                                                            </button>
-                                                        </div>
+                                                        <span>Supplier1</span>
+                                                        <span>Supplier2</span>
+                                                        <span>Supplier3</span>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Notes
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        Vorem ipsum dolor sit
-                                                    </h4>
                                                 </td>
                                             </tr>
                                             <tr class="wrap__amount">
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Invoice
-                                                        Amount
+                                                        Engineering
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="project__input" data-type="invoice">
-                                                        <input type="number" value="100000">
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            <tr class="wrap__percent">
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        % of
-                                                        contract
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text percent amount__percent">
-                                                        <span>10</span>%
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr class="wrap__amount">
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Received
-                                                        Amount
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__input" data-type="received">
-                                                        <input type="number" value="100000">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="wrap__percent">
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        % of
-                                                        contract
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text percent received__percent">
-                                                        <span>10</span>%
-                                                    </h4>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Status
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="drop-wrap">
-                                                        <div class="drop">
-                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
-                                                            <div class="drop__menu">
-                                                                <div class="drop__menu-flex">
-                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
-                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
-                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
-                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
-                                                                </div>
+                                                    <div class="project__clarify-text supplier compare" data-type="engineering">
+                                                        <div class="financial__input-wrap">
+                                                            <div class="financial__input">
+                                                                <input type="number" value="700">
                                                             </div>
+                                                            <span>(-300)</span>
                                                         </div>
+                                                        <span>Supplier1</span>
+                                                        <span>Supplier2</span>
                                                     </div>
 
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Management
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-text supplier compare" data-type="management">
+                                                        <div class="financial__input-wrap">
+                                                            <div class="financial__input" >
+                                                                <input type="number" value="1300">
+                                                            </div>
+                                                            <span>(+300)</span>
+                                                        </div>
+                                                        <span>Supplier1</span>
 
+                                                    </div>
                                                     <button class="delete__item img">
                                                         <img src="./img/delete.svg" alt="">
                                                     </button>
                                                 </td>
                                             </tr>
                                             </tbody>
-                                            <tbody class="" data-item-id="22222">
+                                            <tbody  data-item-id="22222" >
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Invoice
+                                                        Item
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <h4 class="project__clarify-text">
-                                                        Invoice #1
+                                                        Invoice #222
                                                     </h4>
 
                                                 </td>
@@ -2888,114 +2881,57 @@
                                             <tr>
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        File
+                                                        Budget
                                                     </div>
-
                                                 </td>
                                                 <td>
-                                                    <div class="project__clarify-flex" data-id="1">
-                                                        <div class="project__clarify-file">
-                                                            Uploaded file 1.pdf
+                                                    <div class="project__clarify-text supplier" data-type="budget">
+                                                        <div class="financial__input" data-type="budget">
+                                                            <input type="number" value="1000">
                                                         </div>
-                                                        <div class="project__clarify-btn">
-                                                            <a href="./img/notification.svg" download="" class="project__clarify-download img">
-                                                                <img src="./img/upload.svg" alt="">
-                                                            </a>
-                                                            <button class=" project__clarify-delete img">
-                                                                <img src="./img/delete.svg" alt="">
-                                                            </button>
-                                                        </div>
+                                                        <span>Supplier1</span>
+                                                        <span>Supplier2</span>
+                                                        <span>Supplier3</span>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Notes
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text">
-                                                        Vorem ipsum dolor sit
-                                                    </h4>
                                                 </td>
                                             </tr>
                                             <tr class="wrap__amount">
                                                 <td>
                                                     <div class="clarify__mob-text">
-                                                        Invoice
-                                                        Amount
+                                                        Engineering
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="project__input" data-type="invoice">
-                                                        <input type="number" value="100000">
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            <tr class="wrap__percent">
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        % of
-                                                        contract
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text percent amount__percent">
-                                                        <span>10</span>%
-                                                    </h4>
-
-                                                </td>
-                                            </tr>
-                                            <tr class="wrap__amount">
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Received
-                                                        Amount
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="project__input" data-type="received">
-                                                        <input type="number" value="100000">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="wrap__percent">
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        % of
-                                                        contract
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h4 class="project__clarify-text percent received__percent">
-                                                        <span>10</span>%
-                                                    </h4>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="clarify__mob-text">
-                                                        Status
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="drop-wrap">
-                                                        <div class="drop">
-                                                            <div class="drop__btn" data-status="4"> Not Initiated</div>
-                                                            <div class="drop__menu">
-                                                                <div class="drop__menu-flex">
-                                                                    <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
-                                                                    <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
-                                                                    <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
-                                                                    <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
-                                                                </div>
+                                                    <div class="project__clarify-text supplier compare" data-type="engineering">
+                                                        <div class="financial__input-wrap">
+                                                            <div class="financial__input">
+                                                                <input type="number" value="700">
                                                             </div>
+                                                            <span>(-300)</span>
                                                         </div>
+                                                        <span>Supplier1</span>
+                                                        <span>Supplier2</span>
                                                     </div>
 
+                                                </td>
+                                            </tr>
+                                            <tr class="wrap__percent">
+                                                <td>
+                                                    <div class="clarify__mob-text">
+                                                        Management
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="project__clarify-text supplier compare" data-type="management">
+                                                        <div class="financial__input-wrap">
+                                                            <div class="financial__input" >
+                                                                <input type="number" value="1300">
+                                                            </div>
+                                                            <span>(+300)</span>
+                                                        </div>
+                                                        <span>Supplier1</span>
 
+                                                    </div>
                                                     <button class="delete__item img">
                                                         <img src="./img/delete.svg" alt="">
                                                     </button>
@@ -3010,64 +2946,82 @@
                                         </div>
 
                                         <div class="total__mob-wrap">
-                                            <div class="total__title">Total</div>
                                             <table class="total">
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="clarify__mob-text">
-                                                            Invoice Amount
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <h4 class="project__clarify-text" data-type="invoice">
-                                                            100000
-                                                        </h4>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="clarify__mob-text">
-                                                            % of
-                                                            contract
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <h4 class="project__clarify-text total__invoice-percent">
-                                                            <span>10</span>%
-                                                        </h4>
+                                                <colgroup>
+                                                    <col span="1" style="width: 33.3%;">
+                                                    <col span="1" style="width: 33.3%;">
+                                                    <col span="1" style="width: 33.3%;">
+                                                </colgroup>
+                                                <thead>
 
-                                                    </td>
-                                                </tr>
-                                                <tr>
+                                                    <tr>
+                                                    <th>Total
+                                                        Budget</th>
+                                                    <th>Total Engineering</th>
+                                                    <th>Total
+                                                        Management</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <h4 class="project__clarify-text" data-type="budget" >
+                                                                1000
+                                                            </h4>
+                                                        </td>
+
+                                                        <td>
+                                                            <h4 class="project__clarify-text" data-type="engineering" >
+                                                                700
+                                                            </h4>
+                                                        </td>
+                                                        <td>
+                                                            <h4 class="project__clarify-text"  data-type="management">
+                                                                1300
+                                                            </h4>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="total">
+                                                <colgroup>
+                                                    <col span="1" style="width: 33.3%">
+                                                    <col span="1" style="width: 33.3%">
+                                                    <col span="1" style="width: 33.3%">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sav./Loss
+                                                            Budget</th>
+                                                        <th>Sav./Loss
+                                                            Engineering</th>
+                                                        <th>Sav./Loss
+                                                            Management</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr class="total total__save">
                                                     <td>
-                                                        <div class="clarify__mob-text">
-                                                            Received
-                                                            Amount
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <h4 class="project__clarify-text" data-type="received">
-                                                            100000
+                                                        <h4 class="project__clarify-text total__value" >
+                                                            Savings/Losts
                                                         </h4>
                                                     </td>
-                                                </tr>
-                                                <tr>
+
                                                     <td>
-                                                        <div class="clarify__mob-text">
-                                                            % of
-                                                            contract
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <h4 class="project__clarify-text total__received-percent">
-                                                            <span>10</span>%
+                                                        <h4 class="project__clarify-text" data-type="engineering">
+                                                            -300
                                                         </h4>
                                                     </td>
+                                                    <td>
+                                                        <h4 class="project__clarify-text" data-type="management">
+                                                            +300
+                                                        </h4>
+                                                    </td>
+
                                                 </tr>
                                                 </tbody>
-
                                             </table>
+
                                         </div>
 
 
@@ -3075,8 +3029,8 @@
                                 </div>
                             </div>
                             <div class="location__more-block">
-                                <form action="" class="form invoices__form">
-                                    <input type="hidden" name="action" value="add_invoice">
+                                <form action="" class="form purchase__form">
+                                    <input type="hidden" name="action" value="add_purchase">
                                     <input type="hidden" name="project_id" value="<?php echo $this->project_id; ?>">
                                     <div class="form__line"></div>
                                     <div class="form__file">
@@ -3084,53 +3038,67 @@
 
                                         </ul>
                                         <div class="form__file-upload">
-                                            <label for="fileInput3333"><img src="./img/upload.svg" alt="">Upload the file</label>
-                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput3333">
+                                            <label for="fileInput33334"><img src="./img/upload.svg" alt="">Upload the file</label>
+                                            <input type="file" name="file" multiple=""   class="file__input" id="fileInput33334">
                                         </div>
                                     </div>
                                     <div class="form__line"></div>
+
+
                                     <div class="form__input">
-                                        <label for="notes3333">Status</label>
-                                        <div class="drop-wrap">
-                                            <div class="drop">
-                                                <input type="hidden" name="status" value="Not Initiated">
-                                                <div class="drop__btn" data-status="4"> Not Initiated</div>
-                                                <div class="drop__menu">
-                                                    <div class="drop__menu-flex">
-                                                        <span data-status="1" data-status-color="rgba(183, 226, 182, 0.50)">Paid</span>
-                                                        <span data-status="2" data-status-color="#F0C5BF" >Not Paid</span>
-                                                        <span data-status="3" data-status-color="#FFE8CC" >Partially Paid </span>
-                                                        <span data-status="4" data-status-color="#E8E8E8" >Not Initiated</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <label for="item1">Item</label>
+                                        <input type="text" name="item" id="item1">
+                                    </div>
+                                    <div class="form__input">
+                                        <label for="budget1">Budget</label>
+                                        <input type="text" name="budget" id="budget1">
+                                    </div>
+                                    <div class="form__input-row">
+                                        <div class="form__input">
+                                            <label >Supplier</label>
+                                            <input type="text" name="supplier__budget[]">
+
+                                        </div>
+                                        <div class="form__input">
+                                            <label >Supplier</label>
+                                            <input type="text" name="supplier__budget[]">
+
+                                        </div>
+                                        <div class="form__input">
+                                            <label >Supplier</label>
+                                            <input type="text" name="supplier__budget[]">
                                         </div>
                                     </div>
+                                    <div class="form__input">
+                                        <label >Engineering</label>
+                                        <input type="text" name="engineering" >
+                                    </div>
+                                    <div class="form__input-row two">
+                                        <div class="form__input">
+                                            <label >Supplier</label>
+                                            <input type="text" name="supplier__engineering[]">
 
-                                    <div class="form__input">
-                                        <label for="notes3333">Invoice name</label>
-                                        <input type="text" name="invoice_name" id="notes3333">
+                                        </div>
+                                        <div class="form__input">
+                                            <label >Supplier</label>
+                                            <input type="text" name="supplier__engineering[]">
+                                        </div>
                                     </div>
                                     <div class="form__input">
-                                        <label for="notes33334">Notes</label>
-                                        <input type="text" name="notes" id="notes33334">
+                                        <label >Management</label>
+                                        <input type="text" name="engineering" >
                                     </div>
                                     <div class="form__input">
-                                        <label for="invoice-amount1">Invoice Amount</label>
-                                        <input type="text" name="invoice_amount" id="invoice-amount1">
+                                        <label >Supplier</label>
+                                        <input type="text" name="supplier__management">
                                     </div>
-                                    <div class="form__input">
-                                        <label for="received-amount1">Received Amount</label>
-                                        <input type="text" name="received_amount" id="received-amount1">
-                                    </div>
-
                                     <div class="modal__managers-btn big">
                                         <button class=" section__button location__save">Save</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal__managers-btn big">
-                                <button class="section__button-secondary section__button location__more ">Add Invoices</button>
+                                <button class="section__button-secondary section__button location__more ">Add Purchases</button>
                             </div>
                         </div>
                     </div>

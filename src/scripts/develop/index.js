@@ -531,6 +531,9 @@ function submitFormDataProject(form) {
             $('.modal .form__file-hint').remove();
             required = true;
         }
+        if( messageProject.length == 0 ){
+            required = true;
+        }
         console.log(11111, fileProject.val(), fileProject.length > 0, fileProject.val() !== "", required);
         if (fileProject.length > 0 && fileProject.val() !== "" && required) {
             let formData = new FormData($(this)[0]);

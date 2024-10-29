@@ -586,13 +586,22 @@ table{
 .location__more-block .drop{
   min-width: 19rem;
 }
-@media only screen and (max-width: 1440px) {
-  .modal__content-biggest{
-    max-width: 90%;
+
+.financial__input-wrap {
+  display: flex;
+  align-items: center;
+  span{
+    font: 400 1.4rem / normal var(--Arimo);
   }
-  .chart__info-item{
-   gap:1rem;
-  }
+}
+.financial__input {
+  display: inline-block;
+  width: max-content;
+}
+.financial__input input{
+  font: 400 1.4rem / normal var(--Arimo);
+  border: none;
+  width: 6rem;
 }
 .modal__content-invoices{
   max-width: 135.5rem;
@@ -617,11 +626,11 @@ table{
 
 }
 
-
 .supplier{
   display: flex;
   flex-wrap: wrap;
   gap:0.4rem;
+  align-items: center;
 
   //&__wrap{
   //  gap:2rem;
@@ -643,6 +652,16 @@ table{
     font: 400 1rem / normal var(--Arimo);
   }
 }
+
+@media only screen and (max-width: 1440px) {
+  .modal__content-biggest{
+    max-width: 90%;
+  }
+  .chart__info-item{
+   gap:1rem;
+  }
+}
+
 @media only screen and (max-width: 666px) {
   .project__table-manager{
     margin: 1.6rem 0;

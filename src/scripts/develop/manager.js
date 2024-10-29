@@ -425,22 +425,20 @@ function dropMenu() {
         });
     });
 }
-
-
-function editDataAmount(){
+function editDataAmount() {
     $(document).on('change', '.project__input input', function () {
         let project_id = $('.project__table-task').data('project-id');
-        let invoice_id = $(this).closest('[data-item-id]').data('item-id')
+        let invoice_id = $(this).closest('[data-item-id]').data('item-id');
         let amount = +$(this).val();
         let type = $(this).closest('.project__input').data('type');
 
         let currentModal = $(this).closest('.modal');
         let action = currentModal.data('action-change');
         let totalAmountProject = +currentModal.data('project-amount');
-        let obj = { action, project_id, invoice_id,  type, amount };
+        let obj = { action, project_id, invoice_id, type, amount };
 
         let currentPercent = $(this).closest('.wrap__amount').next().find('.percent').find('span');
-        let percent = ((amount / totalAmountProject) * 100).toFixed(2);
+        let percent = (amount / totalAmountProject * 100).toFixed(2);
         if (totalAmountProject) {
             currentPercent.text(percent);
         }
@@ -467,11 +465,198 @@ function editDataAmount(){
                 totalPercentReceived += parseFloat($(this).text()) || 0;
             });
 
+            if (totalPercentInvoice > 100) {
+                console.log(34343434);
+                $(selector).find('.total__invoice-percent').css('color', 'red');
+            } else {
+                console.log(66666);
+                $(selector).find('.total__invoice-percent').css('color', 'inherit');
+            }
+            if (totalPercentReceived > 100) {
+                $(selector).find('.total__received-percent').css('color', 'red');
+            } else {
+                $(selector).find('.total__received-percent ').css('color', 'inherit');
+            }
+
+            $(selector).find('.total h4[data-type="invoice"]').text(totalInvoice);
+            $(selector).find('.total h4[data-type="received"]').text(totalReceived);
+            $(selector).find('.total__invoice-percent span').text(totalPercentInvoice);
+            $(selector).find('.total__received-percent span').text(totalPercentReceived);
+        }
+
+        function successEdit() {
+            calculateTotals(currentModal.find('table.change__table'));
+
+            calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
+        }
+
+        $.ajax({
+            url: '/wp-admin/admin-ajax.php',
+            data: obj,
+            method: 'POST',
+            success: function (res) {
+                successEdit();
+            },
+            error: function (error) {
+                successEdit();
+            }
+        });
+    });
+}
+
+
+// function editDataAmount(){
+//     $(document).on('change', '.project__input input', function () {
+//         let project_id = $('.project__table-task').data('project-id');
+//         let invoice_id = $(this).closest('[data-item-id]').data('item-id')
+//         let amount = +$(this).val();
+//         let type = $(this).closest('.project__input').data('type');
+//
+//         let currentModal = $(this).closest('.modal');
+//         let action = currentModal.data('action-change');
+//         let totalAmountProject = +currentModal.data('project-amount');
+//         let obj = { action, project_id, invoice_id,  type, amount };
+//
+//
+//         let invoiceAmount = $(this).closest('[data-item-id]').find('[data-type="invoice"]').find('input').val();
+//         let invoiceReceived = $(this).closest('[data-item-id]').find('[data-type="received"]').find('input').val();
+//
+//         let invoicePercent = $(this).closest('[data-item-id]').find('.amount__percent').find('span');
+//         let receivedPercent = $(this).closest('[data-item-id]').find('.received__percent').find('span');
+//
+//         let percentAmount = ((invoiceAmount / totalAmountProject) * 100).toFixed(2);
+//         let percentReceived = ((invoiceReceived / invoiceAmount) * 100).toFixed(2);
+//
+//         if (totalAmountProject) {
+//             invoicePercent.text(percentAmount);
+//             receivedPercent.text(percentReceived);
+//         }
+//
+//         function calculateTotals(selector) {
+//             let totalInvoice = 0;
+//             let totalReceived = 0;
+//             let totalPercentInvoice = 0;
+//             let totalPercentReceived = 0;
+//
+//             $(selector).find('.project__input[data-type="invoice"] input').each(function () {
+//                 totalInvoice += parseFloat($(this).val()) || 0;
+//             });
+//
+//             $(selector).find('.project__input[data-type="received"] input').each(function () {
+//                 totalReceived += parseFloat($(this).val()) || 0;
+//             });
+//
+//             $(selector).find('.amount__percent span').each(function () {
+//                 totalPercentInvoice += parseFloat($(this).text()) || 0;
+//             });
+//
+//             $(selector).find('.received__percent span').each(function () {
+//                 totalPercentReceived += parseFloat($(this).text()) || 0;
+//             });
+//
+//             if(totalPercentInvoice > 100){
+//                 $(selector).find('.total__invoice-percent').css('color', 'red');
+//             }else{
+//                 $(selector).find('.total__invoice-percent').css('color', 'inherit');
+//             }
+//             if(totalPercentReceived > 100){
+//                 $(selector).find('.total__received-percent').css('color', 'red');
+//             } else{
+//                 $(selector).find('.total__received-percent ').css('color', 'inherit');
+//             }
+//
+//             $(selector).find('.total h4[data-type="invoice"]').text(totalInvoice);
+//             $(selector).find('.total h4[data-type="received"]').text(totalReceived);
+//             $(selector).find('.total__invoice-percent span').text(totalPercentInvoice);
+//             $(selector).find('.total__received-percent span').text(totalPercentReceived);
+//         }
+//
+//         function successEdit() {
+//             calculateTotals(currentModal.find('table.change__table'));
+//             calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
+//         }
+//
+//         $.ajax({
+//             url: '/wp-admin/admin-ajax.php',
+//             data: obj,
+//             method: 'POST',
+//             success: function (res) {
+//                 successEdit();
+//             },
+//             error: function (error) {
+//                 successEdit();
+//             },
+//         });
+//     });
+// }
+
+
+
+
+function editDataPurchases(){
+    $(document).on('change', '.financial__input input', function () {
+        let project_id = $('.project__table-task').data('project-id');
+        let purchases_id = $(this).closest('[data-item-id]').data('item-id')
+        let amount = +$(this).val();
+        let type = $(this).closest('.supplier').data('type');
+        let currentModal = $(this).closest('.modal');
+        let action = currentModal.data('action-change');
+
+
+        // let totalAmountProject = +currentModal.data('project-amount');
+        let obj = { action, project_id, purchases_id,  type, amount };
+
+
+
+
+
+        let budgetAmount = $(this).closest('[data-item-id]').find('[data-type="budget"]').find('input').val();
+        let engineeringAmount = $(this).closest('[data-item-id]').find('[data-type="engineering"]').find('input').val();
+        let managementAmount = $(this).closest('[data-item-id]').find('[data-type="management"]').find('input').val();
+
+        let diff = $(this).closest('.financial__input-wrap').find('span')
+        let diffCount = budgetAmount - amount
+        if(diff){
+            amount > budgetAmount ? diff.text(`+ `):diff.text(`- `);
+        }
+
+
+        let invoicePercent = $(this).closest('[data-item-id]').find('.amount__percent').find('span');
+        let receivedPercent = $(this).closest('[data-item-id]').find('.received__percent').find('span');
+
+        let percentAmount = ((invoiceAmount / totalAmountProject) * 100).toFixed(2);
+        let percentReceived = ((invoiceReceived / invoiceAmount) * 100).toFixed(2);
+
+        if (totalAmountProject) {
+            invoicePercent.text(percentAmount);
+            receivedPercent.text(percentReceived);
+        }
+
+        function calculateTotals(selector) {
+            let totalInvoice = 0;
+            let totalReceived = 0;
+            let totalPercentInvoice = 0;
+            let totalPercentReceived = 0;
+
+            $(selector).find('.project__input[data-type="invoice"] input').each(function () {
+                totalInvoice += parseFloat($(this).val()) || 0;
+            });
+
+            $(selector).find('.project__input[data-type="received"] input').each(function () {
+                totalReceived += parseFloat($(this).val()) || 0;
+            });
+
+            $(selector).find('.amount__percent span').each(function () {
+                totalPercentInvoice += parseFloat($(this).text()) || 0;
+            });
+
+            $(selector).find('.received__percent span').each(function () {
+                totalPercentReceived += parseFloat($(this).text()) || 0;
+            });
+
             if(totalPercentInvoice > 100){
-                console.log(34343434)
                 $(selector).find('.total__invoice-percent').css('color', 'red');
             }else{
-                console.log(66666)
                 $(selector).find('.total__invoice-percent').css('color', 'inherit');
             }
             if(totalPercentReceived > 100){
@@ -488,8 +673,6 @@ function editDataAmount(){
 
         function successEdit() {
             calculateTotals(currentModal.find('table.change__table'));
-
-            // Calculate totals for the project__clarify-mob in the current modal
             calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
         }
 
@@ -507,7 +690,6 @@ function editDataAmount(){
     });
 }
 
-
 $(document).ready(function () {
     editDataAmount()
     removeDate();
@@ -521,17 +703,6 @@ $(document).ready(function () {
     dropMenu();
 
     let locationForm = $('.location__form');
-    validateForm(locationForm, function () {
-        ajaxSend(locationForm, function () {
-            $('.location__more-block').hide();
-            $('.location__more').show();
-        }, function (error) {
-            // $('.location__more-block').hide();
-            // $('.location__more').show();
-        });
-    });
-
-    let minutesForm = $('.minutes__form');
     validateForm(locationForm, function () {
         ajaxSend(locationForm, function () {
             $('.location__more-block').hide();
@@ -620,6 +791,9 @@ $(document).ready(function () {
 
     submitFormDataProject('.invoices__form');
     submitFormDataProject('.variations__form');
+    submitFormDataProject('.minutes__form');
+
+
 });
 
 $(window).load(function () {});

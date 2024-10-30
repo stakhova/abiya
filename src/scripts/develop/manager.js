@@ -504,10 +504,6 @@ function editDataAmount() {
     });
 }
 
-
-
-
-
 function editDataPurchases() {
     $(document).on('change', '.financial__input input', function () {
         let project_id = $('.project__table-task').data('project-id');
@@ -519,20 +515,16 @@ function editDataPurchases() {
 
         let obj = { action, project_id, purchases_id, type, amount };
 
-        // Function to update differences for a specified container
+
         function updateDifferences(container) {
             $(container).find('[data-item-id]').each(function () {
                 let budgetAmount = +$(this).find('[data-type="budget"] input').val() || 0;
 
-                // Update difference for Engineering
                 updateDifferenceForType($(this), "engineering", budgetAmount);
-
-                // Update difference for Management
                 updateDifferenceForType($(this), "management", budgetAmount);
             });
         }
 
-        // Helper function to update difference for a specific type (e.g., Engineering, Management)
         function updateDifferenceForType(item, type, budgetAmount) {
             let typeInput = item.find(`[data-type="${type}"] input`);
             let typeAmount = +typeInput.val() || 0;
@@ -542,38 +534,30 @@ function editDataPurchases() {
             );
         }
 
-        // Function to recalculate totals within a specific container
         function recalculateTotals(container) {
             let totalBudget = 0;
             let totalEngineering = 0;
             let totalManagement = 0;
 
-            // Accumulate totals based on inputs within the specified container
             $(container).find('[data-item-id]').each(function () {
                 totalBudget += +$(this).find('[data-type="budget"] input').val() || 0;
                 totalEngineering += +$(this).find('[data-type="engineering"] input').val() || 0;
                 totalManagement += +$(this).find('[data-type="management"] input').val() || 0;
             });
-
-            // Update the Total Material Cost row in the specified container
             $(container).find('.total [data-type="budget"]').text(totalBudget);
             $(container).find('.total [data-type="engineering"]').text(totalEngineering);
             $(container).find('.total [data-type="management"]').text(totalManagement);
 
-            // Calculate and update Savings/Losses row
             let savingsEngineering = totalEngineering - totalBudget;
             let savingsManagement = totalManagement - totalBudget;
             $(container).find('.total__save [data-type="engineering"]').text(savingsEngineering >= 0 ? `+${savingsEngineering}` : savingsEngineering);
             $(container).find('.total__save [data-type="management"]').text(savingsManagement >= 0 ? `+${savingsManagement}` : savingsManagement);
         }
 
-        // Call update functions for both desktop and mobile tables
         updateDifferences('table.change__table');
         recalculateTotals('table.change__table');
         updateDifferences('.project__clarify-mob');
         recalculateTotals('.project__clarify-mob');
-
-        // AJAX request to update the server with new values
         $.ajax({
             url: '/wp-admin/admin-ajax.php',
             data: obj,
@@ -588,9 +572,74 @@ function editDataPurchases() {
     });
 }
 
+
+
+function addDataEnd() {
+    $(document).on('change', '.calendar__input input', function () {
+        let project_id = $('.project__table-task').data('project-id');
+        let task_id = $(this).closest('[data-item-id]').data('item-id');
+        let currentModal = $(this).closest('.modal');
+        let action = currentModal.data('action-add');
+        let currentTask = $(this).closest('tr');
+        let endDate = $(this).val();
+
+        // Retrieve the previous date (start date) text and parse it into a date format
+        let previousDateText = currentTask.find('.start__date').text().trim();
+
+        if (previousDateText) {
+
+            let previousDate = new Date(previousDateText.split('/').reverse().join('-')); // Converts dd/mm/yyyy to yyyy-mm-dd
+            let selectedDate = new Date(endDate.split('/').reverse().join('-'));
+
+
+            $(this).attr('min', previousDateText.split('/').reverse().join('-'));
+
+            if (selectedDate >= previousDate) {
+                let dayDifference = Math.floor((selectedDate - previousDate) / (1000 * 60 * 60 * 24));
+                let obj = { action, project_id, task_id, endDate };
+                $.ajax({
+                    url: '/wp-admin/admin-ajax.php',
+                    data: obj,
+                    method: 'POST',
+                    success: function (res) {
+                        currentTask.find('.count').text(`${dayDifference + 1} days`);
+                    },
+                    error: function (error) {
+                        currentTask.find('.count').text(`${dayDifference + 1} days`);
+                        currentTask.addClass('comleted')
+
+
+                        // $('[data-manager] .comleted').each(function() {
+                        //     $(this).appendTo($(this).closest('tbody'));
+                        // });
+                    }
+                });
+
+            } else {
+                currentTask.find('.count').text('');
+                $(this).val('');
+                alert("Please select a date after " + previousDateText);
+            }
+        }
+
+
+    });
+}
+
+function addNewTask(){
+    $(document).on('click','.task__more-btn', function (){
+        let form  = $('.task__more-form')
+        let managerId = $(this).closest('.project__table-manager').data('manager')
+        $('.task__more-form input[name="manager_id"]').val(managerId)
+        let btn = $('.task__more-btn')
+        $(this).closest('.task__more').append(form)
+        btn.show()
+        $(this).hide()
+        $('.task__more-form').addClass('active')
+    })
+}
 function adjustInputWidth() {
-    $('.financial__input input, .project__input input').each(function () {
-        // Create a temporary element to measure the width of the input value
+    $('.manager__input input').each(function () {
         let tempSpan = $('<span>').text($(this).val()).css({
             'font-size': $(this).css('font-size'),
             'font-family': $(this).css('font-family'),
@@ -672,6 +721,19 @@ $(document).ready(function () {
     });
 
 
+    let personForm = $('.person__form');
+    validateForm(personForm, function () {
+        ajaxSend(personForm, function () {
+            $('.location__more-block').hide();
+            $('.location__more').show();
+        }, function (error) {
+            // $('.location__more-block').hide();
+            // $('.location__more').show();
+        });
+    });
+
+
+
 
     let dateForm = $('.calendar__form');
     validateForm(dateForm, function () {
@@ -715,10 +777,31 @@ $(document).ready(function () {
     submitFormDataProject('.invoices__form');
     submitFormDataProject('.variations__form');
     submitFormDataProject('.minutes__form');
+    submitFormDataProject('.minutes__form');
 
+    submitFormDataProject('.task__more-form');
+
+    addNewTask()
+    addDataEnd()
     editDataPurchases()
     adjustInputWidth()
-    $(document).on('input', '.financial__input input', adjustInputWidth);
+
+    $("[data-manager] tbody").sortable({
+        items: "tr", // Only make <tr> elements sortable
+        cursor: "move", // Change cursor to 'move' while dragging
+        placeholder: "sortable-placeholder", // Add a placeholder class while dragging
+        start: function(event, ui) {
+            ui.item.addClass("highlight"); // Optional: add class to highlight the row being dragged
+        },
+        stop: function(event, ui) {
+            ui.item.removeClass("highlight"); // Optional: remove highlight after dragging
+        },
+        update: function(event, ui) {
+            // Optional: Code here runs after sorting is updated, e.g., saving new order to database
+            console.log("Row order updated");
+        }
+    });
+    $(document).on('input', '.manager__input input', adjustInputWidth);
 });
 
 $(window).load(function () {});

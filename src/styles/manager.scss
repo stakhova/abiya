@@ -546,11 +546,8 @@ table{
     }
   }
 }
-.project__input{
- //padding: 1.6rem 0.8rem!important;
-}
-.project__input input{
-  //width: -webkit-fill-available;
+
+.manager__input input{
   font: 400 1.4rem / normal var(--Arimo);
   border: none;
   //text-align: center;
@@ -601,15 +598,15 @@ table{
     font: 400 1.4rem / normal var(--Arimo);
   }
 }
-.financial__input {
-  display: inline-block;
-  width: max-content;
-}
-.financial__input input{
-  font: 400 1.4rem / normal var(--Arimo);
-  border: none;
-  width: 8rem;
-}
+//.financial__input {
+//  display: inline-block;
+//  width: max-content;
+//}
+//.financial__input input{
+//  font: 400 1.4rem / normal var(--Arimo);
+//  border: none;
+//  width: 8rem;
+//}
 .modal__content-invoices{
   max-width: 135.5rem;
 }
@@ -669,7 +666,57 @@ table{
     font: 400 1rem / normal var(--Arimo);
   }
 }
+.task__more-form{
+  display: none;
+  &.active{
+    display: flex;
+  }
+ .section__button{
+   padding:1rem 10rem ;
+   text-align: center;
+   width: max-content;
+ }
+}
+.task__more{
+  margin-top: 1.6rem;
+}
+.task__more-btn{
+  padding:1rem 5rem ;
+  width: max-content;
+}
+.calendar__input input{
+  width: 100%!important;
+}
+.comleted > *{
+  pointer-events: none;
+}
+.comleted > * .delete__item{
+  pointer-events:visible;
+}
+.comleted{
+  position: relative;
+}
+.comleted:after{
+  content: '';
+  position: absolute;
+  width: calc(100% - 4rem);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 0.1rem;
+  background-color: var(--color-violet);
+}
 
+.sortable-placeholder {
+  background-color: #f0f0f0;
+  border: 2px dashed #ccc;
+  height: 40px;
+  visibility: visible !important;
+}
+
+.highlight {
+  background-color:rgba(87, 66, 117, 0.5);
+}
 @media only screen and (max-width: 1440px) {
   .modal__content-biggest{
     max-width: 90%;
@@ -813,7 +860,7 @@ table{
     font-size: 1.2rem;
     line-height: 1.4rem;
   }
-  .project__input input {
+  .manager__input input {
     font-size: 1rem;
   }
   .total__mob-wrap tbody {
@@ -867,7 +914,7 @@ table{
   .purchases__modal .total td{
     font-weight: 400;
   }
-  .financial__input input, .financial__input-wrap span{
+  .financial__input-wrap span{
     font-size: 1rem;
   }
   .supplier > span{
@@ -878,6 +925,12 @@ table{
   }
   .purchases__modal .total td:first-child > *{
     font: 400 1rem / normal var(--Arimo);
+  }
+  .task__more-btn{
+    padding: 0.6rem 2rem;
+  }
+  .task__more{
+    margin-top: 1rem;
   }
 }
 

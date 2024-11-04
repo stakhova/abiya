@@ -932,5 +932,94 @@ table{
   .task__more{
     margin-top: 1rem;
   }
+  .calendar__date{
+    position: relative;
+    flex-wrap: wrap;
+
+  }
+  .calendar__date > *{
+    width: 50%;
+    position: relative;
+  }
+  .calendar__point:nth-child(odd):after{
+    right: -0.8rem  ;
+  }
+  .calendar__point:nth-child(even):after{
+    left: -0.8rem  ;
+  }
+  .calendar__date .calendar__point:before{
+    height: 0.1rem;
+    width: 2rem;
+    top: 50%!important;
+    transform: translateY(-50%);
+  }
+
+  .calendar__date .calendar__point:nth-child(even):before{
+    left: 0;
+  }
+  .calendar__date .calendar__point:nth-child(odd):before{
+    right: 0;
+    left: unset;
+  }
+  .calendar__start{
+    top: 0!important;
+  }
+  .calendar__point{
+    position: relative;
+  }
+
+  .calendar__point:nth-child(even){
+    margin-top: 10rem;
+    padding-left: 3rem;
+  }
+  .calendar__point:nth-child(odd){
+    padding-right: 3rem;
+    margin-bottom: 2rem;
+  }
+  .calendar__point:nth-child(even) .calendar__point-content{
+    margin: 0!important;
+  }
+  .calendar__start{
+    margin-top: 0!important;
+    &:after{
+      left: 50%!important;
+      transform: translateX(-50%);
+    }
+  }
+  .calendar__end {
+    padding-top: 3rem;
+    margin: 0!important;
+    &:after{
+      left: 50%!important;
+      transform: translateX(-50%);
+    }
+  }
+  .calendar__line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0.1rem;
+    height: 100%;
+    background-image: linear-gradient(to bottom, transparent 50%, #564073 50%);
+    background-size: 100% 0.6rem;
+  }
+  .calendar__line-wrap{
+    position: unset;
+    margin: 0;
+  }
+  .calendar__illustrate{
+    margin: 4rem 0;
+  }
+  .calendar__start .date, .calendar__end .date{
+    top: -0.5rem;
+    left: 58vw;
+    transform: translateX(-50%);
+    right: unset;
+    color:#564073;
+  }
+  .calendar__end .date {
+  bottom: -0.5rem;
+    top:unset;
+  }
 }
 

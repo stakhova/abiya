@@ -499,12 +499,11 @@ function showMobTask(table, elem, prev, next) {
         disabledBtn();
     });
 
-    $('.clarify__mob-wrap').each(function (){
-      if($(this).find('tbody').length==1){
-          $(this).find('.clarify__mob-nav').hide()
-      }
-    })
-
+    $('.clarify__mob-wrap').each(function () {
+        if ($(this).find('tbody').length == 1) {
+            $(this).find('.clarify__mob-nav').hide();
+        }
+    });
 }
 
 function successFormData() {}
@@ -531,7 +530,7 @@ function submitFormDataProject(form) {
             $('.modal .form__file-hint').remove();
             required = true;
         }
-        if( messageProject.length == 0 ){
+        if (messageProject.length == 0) {
             required = true;
         }
         console.log(11111, fileProject.val(), fileProject.length > 0, fileProject.val() !== "", required);
@@ -1193,5 +1192,6 @@ $(window).load(function () {});
 
 $(window).resize(function () {});
 $(window).scroll(function () {});
+//# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

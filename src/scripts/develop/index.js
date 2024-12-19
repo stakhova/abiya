@@ -67,7 +67,10 @@ const validateForm = (form, func, noreset) => {
             },
             percentage: {
                 required: true
-            }
+            },
+            amount: {
+                required: true
+            },
 
         },
         messages: {
@@ -121,7 +124,10 @@ const validateForm = (form, func, noreset) => {
             },
             percentage: {
                 required: "This field is required"
-            }
+            },
+            amount: {
+                required: "This field is required"
+            },
 
         },
         submitHandler: function () {
@@ -178,6 +184,9 @@ function tab() {
         $(".tab__content-item").hide().eq($(this).index()).fadeIn();
     }).eq(0).addClass("active");
 }
+
+
+
 
 function progressBar() {
     let allTasks = $('.task').length;
@@ -383,6 +392,7 @@ function showInstruction() {
 }
 
 function openPopupFunction() {
+
     let cloneFileName = button.closest('.notes__file-item').clone();
     $('.modal__delete .notes__file-item').remove();
     $('.modal__delete .modal__btn').before(cloneFileName);
@@ -391,7 +401,7 @@ function openPopupFunction() {
     if (button.hasClass('task')) {
         appendToModalData();
     }
-    if (button.hasClass('clarify') || button.hasClass('accept')) {
+    if (button.hasClass('clarify') || button.hasClass('accept') || button.hasClass('first')) {
         appendInfoAboutClarify(button);
     }
     if (button.hasClass('notes__top-edit')) {
@@ -464,88 +474,124 @@ function updateFileListDisplay(fileList) {
 }
 
 function showMobTask(table, elem, prev, next) {
-    $(`${table} ${elem}:first-of-type`).addClass('active');
 
-    $(prev).addClass('disabled');
+    // Loop through each table individually
+    $(table).each(function () {
+        const $table = $(this); // Current table instance
 
-    function disabledBtn() {
-        if (!$(`${table} ${elem}:first-child`).hasClass('active')) {
-            $(prev).removeClass('disabled');
-            console.log(1111);
-        } else {
-            $(prev).addClass('disabled');
-            console.log(2222);
+        $table.find(`${elem}:first-of-type`).addClass('active');
+        $table.find(prev).addClass('disabled');
+
+        function disabledBtn() {
+            if (!$table.find(`${elem}:first-of-type`).hasClass('active')) {
+                $table.find(prev).removeClass('disabled');
+            } else {
+                $table.find(prev).addClass('disabled');
+            }
+            if (!$table.find(`${elem}:last-of-type`).hasClass('active')) {
+                $table.find(next).removeClass('disabled');
+            } else {
+                $table.find(next).addClass('disabled');
+            }
         }
-        if (!$(`${table} ${elem}:last-child`).hasClass('active')) {
-            $(next).removeClass('disabled');
-            console.log(3333);
-        } else {
-            $(next).addClass('disabled');
-            console.log(4444);
-        }
-    }
-    $(document).on('click', next, function () {
-        let active = $(`${table} ${elem}.active`);
-        let next = active.next(`${table} ${elem}`);
-        active.removeClass('active');
-        next.addClass('active');
-        disabledBtn();
-    });
-    $(document).on('click', prev, function () {
-        let active = $(`${table} ${elem}.active`);
-        let prev = active.prev(`${table} ${elem}`);
-        active.removeClass('active');
-        prev.addClass('active');
-        disabledBtn();
-    });
 
-    $('.clarify__mob-wrap').each(function () {
-        if ($(this).find('tbody').length == 1) {
-            $(this).find('.clarify__mob-nav').hide();
+        $table.on('click', next, function () {
+            let active = $table.find(`${elem}.active`);
+            let nextElem = active.next(`${elem}`);
+            if (nextElem.length) {
+                active.removeClass('active');
+                nextElem.addClass('active');
+                disabledBtn();
+            }
+        });
+
+        $table.on('click', prev, function () {
+            let active = $table.find(`${elem}.active`);
+            let prevElem = active.prev(`${elem}`);
+            if (prevElem.length) {
+                active.removeClass('active');
+                prevElem.addClass('active');
+                disabledBtn();
+            }
+        });
+
+        // Hide navigation if there's only one tbody element in the table
+        if ($table.find("table:not('.total__mob-wrap') tbody").length <= 1) {
+
+            console.log(1234588888,$table.find("table:not('.total__mob-wrap') tbody"),  $table.find("table:not('.total__mob-wrap') tbody").length)
+            console.log(5555, $table.find('.clarify__mob-nav'))
+            $table.find('.clarify__mob-nav').hide();
         }
     });
 }
 
 function successFormData() {}
 
+
 function submitFormDataProject(form) {
     $(document).on('submit', form, function (e) {
-
         e.preventDefault();
+
         let taskId = $(this).find('input[name=task_id]').val();
         let currentTask;
+
+        // Find the current task based on taskId
         $('.task').each(function () {
             if ($(this).attr('data-taskId') == taskId) {
                 currentTask = $(this);
             }
         });
+
         let fileProject = $(this).closest('.modal').find('input[type="file"]');
         let messageProject = $(this).closest('.modal').find('input[name="notes"]');
         let required = false;
 
+        // Check if the modal has the class 'modal__managers-tracker'
+        let isManagersTracker = $(this).closest('.modal').hasClass('modal__managers-tracker');
+
+        // Validate 'notes' field
         if (!messageProject.val()) {
-            e.preventDefault();
-            messageProject.closest('.form__input').append(`<p class="form__file-hint" >Notes is required</p>`);
+            messageProject.closest('.form__input').find('.form__file-hint').remove(); // Avoid duplicate hints
+            messageProject.closest('.form__input').append(`<p class="form__file-hint">Notes is required</p>`);
         } else {
-            $('.modal .form__file-hint').remove();
+            messageProject.closest('.form__input').find('.form__file-hint').remove();
             required = true;
         }
-        if (messageProject.length == 0) {
+
+        // File validation: Only required if not in 'modal__managers-tracker'
+        if (!isManagersTracker) {
+            if (fileProject.length > 0 && fileProject.val() === "") {
+                fileProject.closest('.form__file-upload').find('.form__file-hint').remove(); // Avoid duplicate hints
+                fileProject.closest('.form__file-upload').append(`<p class="form__file-hint">File is required</p>`);
+                required = false;
+            } else {
+                fileProject.closest('.form__file-upload').find('.form__file-hint').remove();
+                required = true;
+            }
+        } else {
+            // No file requirement for 'modal__managers-tracker'
             required = true;
         }
-        console.log(11111, fileProject.val(), fileProject.length > 0, fileProject.val() !== "", required);
-        if (fileProject.length > 0 && fileProject.val() !== "" && required) {
+
+        console.log("Validation Results:", fileProject.val(), required);
+
+        // If all validations pass
+        if (required) {
             let formData = new FormData($(this)[0]);
+
+            // Remove default files and add uploaded files
             formData.forEach(function (value, key) {
                 if (key === 'file[]') {
                     formData.delete(key);
                 }
             });
-            uploadedFiles.forEach(function (file, index) {
+            uploadedFiles.forEach(function (file) {
                 formData.append('file[]', file);
             });
+
             $('.preloader__wrap').show();
 
+            // AJAX Request
             $.ajax({
                 url: '/wp-admin/admin-ajax.php',
                 data: formData,
@@ -554,44 +600,181 @@ function submitFormDataProject(form) {
                 processData: false,
                 cache: false,
                 success: function (res) {
-
-                    let newStatus = res.data.status;
-                    let classes = currentTask.attr('class').split(' ');
-                    for (let i = 0; i < classes.length; i++) {
-                        if (classes[i] !== 'task') {
-                            let classDelete = classes[i];
-                            currentTask.removeClass(classDelete);
-                        }
+                    if (res.data) {
+                        let newStatus = res.data.status;
+                        currentTask.attr('class', 'task').addClass(newStatus);
                     }
-                    currentTask.addClass(newStatus);
 
-                    $('.modal').hide();
-                    $('body').removeClass('hidden');
-                    $('.form__file-list > *').remove();
-                    $('.file__input').val('');
-                    $('.form__input input').val("");
-                    $('.form__input textarea').val("");
-                    uploadedFiles = [];
-                    $('.form__check > *').remove();
-                    $('.preloader__wrap').hide();
+                    if ($('.manager__wrap').length > 0) {
+                        $(form).closest('.modal__more-task').find('.append__form').append($(form));
+                        $(form).hide();
+                        $(form).closest('.modal').find('.project__table > *').remove();
+                        $(form).closest('.modal').find('.project__table').append(res);
+                        showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+                        $('.location__more-block').hide();
+                        $('.location__more').show();
+                        sortTask();
+                    } else {
+                        $('.modal').hide();
+                    }
+
+                    resetForm();
                 },
-                error: function (error) {
-                    console.log('error ajax222');
+                error: function () {
+                    console.error('Error during AJAX submission');
                 }
             });
-        } else {
-            if ($('.form__file-upload .form__file-hint').length == 1) {
-                $('.form__file-upload .form__file-hint').remove();
-            }
-            if ($('.form__file-upload .form__file-hint').length == 0 && fileProject.val() == "") {
-                $('.form__file-upload').append(`<p class="form__file-hint" > File is required</p>`);
-            }
         }
     });
+
+    // Handle file input change
     $(document).on('change', '.modal__task input[type=file]', function () {
         $('.form__file-hint').remove();
     });
 }
+
+// Helper function to reset the form after submission
+function resetForm() {
+    $('body').removeClass('hidden');
+    $('.form__file-list > *').remove();
+    $('.file__input').val('');
+    $('.form__input input').val("");
+    $('.form__input textarea').val("");
+    uploadedFiles = [];
+    $('.form__check > *').remove();
+    $('.preloader__wrap').hide();
+}
+
+
+// function submitFormDataProject(form) {
+//     $(document).on('submit', form, function (e) {
+//
+//         e.preventDefault();
+//         let taskId = $(this).find('input[name=task_id]').val();
+//         let currentTask;
+//         $('.task').each(function () {
+//             if ($(this).attr('data-taskId') == taskId) {
+//                 currentTask = $(this);
+//             }
+//         });
+//         let fileProject = $(this).closest('.modal').find('input[type="file"]');
+//         let messageProject = $(this).closest('.modal').find('input[name="notes"]');
+//         let required = false;
+//
+//         if (!messageProject.val()) {
+//             e.preventDefault();
+//             messageProject.closest('.form__input').append(`<p class="form__file-hint" >Notes is required</p>`);
+//         } else {
+//             $('.modal .form__file-hint').remove();
+//             required = true;
+//         }
+//         if (messageProject.length == 0) {
+//             required = true;
+//         }
+//
+//         // $(form).find('[name="invoice_amount"], [name="amount"]').each(function() {
+//         //     const $field = $(this);
+//         //     const $hint = $field.siblings('.form__file-hint');
+//         //
+//         //     if ($field.val().trim() === "") {
+//         //         if ($hint.length === 0) {
+//         //             $field.after('<p class="form__file-hint">Amount is required</p>');
+//         //         }
+//         //     } else {
+//         //         $hint.remove();
+//         //     }
+//         // });
+//         //
+//         // if ( $(form).find('[name="invoice_amount"]').val()=="" ||  $(form).find('[name="amount"]').val()==""){
+//         //     required = false;
+//         // } else{
+//         //     required = true;
+//         // }
+//
+//         console.log(11111, fileProject.val(), fileProject.length > 0, fileProject.val() !== "", required);
+//         if (fileProject.length > 0 && fileProject.val() !== "" && required) {
+//             let formData = new FormData($(this)[0]);
+//             formData.forEach(function (value, key) {
+//                 if (key === 'file[]') {
+//                     formData.delete(key);
+//                 }
+//             });
+//             uploadedFiles.forEach(function (file, index) {
+//                 formData.append('file[]', file);
+//             });
+//             $('.preloader__wrap').show();
+//
+//             $.ajax({
+//                 url: '/wp-admin/admin-ajax.php',
+//                 data: formData,
+//                 method: 'POST',
+//                 contentType: false,
+//                 processData: false,
+//                 cache: false,
+//                 success: function (res) {
+//                     let newStatus
+//                     if(res.data){
+//                        newStatus = res.data.status;
+//                         let classes = currentTask.attr('class').split(' ');
+//                         for (let i = 0; i < classes.length; i++) {
+//                             if (classes[i] !== 'task') {
+//                                 let classDelete = classes[i];
+//                                 currentTask.removeClass(classDelete);
+//                             }
+//                         }
+//                         currentTask.addClass(newStatus);
+//                     }
+//                     if($('.manager__wrap').length > 0){
+//                              console.log(1234, $(`${form}`))
+//                             $(form).closest('.modal__more-task').find('.append__form').append($(`${form}`))
+//
+//                             $(`${form}`).hide()
+//                             $(form).closest('.modal').find('.project__table > *').remove()
+//                             $(form).closest('.modal').find('.project__table').append(res)
+//
+//                             console.log(1111, $(form), $(form).closest('.modal'), $(form).closest('.modal').find('.project__table'), res)
+//                             showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+//                             $(form).closest('.modal').find('.clarify__mob-wrap tbody').removeClass('active')
+//                             $(form).closest('.modal').find('.clarify__mob-wrap tbody:last-child').addClass('active')
+//
+//                             $(form).closest('.modal').find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+//                             $(form).closest('.modal').find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
+//                             $('.location__more-block').hide();
+//                             $('.location__more').show();
+//                             // dropMenu()
+//                             sortTask()
+//
+//                     } else{
+//                         $('.modal').hide();
+//                     }
+//
+//
+//                     $('body').removeClass('hidden');
+//                     $('.form__file-list > *').remove();
+//                     $('.file__input').val('');
+//                     $('.form__input input').val("");
+//                     $('.form__input textarea').val("");
+//                     uploadedFiles = [];
+//                     $('.form__check > *').remove();
+//                     $('.preloader__wrap').hide();
+//                 },
+//                 error: function (error) {
+//                     console.log('error ajax222');
+//                 }
+//             });
+//         } else {
+//             if ($('.form__file-upload .form__file-hint').length == 1) {
+//                 $('.form__file-upload .form__file-hint').remove();
+//             }
+//             if ($('.form__file-upload .form__file-hint').length == 0 && fileProject.val() == "") {
+//                 $('.form__file-upload').append(`<p class="form__file-hint" > File is required</p>`);
+//             }
+//         }
+//     });
+//     $(document).on('change', '.modal__task input[type=file]', function () {
+//         $('.form__file-hint').remove();
+//     });
+// }
 function submitFormDataNotes(form) {
 
     $(document).on('submit', form, function (e) {
@@ -849,6 +1032,8 @@ function deleteJustUploadFile() {
 
     $(document).on('click', '.form__file .notes__file-delete', function () {
         $(this).closest('.form__file-item').remove();
+
+
     });
     // $('#upload').on('change', function(event) {
     //     let fileList = event.target.files;
@@ -1155,10 +1340,12 @@ $(document).ready(function () {
     if ($('.project__wrap').attr('data-role') == 'manager') {
         toogleModal($('.project__table-task .clarify'), $('.modal__manager'));
         toogleModal($('.project__table-task .accept'), $('.modal__manager'));
+        toogleModal($('.project__table-task .first'), $('.modal__manager'));
     } else {
         toogleModal($('.project__table-task .clarify'), $('.modal__task-clarify'));
         toogleModal($('.project__table-task .accept'), $('.modal__task-clarify'));
         toogleModal($('.project__table-task .reject'), $('.modal__task'));
+        toogleModal($('.project__table-task .first'), $('.modal__task-clarify'));
     }
 
     toogleModal($('.notes__file-delete'), $('.modal__delete'));
@@ -1192,6 +1379,7 @@ $(window).load(function () {});
 
 $(window).resize(function () {});
 $(window).scroll(function () {});
+//# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map

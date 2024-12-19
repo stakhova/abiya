@@ -160,6 +160,7 @@ function moreLocation() {
     $(document).on('click', '.location__more', function () {
         let modal = $(this).closest('.modal');
         modal.find('.location__more-block').show();
+        modal.find('.form').show();
         $(this).hide();
     });
 }
@@ -177,6 +178,7 @@ function appendManager() {
 
     if (amountContract !== '') {
         $('input[name="amount_contract"]').val(amountContract);
+        $('.amount__error').remove()
     }
 
     modalManager.find('.project__modal-desc h3').text(title);
@@ -187,27 +189,41 @@ function appendManager() {
 
 function fillCalendar() {
     let calendarBtn = $('.modal__calendar .location__more');
+    console.log(11113333, $('[name = "date_from"]').val())
     if ($('[name = "date_from"]').val() == '') {
         calendarBtn.addClass('disabled');
+    } else{
+        calendarBtn.removeClass('disabled');
     }
     $(document).on('change', '.calendar__wrap input', function () {
 
         let wrap = $(this).closest('.modal__calendar');
-        function parseDate(input) {
-            const parts = input.split('/');
-            const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
-            return new Date(year, month, day);
+        function parseDate(dateStr) {
+            const [day, month, year] = dateStr.split('/');
+            return new Date(year, month - 1, day);
         }
+
         const dateFrom = $('#date_from').val();
-        const dateTo = $('#date_to').val();
+        const dateToHtml = $('#date_to').val();
+        const dateEnd = dateToHtml ? dateToHtml : '';
         let project_id = $('.project__table-task').data('project-id');
 
-        $('.error').remove();
+        const dateTo = dateToHtml ? dateToHtml : (function() {
+            const today = new Date();
+            return formatDate(today);
+        })();
+
+        // function formatDate(date) {
+        //     const d = new Date(date);
+        //     const day = String(d.getDate()).padStart(2, '0');
+        //     const month = String(d.getMonth() + 1).padStart(2, '0');
+        //     const year = d.getFullYear();
+        //     return `${day}/${month}/${year}`;
+        // }
 
         const dateFromObj = parseDate(dateFrom);
         const dateToObj = parseDate(dateTo);
+
 
         let duration;
 
@@ -215,30 +231,29 @@ function fillCalendar() {
             $('.calendar__wrap').append('<label class="error" >The project completion date cannot be earlier than the award of contract date.</label>');
             wrap.removeClass('active');
         } else {
-            duration = Math.floor((dateToObj - dateFromObj) / (1000 * 60 * 60 * 24));
+            const diffTime = dateToObj - dateFromObj;
+            duration = diffTime / (1000 * 3600 * 24);
 
-            let obj = { action: 'add_date', dateFrom, dateTo, project_id };
+            let obj = { action: 'add_date', dateFrom, dateEnd, project_id };
             $.ajax({
                 url: '/wp-admin/admin-ajax.php',
                 data: obj,
                 method: 'POST',
                 success: function (res) {
-                    $('.calendar__start span').text(dateFrom);
-                    $('.calendar__end span').text(dateTo);
-                    wrap.addClass('active');
-                    getPositionDate();
-                    $('.calendar__wrap-duration span').text(duration);
+                    // $('.calendar__start span').text(dateFrom);
+                    // $('.calendar__end span').text(dateEnd);
+                    // wrap.addClass('active');
+                    // getPositionDate();
+                    // $('.calendar__wrap-duration span').text(duration);
+
+                    $('.calendar__date > *').remove()
+                    $('.calendar__date').append(res);
                     $('[name = "date_from"]').val() == '' ? calendarBtn.addClass('disabled') : calendarBtn.removeClass('disabled');
+                    getPositionDate();
                 },
                 error: function (error) {
-                    console.log('error ajax');
-                    $('.calendar__start span').text(dateFrom);
-                    $('.calendar__end span').text(dateTo);
-                    wrap.addClass('active');
-                    getPositionDate();
-                    $('.calendar__wrap-duration span').text(duration);
-                    dateFrom == '' ? calendarBtn.addClass('disabled') : calendarBtn.removeClass('disabled');
-                    dateTo !== '' ? calendarBtn.hide() : calendarBtn.show();
+
+
                 }
             });
         }
@@ -247,46 +262,48 @@ function fillCalendar() {
 function moreItems() {
     let modal;
     $(document).on('click', '.modal__managers-more', function () {
-        // $(this).closest('.modal[data-modal="1_1"]').find('.project__table-manager > table tbody').append(`<tr class="new">
-        //                                 <td>
-        //                                     <input type="text">
-        //                                 </td>
-        //                                 <td>
-        //                                    <input type="text">
-        //                                 </td>
-        //                             </tr>`)
         modal = $(this).closest('.modal');
         modal.find('.modal__managers-save').show();
         $(this).hide();
         submitFormDataProject('.form__task');
         submitFormDataProject('.inspections__form');
     });
-    // $(document).on('click','.modal__managers-save', function (){
-    //     // modal.find('.new:last-of-type input').attr('readonly', true)
-    //     modal = $(this).closest('.modal')
-    //     modal.find('.modal__managers-more').show()
-    //     $(this).hide()
-    // })
 }
 
 function removeItem() {
     $(document).on('click', '.delete__item', function () {
+        let btn = $(this)
+        let wrapMob = $(this).closest('.clarify__mob-wrap')
         let action = $(this).closest('.modal').data('action');
         let project_id = $('.project__table-task').data('project-id');
         let item = $(this).closest('[data-item-id]');
+        let manager_id = $(this).closest("[data-manager]").data('manager');
+        let type = $(this).closest("[data-type]").data('type');
         let nextAll = item.nextAll();
         let item_id = item.data('item-id');
-        let obj = { action, item_id, project_id };
+
+
+        let obj = { action, item_id, project_id, manager_id, type };
 
         if (item.hasClass('active')) {
-            item.next().addClass('active');
+            if (item.is(':last-child')) {
+                item.prev().addClass('active');
+            } else {
+                item.next().addClass('active');
+            }
         }
+
+
+
         $.ajax({
             url: '/wp-admin/admin-ajax.php',
             data: obj,
             method: 'POST',
             success: function (res) {
                 item.remove();
+                if(wrapMob.find('table tbody').length <= 1){
+                    wrapMob.find('.clarify__mob-nav').remove()
+                }
                 nextAll.each(function () {
                     let currentId = $(this).data('item-id');
                     let newId = currentId - 1;
@@ -307,66 +324,24 @@ function calendar() {
     });
 }
 
+
+function  getLineWidth(){
+
+
+}
 function getPositionDate() {
-    let lineWidth = $('.calendar__illustrate').width();
-    let itemLength = $('.calendar__date .calendar__point').length + 1;
-
-    let gap = lineWidth / itemLength;
-
-    let position = 0;
-
-    if (window.innerWidth <= 666) {
-        // Mobile view: Apply vertical layout
-        // $('.calendar__date .calendar__point').css({
-        //     'position': 'relative',
-        //     'left': 'auto',
-        //     'width': '50%',
-        //     'max-width': '50%',
-        //     'margin-bottom': '20px'  // Add spacing between points if needed
-        // });
-        //
-        // $('.calendar__date .calendar__point-content').css({
-        //     'position': 'relative',
-        //     'right': 'auto',
-        //     'bottom': 'auto',
-        //     'max-width': '100%'
-        // });
-        //
-        // $('.calendar__date .calendar__point:nth-child(odd)').each(function () {
-        //     let content = $(this).find('.calendar__point-content');
-        //     let contentHeight = content.height();
-        //
-        //     content.css({
-        //         'bottom': `${contentHeight + 70}px`
-        //     });
-        // });
-    } else {
-        $('.calendar__date .calendar__point').each(function () {
-            position += gap;
-            let content = $(this).find('.calendar__point-content');
-
-            content.css({
-                'right': `${(gap - 16) / 2}px`,
-                'max-width': gap + 'px'
-            });
-
-            $(this).css({
-                'position': 'absolute',
-                'left': position + 'px',
-                'max-width': gap + 'px'
-            });
-        });
-        $('.calendar__date .calendar__point:nth-child(odd)').each(function () {
-
-            let content = $(this).find('.calendar__point-content');
-            let contentHeight = content.height();
-
-            content.css({
-                'bottom': `${contentHeight + 70}px`
-            });
-        });
+    let first = $('.calendar__point-wrap:first-child')
+    if(!first.hasClass('calendar__start')){
+        first.css('margin-left','80px')
+        // first.addClass('first')
+    }else{
+       $('.calendar__start .date').css('left','0')
     }
 }
+
+
+
+
 
 function removeDate() {
     $(document).on('click', '.calendar__point-delete', function () {
@@ -379,13 +354,19 @@ function removeDate() {
             data: obj,
             method: 'POST',
             success: function (res) {
-                $('.calendar__illustrate').html(res);
+                $('.calendar__date > *').remove()
+                $('.calendar__date').append(res);
                 getPositionDate();
             },
             error: function (error) {
-                console.log('error ajax');
-                date.remove();
+                $('.calendar__date > *').remove()
+                $('.calendar__date').append(res);
                 getPositionDate();
+
+                console.log('error ajax');
+
+                // date.remove();
+                // getPositionDate();
             }
         });
     });
@@ -407,22 +388,20 @@ function dropMenu() {
     $('.drop').each(function () {
         let btn = $(this).find('.drop__btn');
         let status = btn.data('status');
-        let listStatus = $(this).find('.drop__menu-flex span[data-status="' + status + '"]');
-        if (listStatus.length) {
-            let bgColor = listStatus.data('status-color');
-            btn.css('background-color', bgColor);
-        }
+        let bgColor = btn.data('status-color');
+        btn.css('background-color', bgColor);
     });
-    $(".drop__btn").on("click", function () {
+    $(document).on("click",".drop__btn", function () {
+        console.log(11111111,$(this), $(this).next(".drop__menu"))
         $(this).next(".drop__menu").slideToggle();
-        $(".drop__menu").not($(this).next(".drop__menu")).slideUp();
+        // $(".drop__menu").not($(this).next(".drop__menu")).slideUp();
     });
 
-    $(document).on("click", function (event) {
-        if (!$(event.target).closest('.drop').length) {
-            $(".drop__menu").slideUp();
-        }
-    });
+    // $(document).on("click", function (event) {
+    //     if (!$(event.target).closest('.drop').length) {
+    //         $(".drop__menu").slideUp();
+    //     }
+    // });
 
     $(document).on('click', '.drop__menu-flex > *', function () {
         let current = $(this).text();
@@ -435,29 +414,62 @@ function dropMenu() {
         $(".drop__menu").slideUp();
         let action = $(this).closest('.modal').data('action-change');
         let project_id = $('.project__table-task').data('project-id');
-        const obj = { action, project_id, current, currentStatus };
+        let item_id = $(this).closest('[data-item-id]').data('item-id');
+
+        let manager = $(this).closest('[data-manager]').data('manager');
+        const obj = { action, project_id,item_id, current, currentStatus, manager};
+
+        let wrap= $(this).closest('.project__table.project__table-clarify')
+
+        if(wrap.length > 0){
+            $.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                data: obj,
+                method: 'POST',
+                success: function (res) {},
+                error: function (error) {
+                    console.log('error', error);
+                }
+            });
+        }
+
+    });
+}
+function addDateInvoice()  {
+    $(document).on('change', '.amount__date input', function () {
+        let project_id = $('.project__table-task').data('project-id');
+        let item_id = $(this).closest('[data-item-id]').data('item-id');
+        let date = $(this).val();
+        let type = $(this).attr('name');
+
+        let currentModal = $(this).closest('.modal');
+        let action = currentModal.data('action-change');
+        let obj = { action, project_id, item_id, type, date };
         $.ajax({
             url: '/wp-admin/admin-ajax.php',
             data: obj,
             method: 'POST',
-            success: function (res) {},
+            success: function (res) {
+            },
             error: function (error) {
-                console.log('error', error);
             }
         });
     });
 }
-function editDataAmount() {
+
+
+
+function editDataAmount(){
     $(document).on('change', '.project__input input', function () {
         let project_id = $('.project__table-task').data('project-id');
-        let invoice_id = $(this).closest('[data-item-id]').data('item-id');
+        let item_id = $(this).closest('[data-item-id]').data('item-id');
         let amount = +$(this).val();
         let type = $(this).closest('.project__input').data('type');
 
         let currentModal = $(this).closest('.modal');
         let action = currentModal.data('action-change');
         let totalAmountProject = +currentModal.data('project-amount');
-        let obj = { action, project_id, invoice_id, type, amount };
+        let obj = { action, project_id, item_id, type, amount };
 
         let currentPercent = $(this).closest('.wrap__amount').next().find('.percent').find('span');
         let percent = (amount / totalAmountProject * 100).toFixed(2);
@@ -524,6 +536,8 @@ function editDataAmount() {
     });
 }
 
+
+
 function editDataPurchases() {
     $(document).on('change', '.financial__input input', function () {
         let project_id = $('.project__table-task').data('project-id');
@@ -589,93 +603,244 @@ function editDataPurchases() {
     });
 }
 
+
+function disableForUser(){
+    if($('.project__table').attr('data-user') !== 'manager'){
+        $('.drop-wrap').addClass('disabled')
+        $('.manager__input input').addClass('disabled')
+    }
+}
+let formattedDate = "";
+function setToday() {
+    let today = new Date();
+
+    let day = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+    let year = today.getFullYear();
+    formattedDate = day + '/' + month + '/' + year;
+    console.log(123, formattedDate);
+}
+
 function addDataEnd() {
-    $(document).on('change', '.calendar__input input', function () {
+    $(document).on('click', '.modal__managers-tracker .drop__menu-flex > *', function () {
+
         let project_id = $('.project__table-task').data('project-id');
         let task_id = $(this).closest('[data-item-id]').data('item-id');
         let currentModal = $(this).closest('.modal');
         let action = currentModal.data('action-add');
         let currentTask = $(this).closest('tr');
-        let endDate = $(this).val();
+        if(window.innerWidth < 666){
+            currentTask = $(this).closest('tbody');
+        }
+        let status = $(this).data('status');
+        let manager = $(this).closest('[data-manager]').data('manager');
+        if (status == '1') {
+            setToday();
+            currentTask.find('.end__date').text(`${formattedDate}`);
+            let endDate = currentTask.find('.end__date').text().trim();
+            let currentStatus = $(this).attr('data-status');
+            let previousDateText = currentTask.find('.start__date').text().trim();
+            console.log(3333,currentTask.find('.start__date').text())
+            console.log(3333,previousDateText)
 
-        // Retrieve the previous date (start date) text and parse it into a date format
-        let previousDateText = currentTask.find('.start__date').text().trim();
+            if (previousDateText) {
+                let previousDate = new Date(previousDateText.split('/').reverse().join('-')); // Converts dd/mm/yyyy to yyyy-mm-dd
+                let selectedDate = new Date(endDate.trim().split('/').reverse().join('-'));
 
-        if (previousDateText) {
-
-            let previousDate = new Date(previousDateText.split('/').reverse().join('-')); // Converts dd/mm/yyyy to yyyy-mm-dd
-            let selectedDate = new Date(endDate.split('/').reverse().join('-'));
-
-            $(this).attr('min', previousDateText.split('/').reverse().join('-'));
-
-            if (selectedDate >= previousDate) {
                 let dayDifference = Math.floor((selectedDate - previousDate) / (1000 * 60 * 60 * 24));
-                let obj = { action, project_id, task_id, endDate };
+
+                console.log(1111111, selectedDate, previousDate,dayDifference)
+                let obj = { action, project_id, manager, task_id, endDate, currentStatus };
                 $.ajax({
                     url: '/wp-admin/admin-ajax.php',
                     data: obj,
                     method: 'POST',
                     success: function (res) {
                         currentTask.find('.count').text(`${dayDifference + 1} days`);
+                        currentTask.addClass('comleted');
+                        // $('[data-manager] .comleted').each(function () {
+                        //     $(this).appendTo($(this).closest('tbody'));
+                        // });
                     },
                     error: function (error) {
-                        currentTask.find('.count').text(`${dayDifference + 1} days`);
-                        currentTask.addClass('comleted');
-
-                        $('[data-manager] .comleted').each(function () {
-                            $(this).appendTo($(this).closest('tbody'));
-                        });
                     }
                 });
-            } else {
-                currentTask.find('.count').text('');
-                $(this).val('');
-                alert("Please select a date after " + previousDateText);
             }
+        }else{
+            let obj = { action, project_id, manager, task_id };
+            $.ajax({
+                url: '/wp-admin/admin-ajax.php',
+                data: obj,
+                method: 'POST',
+                success: function (res) {
+                },
+                error: function (error) {
+                }
+            });
         }
     });
 }
 
 function addNewTask() {
     $(document).on('click', '.task__more-btn', function () {
-        let form = $('.task__more-form');
-        let managerId = $(this).closest('.project__table-manager').data('manager');
+        let form = $(this).closest('.modal').find('.more__form');
+        let managerId = $(this).closest('[data-manager]').data('manager');
         $('.task__more-form input[name="manager_id"]').val(managerId);
         let btn = $('.task__more-btn');
         $(this).closest('.task__more').append(form);
         btn.show();
+        form.css('display','flex');
         $(this).hide();
+
+        let type = $(this).data('supplier');
+        $('input[name="purchase_type"]').val(type);
+        // $('.supplier__amount').removeClass('active');
+        // $('.supplier__amount input').attr('disabled', 'disabled');
+        // $('.supplier__amount').each(function () {
+        //     if ($(this).data('supplier') == dataSupplier) {
+        //         $(this).addClass('active');
+        //         $(this).find('input').removeAttr('disabled');
+        //     }
+        // });
+
         $('.task__more-form').addClass('active');
     });
 }
 
 function sortTask() {
+    let oldOrder = [];
+
     $("[data-manager] tbody").sortable({
         items: "tr",
         cursor: "move",
         placeholder: "sortable-placeholder",
+
         start: function (event, ui) {
             ui.item.addClass("highlight");
+            oldOrder = $(this).find("tr:not(.sortable-placeholder)").map(function (index) {
+                let itemId = $(this).attr("data-item-id");
+                return { id: itemId, oldIndex: index };
+            }).get();
         },
+
         stop: function (event, ui) {
             ui.item.removeClass("highlight");
         },
+
         update: function (event, ui) {
-            console.log("Row order updated");
+            let newOrder = $(this).find("tr:not(.sortable-placeholder)").map(function (index) {
+                let itemId = $(this).attr("data-item-id");
+                return { id: itemId, newIndex: index };
+            }).get();
+
+            let updatedPositions = newOrder.map((newItem) => {
+                let oldItem = oldOrder.find(item => item.id === newItem.id);
+                return {
+                    id: newItem.id,
+                    oldIndex: oldItem ? oldItem.oldIndex : -1,
+                    newIndex: newItem.newIndex
+                };
+            });
+
+            $.ajax({
+                url: "/wp-admin/admin-ajax.php",
+                type: "POST",
+                data: {
+                    action: "update_order_project_tracker",
+                    manager_id: $(this).closest("[data-manager]").data('manager'),
+                    project_id: $(".project__table-task").data('project-id'),
+                    updatedTasks: updatedPositions
+                },
+                success: function(response) {
+                    console.log("Order updated successfully");
+                },
+                error: function(error) {
+                    console.error("Error updating order", error);
+                }
+            });
+
+            console.log("Row order updated", updatedPositions);
         }
     });
 }
-function adjustInputWidth() {
-    $('.manager__input input').each(function () {
-        let tempSpan = $('<span>').text($(this).val()).css({
-            'font-size': $(this).css('font-size'),
-            'font-family': $(this).css('font-family'),
-            'visibility': 'hidden',
-            'white-space': 'nowrap'
-        }).appendTo('body');
 
-        $(this).width(tempSpan.width() + 15); //
-        tempSpan.remove();
+
+
+function parseDate(dateStr) {
+    // Split the date string into parts (assumes DD/MM/YYYY format)
+    const [day, month, year] = dateStr.split('/').map(Number);
+    return new Date(year, month - 1, day); // Month is zero-based in JS Date
+}
+
+
+
+function removeMargin(){
+    $('.amount__error').each(function (){
+        $(this).closest(".modal").find('.project__table').css('margin','0')
+    })
+}
+function addDate() {
+    $(document).on('change', '.calendar__form input[name="date"]', function () {
+        let startDateStr = $('.calendar__start span').text();
+        let endDateStr = $('.calendar__end span').text();
+        let selectedDateStr = $(this).val();
+
+        let startDate = parseDate(startDateStr);
+        let endDate = parseDate(endDateStr);
+        let selectedDate = parseDate(selectedDateStr);
+
+        if (isNaN(startDate) || isNaN(endDate) || isNaN(selectedDate)) {
+            console.error("One or more dates are invalid:", {
+                startDateStr,
+                endDateStr,
+                selectedDateStr,
+                startDate,
+                endDate,
+                selectedDate
+            });
+            return;
+        }
+
+        if (selectedDate < startDate || selectedDate > endDate) {
+            $('.calendar__form .location__save').addClass('disable');
+            if ($(this).closest('.form__input').find('.error').length === 0) {
+                $(this).closest('.form__input').append(
+                    `<label class="error">The date must be between the start and end dates</label>`
+                );
+            }
+        } else {
+            $('.calendar__form .location__save').removeClass('disable');
+            $(this).closest('.form__input').find('.error').remove();
+        }
+
+        console.log("Start Date:", startDate, "End Date:", endDate, "Selected Date:", selectedDate);
+    });
+}
+
+
+
+function adjustInputWidth() {
+    $('.manager__input input, .amount__date input').each(function () {
+        let $input = $(this);
+
+        // Функція для встановлення ширини
+        function updateWidth() {
+            let tempSpan = $('<span>').text($input.val()).css({
+                'font-size': $input.css('font-size'),
+                'font-family': $input.css('font-family'),
+                'visibility': 'hidden',
+                'white-space': 'nowrap'
+            }).appendTo('body');
+
+            $input.width(tempSpan.width() + 15); // 15 - додатковий відступ
+            tempSpan.remove();
+        }
+
+        // Ініціальна адаптація ширини
+        updateWidth();
+
+        // Адаптація під час введення тексту
+        $input.on('input', updateWidth);
     });
 }
 $(document).ready(function () {
@@ -687,14 +852,26 @@ $(document).ready(function () {
     removeItem();
     calendar();
     fillCalendar();
-
+    // addDate()
     dropMenu();
 
     let locationForm = $('.location__form');
     validateForm(locationForm, function () {
-        ajaxSend(locationForm, function () {
+        ajaxSend(locationForm, function (res) {
             $('.location__more-block').hide();
+            $('.location__more-block .form').show();
             $('.location__more').show();
+            let modal = locationForm.closest('.modal')
+            modal.find('.project__table > *').remove()
+            modal.find('.project__table').append(res)
+
+            showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+            modal.find('.clarify__mob-wrap tbody').removeClass('active')
+            modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
+            modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+            modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
+
+
         }, function (error) {
             // $('.location__more-block').hide();
             // $('.location__more').show();
@@ -704,55 +881,104 @@ $(document).ready(function () {
     let contractForm = $('.contract__form');
     validateForm(contractForm, function () {
         let form__input = $('.contract__form .form__input input').val();
-        ajaxSend(contractForm, function () {
+        ajaxSend(contractForm, function (res) {
+            $('.amount__text').text(`Amount Of the contract: ${form__input}`);
+            contractForm.attr('data-contract', form__input);
 
-            contractForm.attr('data-contract', form__input);
+            console.log(11111,contractForm)
+            $('.amount__error').remove()
+            let modal = contractForm.closest('.modal')
+            modal.find('.project__table > *').remove()
+            modal.find('.project__table').append(res)
+            showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+            modal.find('.clarify__mob-wrap tbody').removeClass('active')
+            modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
+            modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+            modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
         }, function () {
-            contractForm.attr('data-contract', form__input);
+
         });
     }, 1);
 
     let formTerms = $('.form__terms');
     validateForm(formTerms, function () {
-        ajaxSend(formTerms, function () {
+        ajaxSend(formTerms, function (res) {
             $('.location__more-block').hide();
             $('.location__more').show();
+
+
+
+            let modal = formTerms.closest('.modal')
+            modal.find('.project__table > *').remove()
+            modal.find('.project__table').append(res)
+            showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+            modal.find('.clarify__mob-wrap tbody').removeClass('active')
+            modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
+            modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+            modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
         }, function (error) {
-            // $('.location__more-block').hide();
-            // $('.location__more').show();
+
         });
     });
 
     let contactForm = $('.contact__form');
     validateForm(contactForm, function () {
-        ajaxSend(contactForm, function () {
+        ajaxSend(contactForm, function (res) {
             $('.location__more-block').hide();
             $('.location__more').show();
+
+            let modal = contactForm.closest('.modal')
+            modal.find('.project__table > *').remove()
+            modal.find('.project__table').append(res)
+            showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+            modal.find('.clarify__mob-wrap tbody').removeClass('active')
+            modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
+            modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+            modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
         }, function (error) {
-            // $('.location__more-block').hide();
-            // $('.location__more').show();
+
         });
     });
 
-    let purchaseForm = $('.purchase__form');
-    validateForm(purchaseForm, function () {
-        ajaxSend(purchaseForm, function () {
-            $('.location__more-block').hide();
-            $('.location__more').show();
-        }, function (error) {
-            // $('.location__more-block').hide();
-            // $('.location__more').show();
-        });
-    });
+    // let purchaseForm = $('.purchase__form');
+    // validateForm(purchaseForm, function () {
+    //     ajaxSend(purchaseForm, function (res) {
+    //         $('.location__more-block').hide();
+    //         $('.location__more').show();
+    //
+    //
+    //         let modal = purchaseForm.closest('.modal')
+    //         modal.find('.project__table > *').remove()
+    //         modal.find('.project__table').append(res)
+    //         showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+    //         modal.find('.clarify__mob-wrap tbody').removeClass('active')
+    //         modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
+    //         modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+    //         modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
+    //     }, function (error) {
+    //
+    //     });
+    // });
 
     let personForm = $('.person__form');
     validateForm(personForm, function () {
-        ajaxSend(personForm, function () {
+        ajaxSend(personForm, function (res) {
             $('.location__more-block').hide();
             $('.location__more').show();
+
+
+
+            let modal = personForm.closest('.modal')
+            modal.find('.project__table > *').remove()
+            modal.find('.project__table').append(res)
+            showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
+            modal.find('.clarify__mob-wrap tbody').removeClass('active')
+            modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
+            modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
+            modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
         }, function (error) {
-            // $('.location__more-block').hide();
-            // $('.location__more').show();
+
+
         });
     });
 
@@ -760,28 +986,33 @@ $(document).ready(function () {
     validateForm(dateForm, function () {
         // let date_add = $('#date_add').val()
         // let note_add = $('#note__add').val()
-        ajaxSend(dateForm, function () {
-            $('.calendar__illustrate').html(res);
+        ajaxSend(dateForm, function (res) {
+            $('.calendar__date > *').remove()
+            $('.calendar__date').append(res);
             getPositionDate();
         }, function (error) {
-            $('.calendar__illustrate').html(res);
+            // $('.calendar__illustrate').html(res);
             // $('.calendar__date').append(` <div class="calendar__point">
             //                             <div class="calendar__point-content">
             //                                 <span class="calendar__point-date">${date_add}<button class="calendar__point-delete"></button></span>
             //                                 <span class="calendar__point-desc">${note_add}</span>
             //                             </div>
             //                         </div>`)
-            getPositionDate();
+            // getPositionDate();
         });
     });
 
     $('.select').select2({});
     chartTransfer();
-    spline();
+    // spline();
+    submitFormDataProject('.form__contract');
+    submitFormDataProject('.purchase__form');
+    submitFormDataProject('.form__ar_ap');
+    submitFormDataProject('.form__p_l');
     submitFormDataProject('.delivery__form');
     submitFormDataProject('.mirs__form');
     submitFormDataProject('.wirs__form');
-    submitFormDataProject('.variations__form');
+    submitFormDataProject('.variations__form_add_ons');
     submitFormDataProject('.ncrs__form');
 
     submitFormDataProject('.nomination-letter__form');
@@ -798,22 +1029,26 @@ $(document).ready(function () {
     submitFormDataProject('.invoices__form');
     submitFormDataProject('.variations__form');
     submitFormDataProject('.minutes__form');
-    submitFormDataProject('.minutes__form');
+    submitFormDataProject('.guarantees__form');
 
-    submitFormDataProject('.task__more-form');
+    submitFormDataProject('.form__tracker');
 
     addNewTask();
     addDataEnd();
     editDataPurchases();
     adjustInputWidth();
     sortTask();
-
+    disableForUser()
+    removeMargin()
+    addDateInvoice()
     $(document).on('input', '.manager__input input', adjustInputWidth);
+    getLineWidth();
 });
 
 $(window).load(function () {});
 
 $(window).resize(function () {});
 $(window).scroll(function () {});
+//# sourceMappingURL=manager.js.map
 //# sourceMappingURL=manager.js.map
 //# sourceMappingURL=manager.js.map

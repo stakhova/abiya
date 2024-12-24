@@ -1,5 +1,30 @@
 let modalManager = $('.modal__managers');
 
+
+
+function changeNumberComa() {
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function cleanNumber(value) {
+        return value.replace(/,/g, "");
+    }
+
+    $(document).on('input', '.coma', function () {
+        let input = $(this);
+        let value = input.val().replace(/[^\d]/g, "");
+        input.val(formatNumberWithCommas(value));
+        input.data('rawValue', value);
+    });
+
+    $(document).on('blur', '.coma', function () {
+        let input = $(this);
+        let rawValue = cleanNumber(input.val());
+        input.attr('value', rawValue);
+    });
+}
+
 function openManagerPopup(btn, modal) {
     btn.click(function () {
         button = $(this);
@@ -227,36 +252,37 @@ function fillCalendar() {
 
         let duration;
 
-        if (dateToObj < dateFromObj) {
-            $('.calendar__wrap').append('<label class="error" >The project completion date cannot be earlier than the award of contract date.</label>');
-            wrap.removeClass('active');
-        } else {
-            const diffTime = dateToObj - dateFromObj;
-            duration = diffTime / (1000 * 3600 * 24);
+        // if (dateToObj < dateFromObj) {
+        //     $('.calendar__wrap').append('<label class="error" >The project completion date cannot be earlier than the award of contract date.</label>');
+        //     // wrap.removeClass('active');
+        // } else {
+        const diffTime = dateToObj - dateFromObj;
+        duration = diffTime / (1000 * 3600 * 24);
 
-            let obj = { action: 'add_date', dateFrom, dateEnd, project_id };
-            $.ajax({
-                url: '/wp-admin/admin-ajax.php',
-                data: obj,
-                method: 'POST',
-                success: function (res) {
-                    // $('.calendar__start span').text(dateFrom);
-                    // $('.calendar__end span').text(dateEnd);
-                    // wrap.addClass('active');
-                    // getPositionDate();
-                    // $('.calendar__wrap-duration span').text(duration);
+        let obj = { action: 'add_date', dateFrom, dateEnd, project_id };
+        $.ajax({
+            url: '/wp-admin/admin-ajax.php',
+            data: obj,
+            method: 'POST',
+            success: function (res) {
+                // $('.calendar__start span').text(dateFrom);
+                // $('.calendar__end span').text(dateEnd);
+                // wrap.addClass('active');
+                // getPositionDate();
+                // $('.calendar__wrap-duration span').text(duration);
+                wrap.addClass('active');
+                $('.calendar__date > *').remove()
+                $('.calendar__date').append(res);
+                $('[name = "date_from"]').val() == '' ? calendarBtn.addClass('disabled') : calendarBtn.removeClass('disabled');
+                getPositionDate();
+                // removeDate()
+            },
+            error: function (error) {
 
-                    $('.calendar__date > *').remove()
-                    $('.calendar__date').append(res);
-                    $('[name = "date_from"]').val() == '' ? calendarBtn.addClass('disabled') : calendarBtn.removeClass('disabled');
-                    getPositionDate();
-                },
-                error: function (error) {
 
-
-                }
-            });
-        }
+            }
+        });
+        // }
     });
 }
 function moreItems() {
@@ -324,19 +350,14 @@ function calendar() {
     });
 }
 
-
-function  getLineWidth(){
-
-
-}
 function getPositionDate() {
-    let first = $('.calendar__point-wrap:first-child')
-    if(!first.hasClass('calendar__start')){
-        first.css('margin-left','80px')
-        // first.addClass('first')
-    }else{
-       $('.calendar__start .date').css('left','0')
-    }
+    // let first = $('.calendar__point-wrap:first-child')
+    // if(!first.hasClass('calendar__start')){
+    //     first.css('margin-left','80px')
+    //     // first.addClass('first')
+    // }else{
+    //     $('.calendar__start .date').css('left','0')
+    // }
 }
 
 
@@ -345,8 +366,9 @@ function getPositionDate() {
 
 function removeDate() {
     $(document).on('click', '.calendar__point-delete', function () {
-        let date = $(this).closest('.calendar__point');
-        let date_id = date.data('date-id');
+
+        console.log(12345,'delete')
+        let date_id = $(this).closest('[data-date-id]').data('date-id');
         let project_id = $('.project__table-task').data('project-id');
         let obj = { action: 'delete_date', date_id, project_id };
         $.ajax({
@@ -359,14 +381,8 @@ function removeDate() {
                 getPositionDate();
             },
             error: function (error) {
-                $('.calendar__date > *').remove()
-                $('.calendar__date').append(res);
-                getPositionDate();
-
                 console.log('error ajax');
 
-                // date.remove();
-                // getPositionDate();
             }
         });
     });
@@ -457,25 +473,43 @@ function addDateInvoice()  {
     });
 }
 
-
-
-function editDataAmount(){
+function editDataAmount() {
     $(document).on('change', '.project__input input', function () {
         let project_id = $('.project__table-task').data('project-id');
         let item_id = $(this).closest('[data-item-id]').data('item-id');
-        let amount = +$(this).val();
+
+        // Отримати значення з інпуту
+        let rawValue = $(this).val();
+        // Очистити від ком і пробілів
+        let cleanedValue = rawValue.replace(/,/g, '').trim();
+
+        // Перевірка, чи це число
+        if (isNaN(cleanedValue) || cleanedValue === "") {
+            alert("Введіть коректне число!");
+            $(this).val(''); // Очистити поле, якщо значення некоректне
+            return;
+        }
+
+        let amount = parseFloat(cleanedValue) || 0; // Якщо порожнє, значення буде 0
         let type = $(this).closest('.project__input').data('type');
 
         let currentModal = $(this).closest('.modal');
         let action = currentModal.data('action-change');
-        let totalAmountProject = +currentModal.data('project-amount');
-        let obj = { action, project_id, item_id, type, amount };
+        let totalAmountProject = parseFloat(currentModal.data('project-amount')) || 0;
 
+        // Формуємо об'єкт для запиту, без ком
+        let obj = {
+            action,
+            project_id,
+            item_id,
+            type,
+            amount // Значення без ком
+        };
+
+        // Розрахунок відсотків
         let currentPercent = $(this).closest('.wrap__amount').next().find('.percent').find('span');
-        let percent = (amount / totalAmountProject * 100).toFixed(2);
-        if (totalAmountProject) {
-            currentPercent.text(percent);
-        }
+        let percent = (totalAmountProject ? (amount / totalAmountProject * 100).toFixed(2) : 0);
+        currentPercent.text(percent);
 
         function calculateTotals(selector) {
             let totalInvoice = 0;
@@ -484,11 +518,13 @@ function editDataAmount(){
             let totalPercentReceived = 0;
 
             $(selector).find('.project__input[data-type="invoice"] input').each(function () {
-                totalInvoice += parseFloat($(this).val()) || 0;
+                let value = parseFloat($(this).val().replace(/,/g, '').trim()) || 0;
+                totalInvoice += value;
             });
 
             $(selector).find('.project__input[data-type="received"] input').each(function () {
-                totalReceived += parseFloat($(this).val()) || 0;
+                let value = parseFloat($(this).val().replace(/,/g, '').trim()) || 0;
+                totalReceived += value;
             });
 
             $(selector).find('.amount__percent span').each(function () {
@@ -507,7 +543,7 @@ function editDataAmount(){
             if (totalPercentReceived > 100) {
                 $(selector).find('.total__received-percent').css('color', 'red');
             } else {
-                $(selector).find('.total__received-percent ').css('color', 'inherit');
+                $(selector).find('.total__received-percent').css('color', 'inherit');
             }
 
             $(selector).find('.total h4[data-type="invoice"]').text(totalInvoice);
@@ -518,10 +554,16 @@ function editDataAmount(){
 
         function successEdit() {
             calculateTotals(currentModal.find('table.change__table'));
-
             calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
         }
 
+        // Перевірка перед відправленням
+        if (amount <= 0) {
+            alert("Значення повинно бути більше 0.");
+            return;
+        }
+
+        // Надсилаємо AJAX-запит
         $.ajax({
             url: '/wp-admin/admin-ajax.php',
             data: obj,
@@ -535,6 +577,83 @@ function editDataAmount(){
         });
     });
 }
+
+// function editDataAmount(){
+//     $(document).on('change', '.project__input input', function () {
+//         let project_id = $('.project__table-task').data('project-id');
+//         let item_id = $(this).closest('[data-item-id]').data('item-id');
+//         let amount = +$(this).val();
+//         let type = $(this).closest('.project__input').data('type');
+//
+//         let currentModal = $(this).closest('.modal');
+//         let action = currentModal.data('action-change');
+//         let totalAmountProject = +currentModal.data('project-amount');
+//         let obj = { action, project_id, item_id, type, amount };
+//
+//         let currentPercent = $(this).closest('.wrap__amount').next().find('.percent').find('span');
+//         let percent = (amount / totalAmountProject * 100).toFixed(2);
+//         if (totalAmountProject) {
+//             currentPercent.text(percent);
+//         }
+//
+//         function calculateTotals(selector) {
+//             let totalInvoice = 0;
+//             let totalReceived = 0;
+//             let totalPercentInvoice = 0;
+//             let totalPercentReceived = 0;
+//
+//             $(selector).find('.project__input[data-type="invoice"] input').each(function () {
+//                 totalInvoice += parseFloat($(this).val()) || 0;
+//             });
+//
+//             $(selector).find('.project__input[data-type="received"] input').each(function () {
+//                 totalReceived += parseFloat($(this).val()) || 0;
+//             });
+//
+//             $(selector).find('.amount__percent span').each(function () {
+//                 totalPercentInvoice += parseFloat($(this).text()) || 0;
+//             });
+//
+//             $(selector).find('.received__percent span').each(function () {
+//                 totalPercentReceived += parseFloat($(this).text()) || 0;
+//             });
+//
+//             if (totalPercentInvoice > 100) {
+//                 $(selector).find('.total__invoice-percent').css('color', 'red');
+//             } else {
+//                 $(selector).find('.total__invoice-percent').css('color', 'inherit');
+//             }
+//             if (totalPercentReceived > 100) {
+//                 $(selector).find('.total__received-percent').css('color', 'red');
+//             } else {
+//                 $(selector).find('.total__received-percent ').css('color', 'inherit');
+//             }
+//
+//             $(selector).find('.total h4[data-type="invoice"]').text(totalInvoice);
+//             $(selector).find('.total h4[data-type="received"]').text(totalReceived);
+//             $(selector).find('.total__invoice-percent span').text(totalPercentInvoice);
+//             $(selector).find('.total__received-percent span').text(totalPercentReceived);
+//         }
+//
+//         function successEdit() {
+//             calculateTotals(currentModal.find('table.change__table'));
+//
+//             calculateTotals(currentModal.find('.project__clarify-mob.change__table'));
+//         }
+//
+//         $.ajax({
+//             url: '/wp-admin/admin-ajax.php',
+//             data: obj,
+//             method: 'POST',
+//             success: function (res) {
+//                 successEdit();
+//             },
+//             error: function (error) {
+//                 successEdit();
+//             }
+//         });
+//     });
+// }
 
 
 
@@ -844,6 +963,7 @@ function adjustInputWidth() {
     });
 }
 $(document).ready(function () {
+    changeNumberComa()
     editDataAmount();
     removeDate();
     openManagerPopup($('.manager'), modalManager);
@@ -864,7 +984,6 @@ $(document).ready(function () {
             let modal = locationForm.closest('.modal')
             modal.find('.project__table > *').remove()
             modal.find('.project__table').append(res)
-
             showMobTask('.clarify__mob-wrap', 'tbody', '.clarify__mob-prev', '.clarify__mob-next');
             modal.find('.clarify__mob-wrap tbody').removeClass('active')
             modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
@@ -884,7 +1003,6 @@ $(document).ready(function () {
         ajaxSend(contractForm, function (res) {
             $('.amount__text').text(`Amount Of the contract: ${form__input}`);
             contractForm.attr('data-contract', form__input);
-
             console.log(11111,contractForm)
             $('.amount__error').remove()
             let modal = contractForm.closest('.modal')
@@ -895,6 +1013,8 @@ $(document).ready(function () {
             modal.find('.clarify__mob-wrap tbody:last-child').addClass('active')
             modal.find('.clarify__mob-wrap .clarify__mob-next').addClass('disabled')
             modal.find('.clarify__mob-wrap .clarify__mob-prev').removeClass('disabled')
+            $('.section__button').removeAttr('disabled');
+
         }, function () {
 
         });
@@ -1042,7 +1162,6 @@ $(document).ready(function () {
     removeMargin()
     addDateInvoice()
     $(document).on('input', '.manager__input input', adjustInputWidth);
-    getLineWidth();
 });
 
 $(window).load(function () {});

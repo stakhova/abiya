@@ -132,6 +132,13 @@ const validateForm = (form, func, noreset) => {
         },
         submitHandler: function () {
 
+
+            form.find('input.coma').each(function () {
+                let input = $(this);
+                let cleanValue = input.val().replace(/,/g, ""); // Remove commas
+                input.val(cleanValue);
+            });
+
             if (form.hasClass('.modal__calendar')) {
                 let startDate = new Date($('.calendar__start .date').text().split('/').reverse().join('/'));
                 let endDate = new Date($('.calendar__end .date').text().split('/').reverse().join('/'));
@@ -577,6 +584,13 @@ function submitFormDataProject(form) {
 
         // If all validations pass
         if (required) {
+
+            $(this).find('input.coma').each(function () {
+                let input = $(this);
+                let cleanValue = input.val().replace(/,/g, ""); // Remove commas
+                input.val(cleanValue);
+            });
+
             let formData = new FormData($(this)[0]);
 
             // Remove default files and add uploaded files
@@ -1288,6 +1302,7 @@ function openModalFromEmail() {
     }
 }
 $(document).ready(function () {
+    // changeNumberComa()
     loginPopupChange();
     deleteJustUploadFile();
     let loginForm = $('.login__signin');

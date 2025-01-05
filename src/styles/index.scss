@@ -58,7 +58,7 @@
   display: block;
   color: white;
   background-color: var(--color-violet);
-  font: 700 1.6rem/normal var(--Arimo);
+  font: 700 1.6rem / normal var(--Arimo);
   border-radius: 999.9rem;
   cursor: pointer;
 }
@@ -115,7 +115,7 @@
   color: var(--color-grey);
   padding-left: 3.4rem;
   position: relative;
-  font: 400 1.6rem/normal var(--Arimo);
+  font: 400 1.6rem / normal var(--Arimo);
 }
 
 .header__link:after {
@@ -156,11 +156,11 @@
 }
 
 .header__user-info h3 {
-  font: 400 2rem/2.84rem var(--RozhaOne);
+  font: 400 2rem / 2.84rem var(--RozhaOne);
 }
 
 .header__user-role {
-  font: 400 1.2rem/1.38rem var(--Arimo);
+  font: 400 1.2rem / 1.38rem var(--Arimo);
 }
 
 .header__user-img {
@@ -221,7 +221,7 @@
   padding: 1.2rem 5rem;
   min-width: 18.2rem;
   border-radius: 999.9rem;
-  font: 700 1.4rem/1.6rem var(--Arimo);
+  font: 700 1.4rem / 1.6rem var(--Arimo);
   -ms-flex-align: center;
   align-items: center;
   gap: 0.8rem;
@@ -325,7 +325,7 @@
 }
 
 .header__menu-list > * {
-  font: 400 2.4rem/normal var(--RozhaOne);
+  font: 400 2.4rem / normal var(--RozhaOne);
   color: var(--color-violet);
   text-align: center;
 }
@@ -423,7 +423,7 @@
 }
 
 .login__title {
-  font: 400 3.2rem/normal var(--RozhaOne);
+  font: 400 3.2rem / normal var(--RozhaOne);
   color: var(--color-text);
   text-align: center;
 }
@@ -439,12 +439,12 @@
 
 .login__input label {
   color: var(--color-text);
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
 }
 
 .login__input input {
   padding: 1.6rem 2.4rem;
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
   border: 0.1rem solid var(--color-middle-percent);
   border-radius: 1.2rem;
 }
@@ -454,7 +454,7 @@
 }
 
 .login__text {
-  font: 400 1.6rem/normal var(--Arimo);
+  font: 400 1.6rem / normal var(--Arimo);
   text-align: center;
 }
 
@@ -485,7 +485,7 @@
   color: var(--color-red);
   bottom: -2rem;
   left: 0;
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 p.error {
@@ -493,7 +493,7 @@ p.error {
   color: var(--color-red);
   bottom: -1.8rem;
   left: 0;
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .login__form {
@@ -507,7 +507,7 @@ p.error {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .checkbox {
@@ -523,7 +523,7 @@ p.error {
   -moz-user-select: none;
   -ms-user-select: none;
   color: var(--color-text);
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
 }
 
 .checkbox input {
@@ -632,7 +632,7 @@ p.error {
 }
 
 .project__top-title {
-  font: 400 2.4rem/normal var(--RozhaOne);
+  font: 400 2.4rem / normal var(--RozhaOne);
   text-transform: capitalize;
 }
 
@@ -640,7 +640,7 @@ p.error {
   padding-right: 2.8rem;
   position: relative;
   color: var(--color-violet);
-  font: 700 1.6rem/normal var(--Arimo);
+  font: 700 1.6rem / normal var(--Arimo);
   width: -moz-max-content;
   width: max-content;
 }
@@ -675,7 +675,7 @@ p.error {
   width: -moz-max-content;
   width: max-content;
   margin-left: 3vw;
-  font: 400 1.6rem/normal var(--RozhaOne);
+  font: 400 1.6rem / normal var(--RozhaOne);
 }
 
 .project__progress {
@@ -721,7 +721,7 @@ p.error {
 
 .project__table th {
   text-align: left;
-  font: 400 2rem/normal var(--RozhaOne);
+  font: 400 2rem / normal var(--RozhaOne);
   text-transform: capitalize;
   color: var(--color-text);
   padding: 1.8rem 2.4rem;
@@ -812,17 +812,17 @@ p.error {
 .project__task-title {
   text-align: center;
   width: 100%;
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .project__task-time {
   white-space: nowrap;
-  font: 400 1.2rem/normal var(--Arimo);
+  font: 400 1.2rem / normal var(--Arimo);
   text-transform: capitalize;
 }
 
 .project__task-step {
-  font: 500 2.4rem/normal var(--Poppins);
+  font: 500 2.4rem / normal var(--Poppins);
   text-transform: uppercase;
   text-align: left;
   color: var(--color-gold);
@@ -864,7 +864,7 @@ p.error {
 }
 
 .project__search-list > * {
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .project__search-wrap {
@@ -879,7 +879,7 @@ p.error {
   width: 100%;
   background: none;
   border: none;
-  font: 400 1.6rem/normal var(--Poppins);
+  font: 400 1.6rem / normal var(--Poppins);
   color: var(--color-violet);
 }
 
@@ -931,7 +931,7 @@ p.error {
   background-color: var(--color-middle-percent);
   padding: 0.6rem;
   border-radius: 0.4rem;
-  font: 400 1.6rem/normal var(--RozhaOne);
+  font: 400 1.6rem / normal var(--RozhaOne);
   color: var(--color-text);
   text-align: center;
   width: -moz-max-content;
@@ -962,7 +962,7 @@ p.error {
 }
 
 .project__text {
-  font: 400 1.6rem/normal var(--Arimo);
+  font: 400 1.6rem / normal var(--Arimo);
 }
 
 .project__text > a {
@@ -1030,17 +1030,17 @@ p.error {
 .project__modal-title span {
   display: block;
   color: #4B4B4B;
-  font: 700 2rem/140% var(--Arimo);
+  font: 700 2rem / 140% var(--Arimo);
   margin-bottom: 1.2rem;
 }
 
 .project__modal-desc h3 {
-  font: 400 2rem/normal var(--RozhaOne);
+  font: 400 2rem / normal var(--RozhaOne);
   margin-bottom: 0.8rem;
 }
 
 .project__modal-desc p {
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
 }
 
 .project__manager {
@@ -1053,7 +1053,7 @@ p.error {
 
 .project__manager h3 {
   white-space: nowrap;
-  font: 400 1.6rem/normal var(--RozhaOne);
+  font: 400 1.6rem / normal var(--RozhaOne);
 }
 
 .project__manager-list {
@@ -1068,7 +1068,7 @@ p.error {
   border-radius: 0.8rem;
   background: var(--color-inactive);
   padding: 1.2rem 1.6rem;
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .project__clarify-mob {
@@ -1086,7 +1086,7 @@ p.error {
 .project__clarify-manager > * {
   padding: 0.6rem 1.6rem;
   border-radius: 0.8rem;
-  font: 400 1.2rem/normal var(--Arimo);
+  font: 400 1.2rem / normal var(--Arimo);
   color: var(--color-text);
   text-transform: capitalize;
   background-color: var(--color-accept);
@@ -1101,12 +1101,12 @@ p.error {
 }
 
 .project__clarify-file {
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
   overflow: hidden;
 }
 
 .project__clarify-text {
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .project__clarify-more {
@@ -1140,7 +1140,7 @@ p.error {
 
 .project__approve-manager > * {
   border-radius: 999.9rem;
-  font-size: 700 1.2rem/normal var(--Arimo);
+  font-size: 700 1.2rem / normal var(--Arimo);
   min-width: 10rem;
   text-align: center;
 }
@@ -1194,11 +1194,11 @@ p.error {
 }
 
 .notes__title {
-  font: 400 2.8rem/normal var(--RozhaOne);
+  font: 400 2.8rem / normal var(--RozhaOne);
 }
 
 .notes__desc {
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
   color: var(--color-text);
 }
 
@@ -1242,7 +1242,7 @@ p.error {
 }
 
 .notes__file-item h3 {
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .notes__button {
@@ -1390,7 +1390,7 @@ input:-webkit-autofill:focus {
 }
 
 .modal__title {
-  font: 400 2.4rem/normal var(--RozhaOne);
+  font: 400 2.4rem / normal var(--RozhaOne);
   text-align: center;
   color: var(--color-violet);
 }
@@ -1435,7 +1435,7 @@ input:-webkit-autofill:focus {
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
 }
 
 .form__input input, .form__input textarea {
@@ -1451,7 +1451,7 @@ input:-webkit-autofill:focus {
 }
 
 .form__input label {
-  font: 400 1.6rem/normal var(--RozhaOne);
+  font: 400 1.6rem / normal var(--RozhaOne);
 }
 
 .form__file {
@@ -1495,7 +1495,7 @@ input:-webkit-autofill:focus {
   bottom: -2.2rem;
   left: 0;
   padding: 0.4rem 0.6rem;
-  font: 400 1.1rem/normal var(--Arimo);
+  font: 400 1.1rem / normal var(--Arimo);
   z-index: 3;
   border-radius: 1rem;
 }
@@ -1528,7 +1528,7 @@ input:-webkit-autofill:focus {
   max-width: 12rem;
   overflow: hidden;
   display: -webkit-box;
-  font: 400 1.4rem/normal var(--Arimo);
+  font: 400 1.4rem / normal var(--Arimo);
 }
 
 .form__file-upload label {
@@ -1542,7 +1542,7 @@ input:-webkit-autofill:focus {
   border-radius: 999.9rem;
   border: 0.1rem solid #BFBBBB;
   gap: 1rem;
-  font: 700 1.6rem/normal var(--Arimo);
+  font: 700 1.6rem / normal var(--Arimo);
   cursor: pointer;
 }
 
@@ -1573,7 +1573,7 @@ input:-webkit-autofill:focus {
 }
 
 .notification__project {
-  font: 700 1.6rem/normal var(--Arimo);
+  font: 700 1.6rem / normal var(--Arimo);
   -webkit-text-decoration-line: underline;
   text-decoration-line: underline;
   text-transform: capitalize;
@@ -1585,7 +1585,7 @@ input:-webkit-autofill:focus {
 }
 
 .notification__desc {
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
 }
 
 .notification__desc span {
@@ -1602,7 +1602,7 @@ input:-webkit-autofill:focus {
 }
 
 .notification__time {
-  font: 400 1.6rem/140% var(--Arimo);
+  font: 400 1.6rem / 140% var(--Arimo);
 }
 
 .notification .project__top {
@@ -1701,7 +1701,7 @@ input:-webkit-autofill:focus {
   position: relative;
   padding-left: 3.2rem;
   cursor: pointer;
-  font: 400 1.6rem/2.24rem var(--Arimo);
+  font: 400 1.6rem / 2.24rem var(--Arimo);
   display: inline-block;
   color: #111;
 }
@@ -1794,7 +1794,7 @@ input:-webkit-autofill:focus {
 }
 
 .amount__error{
-  font: 400 2rem/2.4rem  var(--RozhaOne);
+  font: 400 2rem / 2.4rem  var(--RozhaOne);
   color: red;
   margin: 1rem 0;
 }
@@ -2270,7 +2270,7 @@ button:disabled {
     padding: 3rem 1.6rem;
   }
   .clarify__mob-text {
-    font: 400 1.2rem/normal var(--RozhaOne);
+    font: 400 1.2rem / normal var(--RozhaOne);
   }
   .clarify__mob-wrap {
     margin: 1.6rem 0;
@@ -2309,7 +2309,7 @@ button:disabled {
   }
   .clarify__mob-nav > * {
     color: var(--color-gold);
-    font: 400 1.2rem/140% var(--Arimo);
+    font: 400 1.2rem / 140% var(--Arimo);
     text-decoration: underline;
   }
   .clarify__mob-nav > *.disabled {

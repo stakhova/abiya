@@ -1165,9 +1165,5 @@ $(document).ready(function () {
 });
 
 $(window).load(function () {});
-
 $(window).resize(function () {});
 $(window).scroll(function () {});
-//# sourceMappingURL=manager.js.map
-//# sourceMappingURL=manager.js.map
-//# sourceMappingURL=manager.js.map

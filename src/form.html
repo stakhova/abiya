@@ -5,21 +5,255 @@
 
     <div class="wrap__main">
         <div class="question">
-            <div class="question__icon img">
-                <img src="./img/icon-question.svg" alt="">
-            </div>
-            <h2 class="question__title">Form</h2>
-            <form action="" class="question__form">
-                <div class="question__item">
-                    <label>Date</label>
-                    <input type="text" name="date" class="disabled" value="01.10.2020" >
-                </div>
-                <div class="question__item">
-                    <label>Name/Report prepared by</label>
-                </div>
-            </form>
-        </div>
+            <div class="container">
+                <div class="question__block">
+                    <div class="question__head">
+                        <div class="question__icon img">
+                            <img src="./img/icon-question.svg" alt="">
+                        </div>
+                        <h2 class="question__title">Form</h2>
+                    </div>
+                    <form action="" class=" form question__form">
+                        <div class="question__item question__const form__input">
+                            <input type="hidden" name="action" value="question-form">
+                            <label>Date</label>
+                            <input type="text" name="date" class="disabled" value="01.10.2020" >
+                        </div>
+                        <div class="question__item form__input">
+                            <label>Name/Report prepared by</label>
+                            <select name="name/report" class="question__select" data-placeholder="Select name">
+                                <option value=""></option>
+                                <option value="Name 1">Name 1</option>
+                                <option value="Name 2">Name 2</option>
+                                <option value="Name 3">Name 3</option>
+                                <option value="Name 4">Name 4</option>
+                            </select>
+                        </div>
+                        <div class="question__item form__input half">
+                            <label>Project</label>
+                            <select name="project" class="question__select" data-placeholder="Select project">
+                                <option value=""></option>
+                                <option value="Name 1">Name 1</option>
+                                <option value="Name 2">Name 2</option>
+                                <option value="Name 3">Name 3</option>
+                                <option value="Name 4">Name 4</option>
+                            </select>
+                        </div>
+                        <div class="question__item form__input half">
+                            <label>Area</label>
+                            <select name="area" class="question__select" data-placeholder="Select area">
+                                <option value=""></option>
+                                <option value="Living Room">Living Room</option>
+                                <option value="Kitchen">Kitchen</option>
+                                <option value="Bedroom">Bedroom</option>
+                            </select>
+                        </div>
+                        <div class="question__item form__input" data-location>
+                            <label>Location</label>
+                            <select name="location" class="question__select" data-placeholder="Select location">
+                                <option value=""></option>
+                                <option value="factory">Factory</option>
+                                <option value="site">Site</option>
+                            </select>
+                        </div>
+                        <div class="question__item question__hide question__hide-gap " data-location-hide="factory">
+                            <div class="question__item form__input" data-factory>
+                                <label>Factory</label>
+                                <select name="factory" class="question__select" data-placeholder="Select factory">
+                                    <option value=""></option>
+                                    <option value="CNC">CNC</option>
+                                    <option value="Fabrication">Fabrication</option>
+                                    <option value="Powder Coating">Powder Coating</option>
+                                </select>
+                            </div>
 
+                            <div class="question__hide-wrap">
+                                <div class="question__item question__hide question__hide-gap" data-factory-hide="CNC">
+                                    <div class="form__input question__input half">
+                                        <label >Total Machines used</label>
+                                        <input type="text" name="total_machines_used" placeholder="Text here">
+                                    </div>
+                                    <div class="form__input question__input half">
+                                        <label>Total Sheets cut</label>
+                                        <input type="text" name="total_sheets_cut" placeholder="Text here">
+                                    </div>
+                                    <div class="form__input question__input half">
+                                        <label>Total SQM</label>
+                                        <input  type="text" type="total_sqm" placeholder="Text here" >
+                                    </div>
+
+                                </div>
+                                <div class="question__item question__hide question__hide-gap" data-factory-hide="Fabrication">
+
+
+                                    <div class="question__item form__input">
+                                        <label>Fabrication</label>
+                                        <select name="fabrication" class="question__select" data-placeholder="Select option">
+                                            <option value=""></option>
+                                            <option value="aluminium">Aluminium</option>
+                                            <option value="aluminium2">Aluminium2</option>
+                                        </select>
+                                    </div>
+                                    <div class="question__item form__input question__item-radio question__hide-gap">
+                                        <label class="label__small">Sheet/ Profiles</label>
+                                        <select name="Sheet_select" class="question__select" data-placeholder="Select option">
+                                            <option value=""></option>
+                                            <option value="Profiles">Profiles</option>
+                                            <option value="Profiles2">Profiles2</option>
+                                        </select>
+                                        <div class="question__radio checkbox">
+                                            <div class="question__radio-item">
+                                                <input type="checkbox" id="Sheet1" name="sheet" value="Cutting" >
+                                                <label for="Sheet1">Cutting</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox"  id="Sheet2" name="sheet" value="Drilling" >
+                                                <label for="Sheet2">Drilling</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox" id="Sheet3" name="sheet" value="Welding" >
+                                                <label for="Sheet3">Welding</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox"  id="Sheet4" name="sheet" value="Glue" >
+                                                <label for="Sheet4">Glue</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox" id="Sheet5" name="sheet" value="Bending" >
+                                                <label for="Sheet5">Bending</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox"  id="Sheet6" name="sheet" value="Assembly" >
+                                                <label for="Sheet6">Assembly</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox" id="Sheet7" name="sheet" value="Rolling" >
+                                                <label for="Sheet7">Rolling</label>
+                                            </div>
+                                            <div class="question__radio-item">
+                                                <input type="checkbox"  id="Sheet8" name="sheet" value="Other" >
+                                                <label for="Sheet8">Other</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question__item  question__hide question__hide-gap" data-location-hide="site">
+                            <div class="question__item form__input">
+                                <label>Panels/Frame</label>
+                                <select name="panels/sheets" class="question__select" data-placeholder="Select option">
+                                    <option value=""></option>
+                                    <option value="Panels/Sheets">Panels/ Sheets</option>
+                                    <option value="Frame/Secondary Steel">Frame/ Secondary Steel</option>
+                                </select>
+                            </div>
+                            <div class="question__site">
+                                <div class="form__input question__input ">
+                                    <label>Add number </label>
+                                    <input type="text" name="site_number" placeholder="Text here">
+                                </div>
+                                <span>and</span>
+                                <div class="form__input question__input ">
+                                    <label>Add square meters</label>
+                                    <input type="text" name="square_meters" placeholder="Text here">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question__item form__input">
+                            <label>What has been completed today?</label>
+                            <input  type="text" name="what_completed" placeholder="Text here">
+                        </div>
+                        <div class="question__item form__input " data-delay>
+                            <label>Any delays during work?</label>
+                            <select name="delays" class="question__select" data-placeholder="Select option">
+                                <option value=""></option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="question__hide" data-delay-hide="yes">
+                            <div class="question__item form__input question__item-radio ">
+                                <label class="label__small">Who?</label>
+                                <div class="question__radio">
+                                    <div class="question__radio-item">
+                                        <input type="radio" id="who1" name="who" value="client" >
+                                        <label for="who1">Client</label>
+                                    </div>
+                                    <div class="question__radio-item">
+                                        <input type="radio"  id="who2" name="who" value="ABIYA" >
+                                        <label for="who2">ABIYA</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question__item form__input question__item-radio ">
+                                <label class="label__small">Duration?</label>
+                                <div class="question__radio">
+                                    <div class="question__radio-item">
+                                        <input type="radio" id="duration1" name="duration" value="0-4hrs" >
+                                        <label for="duration1">0-4hrs</label>
+                                    </div>
+                                    <div class="question__radio-item">
+                                        <input type="radio" id="duration2" name="duration" value="4-8hrs" >
+                                        <label for="duration2">4-8hrs</label>
+                                    </div>
+                                    <div class="question__radio-item">
+                                        <input type="radio" id="duration3" name="duration" value="8-12hrs" >
+                                        <label for="duration3">8-12hrs</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question__item form__input">
+                                <input type="text" name="notes-delay" placeholder="Notes here" >
+                            </div>
+                        </div>
+                        <div class="question__item form__input" data-request>
+                            <label>REQUESTS: Do you need any tools, fixtures, fittings, equipment or consumables, etc for tomorrow?</label>
+                            <select name="any_extra" class="question__select" data-placeholder="Select option">
+                                <option value=""></option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="question__item form__input question__hide" data-request-hide="yes">
+                            <input type="text" name="notes-extra" placeholder="Notes here" >
+                        </div>
+                        <div class="question__item form__input" data-toolbox>
+                            <label>Did you hold daily safety toolbox talk prior to starting work?</label>
+                            <select name="safety_toolbox" class="question__select" data-placeholder="Select option">
+                                <option value=""></option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <div class="question__item form__input question__hide " data-toolbox-hide="no">
+                            <label class="label__small">Why?</label>
+                            <input type="text" name="notes-extra" placeholder="Notes here" >
+                        </div>
+
+                        <div class="question__item form__input ">
+                            <label class="label__small">Upload files</label>
+                            <div class="form__file">
+                                <ul class="form__file-list file__list">
+
+                                </ul>
+                                <div class="form__file-upload">
+                                    <label for="fileInput"><img src="../img/upload.svg" alt="">Upload the file</label>
+                                    <input type="file" name="file" multiple=""   class="file__input" id="fileInput">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question__btn">
+                            <button class="section__button section__button-secondary question__btn-clear" type="button"> Clear </button>
+                            <button class="section__button"> Send </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

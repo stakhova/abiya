@@ -15,7 +15,19 @@ function clearForm() {
     });
 }
 
+function tab() {
+    $(".tab__header-item").click(function () {
+        $(".tab__header-item").removeClass("active").eq($(this).index()).addClass("active");
+        $(".tab__content-item").hide().eq($(this).index()).fadeIn();
+    }).eq(0).addClass("active");
+}
 
+
+function changeNewTable(){
+    if (window.innerWidth <= 666) {
+        $('.project__top-block:last-of-type').append($('.site__link'))
+    }
+}
 
 
 
@@ -115,7 +127,61 @@ function initSelectForm(){
     });
 }
 
+
+
+let currentChange, currentNotes
+
+
+function  openModalAppend(button){
+    currentChange = button
+    let id = button.closest('[data-item-id]').data('item-id')
+    let text = button.text().trim()
+    $('.modal [name="id"]').val(id)
+    $('.modal [name="notes"]').val(text)
+
+}
+function openModal(btn, modal) {
+
+    btn.click(function () {
+        button = $(this);
+        openModalAppend(button)
+        modal.show();
+        $('body').css('overflow', 'hidden');
+        return false;
+    });
+    $('.modal__close').click(function () {
+        $(this).closest(modal).hide();
+        $('body').css('overflow', 'visible');
+        resetModal();
+        return false;
+    });
+    $('.modal__btn-close').click(function () {
+        $(this).closest(modal).hide();
+        $('body').css('overflow', 'visible');
+        resetModal();
+        return false;
+    });
+    $(document).keydown(function (e) {
+        if (e.keyCode === 27) {
+            e.stopPropagation();
+            resetModal();
+            $('body').css('overflow', 'visible');
+        }
+    });
+    modal.click(function (e) {
+        if ($(e.target).closest('.modal__content').length == 0) {
+            $(this).hide();
+            resetModal();
+            $('body').css('overflow', 'visible');
+        }
+    });
+}
+
+
+
 $(document).ready(function () {
+    openModal($('.change__data'), $('.modal__change'));
+
     changeSelect('location')
     changeSelect('request')
     changeSelect('delay')
@@ -124,4 +190,21 @@ $(document).ready(function () {
     initSelectForm()
     formSubmit()
     clearForm()
+    tab()
+    changeNewTable()
+
+    let formChange = $('.form__change');
+
+    console.log(formChange)
+    validateForm(formChange, function () {
+        ajaxSend(formChange, function (res) {
+            currentNotes = $('.modal [name="notes"]').val()
+            currentChange.text(currentNotes)
+        }, function (error) {
+
+            currentNotes = $('.modal [name="notes"]').val()
+            currentChange.text(currentNotes)
+        }, 1);
+    });
+
 })

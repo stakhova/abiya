@@ -1,0 +1,102 @@
+//= partials/head.html
+
+<div class="wrap ">
+    //= partials/header.html
+
+    <div class="wrap__main">
+        <section class="project project__wrap site overview " data-role="">
+            <div class="container">
+                <div class="project__top">
+                    <div class="project__top-block">
+                        <div class="project__top-icon img">
+                            <img src="../img/site/tops.svg" alt="">
+                        </div>
+                        <h3 class="project__top-title">Project: Name <br>1.2. Progress. Site Progress</h3>
+                    </div>
+                    <div class="project__top-block ">
+
+                        <div class="project__percent"><span></span>%</div>
+                    </div>
+                </div>
+                <div class="project__progress">
+                    <div class="project__progress-bar">
+                    </div>
+                </div>
+                <div class="site__link">
+                    <a href="" class="project__top-link" >Add new Row</a>
+                </div>
+
+                <div class="calendar__block">
+                    <div class="tab">
+                        <div class="tab__header ">
+                            <button class="tab__header-item">Overall Progress</button>
+                            <button class="tab__header-item">Living room</button>
+                            <button class="tab__header-item">Bedroom</button>
+                            <button class="tab__header-item">Kitchen</button>
+                        </div>
+                    </div>
+                    <div class="tab__content ">
+                        <div class="tab__content-item">
+
+                            <div class="year-view calendar"></div>
+                        </div>
+                        <div class="tab__content-item">
+
+                            <div class="year-view calendar"></div>
+                        </div>
+                        <div class="tab__content-item">
+
+                            <div class="year-view calendar"></div>
+                        </div>
+                        <div class="tab__content-item">
+
+                            <div class="year-view calendar"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+    </div>
+</div>
+
+//= partials/scripts.html
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarContainers = document.querySelectorAll('.calendar');
+        const currentYear = new Date().getFullYear();
+
+        calendarContainers.forEach(container => {
+            for (let month = 0; month < 12; month++) {
+                const calendarDiv = document.createElement('div');
+                calendarDiv.className = 'month-calendar';
+
+                const title = document.createElement('h3');
+                title.textContent = new Date(currentYear, month).toLocaleString('uk-UA', { month: 'long' });
+
+                const calendarEl = document.createElement('div');
+                calendarDiv.appendChild(title);
+                calendarDiv.appendChild(calendarEl);
+                container.appendChild(calendarDiv);
+
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialDate: `${currentYear}-${String(month + 1).padStart(2, '0')}-01`,
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: '',
+                        center: '',
+                        right: ''
+                    }
+                });
+
+                calendar.render();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

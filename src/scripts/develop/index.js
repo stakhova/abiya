@@ -1317,7 +1317,6 @@ $(document).ready(function () {
     submitFormDataNotes('.form__notes');
     submitFormDataProject('.form__task');
 
-    tab();
     $('.header__burger').on('click', openMenu);
     deleteFileFromModal('.project__clarify-delete', $('.modal__content-delete'));
     approveFile('.project__approve-manager > *', $('.modal__content-approve'));

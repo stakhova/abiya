@@ -26,7 +26,9 @@ function changeNumberComa() {
 }
 
 function openManagerPopup(btn, modal) {
+
     btn.click(function () {
+        console.log(567)
         button = $(this);
         let modalId = button.attr('data-cell');
         modal = $(`.modal[data-modal="${modalId}"]`);

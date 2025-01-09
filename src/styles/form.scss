@@ -384,64 +384,139 @@
   .project__task-step{
     font:700 2rem / 2.8rem var(--Arimo) ;
   }
+  .project__clarify-text{
+    padding: 2.1rem;
+    font-size: 1.6rem;
+    &.violet {
+      color:var(--color-violet);
+      text-align: left;
+    }
+  }
+  .project__table-clarify th{
+    text-align: center;
+  }
+
 }
+.overview {
+  .project__clarify-text{
+    text-align: center;
+  }
+}
+
+
+.tab{
+  &__header{
+    display: flex;
+    & > *{
+
+    }
+  }
+
+}
+.year-view {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 місяці в рядок */
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.month-calendar {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.month-calendar h3 {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+.month-calendar .fc {
+  margin: 5px;
+}
+.change__data{
+  cursor: pointer;
+}
+
+.modal__change-btn{
+  display: flex;
+  gap:1.6rem;
+  align-items: center;
+  & > *{
+    width: calc(50% - 0.8rem);
+  }
+}
+
+textarea{
+  resize: none;
+}
+
 @media only screen and (max-width: 666px) {
 
-  .question .container{
-    padding: 3.2rem 1.6rem;
+    .question .container{
+      padding: 3.2rem 1.6rem;
+    }
+    .question__form,.question__hide{
+      gap:2rem;
+    }
+    .question__item.half{
+      width: 100%;
+    }
+    .question__item > input{
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+    }
+    .question .select2-container--default .select2-selection--single .select2-selection__rendered{
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+    }
+    .question .select2-container .select2-selection--single{
+      padding: 0.5rem 0;
+    }
+    .question__item > input{
+      padding: 0.5rem 0;
+    }
+    .question .select2-results__option{
+      padding: 1rem 1.4rem;
+    }
+    .question__input.half{
+      width: 100%;
+    }
+    .question .form__input label{
+      font-size: 1.6rem;
+    }
+    .question__btn .section__button{
+      margin: 0;
+      font-size: 1.6rem;
+      line-height: 1.8rem;
+    }
+    .question__btn{
+      gap:1.2rem;
+      align-items: flex-start;
+      flex-direction: column-reverse;
+    }
+    .question__site{
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .question__site span{
+      text-align: center;
+      padding: 0;
+      width: 100%;
+    }
+    .question__site .question__input{
+      max-width: 100%;
+    }
+    .question__hide .half label, .question__site .form__input label {
+      font-size: 1.4rem;
+    }
+  .site .project__top-block:last-of-type{
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    & > *{
+      margin: 0;
+    }
   }
-  .question__form,.question__hide{
-    gap:2rem;
+  .site__link{
+    justify-content: flex-start;
   }
-  .question__item.half{
-    width: 100%;
-  }
-  .question__item > input{
-    font-size: 1.4rem;
-    line-height: 1.6rem;
-  }
-  .question .select2-container--default .select2-selection--single .select2-selection__rendered{
-    font-size: 1.4rem;
-    line-height: 1.6rem;
-  }
-  .question .select2-container .select2-selection--single{
-    padding: 0.5rem 0;
-  }
-  .question__item > input{
-    padding: 0.5rem 0;
-  }
-  .question .select2-results__option{
-    padding: 1rem 1.4rem;
-  }
-  .question__input.half{
-    width: 100%;
-  }
-  .question .form__input label{
-    font-size: 1.6rem;
-  }
-  .question__btn .section__button{
-    margin: 0;
-    font-size: 1.6rem;
-    line-height: 1.8rem;
-  }
-  .question__btn{
-    gap:1.2rem;
-    align-items: flex-start;
-    flex-direction: column-reverse;
-  }
-  .question__site{
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .question__site span{
-    text-align: center;
-    padding: 0;
-    width: 100%;
-  }
-  .question__site .question__input{
-    max-width: 100%;
-  }
-  .question__hide .half label, .question__site .form__input label {
-    font-size: 1.4rem;
-  }
+
 }

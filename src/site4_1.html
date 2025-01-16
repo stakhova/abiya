@@ -1,0 +1,131 @@
+//= partials/head.html
+
+<div class="wrap ">
+    //= partials/header.html
+
+    <div class="wrap__main">
+        <section class="project project__wrap site overview " data-role="">
+            <div class="container">
+                <div class="project__top">
+                    <div class="project__top-block">
+                        <div class="project__top-icon img">
+                            <img src="../img/site/tops.svg" alt="">
+                        </div>
+                        <h3 class="project__top-title">Project: Name <br>1.2. Progress. Site Progress</h3>
+                    </div>
+                    <div class="project__top-block ">
+
+                        <div class="project__percent"><span></span>%</div>
+                    </div>
+                </div>
+                <div class="project__progress">
+                    <div class="project__progress-bar">
+                    </div>
+                </div>
+                <div class="site__link">
+                    <a href="" class="project__top-link" >Add new Row</a>
+                </div>
+
+                <div class="calendar__block">
+                    <div class="tab">
+                        <div class="tab__header ">
+                            <button class="tab__header-item">Overall Progress</button>
+                            <button class="tab__header-item">Living room</button>
+                            <button class="tab__header-item">Bedroom</button>
+                            <button class="tab__header-item">Kitchen</button>
+                        </div>
+                    </div>
+                    <div class="tab__content ">
+                        <div class="tab__content-item">
+
+                            <canvas id="myChart"></canvas>                        </div>
+                        <div class="tab__content-item">
+
+                            <canvas class="chart" data-chart='{"data": [6500, 6500, 6500, 6500]}'></canvas>
+                            <canvas class="chart" data-chart='{"data": [6500, 6500, 6500, 6500]}'></canvas>
+                            <div class="chart__list">
+                                <div class="chart__item">
+                                    <h3>Receivables & Progress </h3>
+                                    <div class="chart__line">
+
+                                        <canvas id="chart__line"
+                                                data-labels="[0, 1, 2, 3]"
+                                                data-datasets='[
+                                                    {"label": "Receivables", "data": [20, 100, 25, 50], "backgroundColor": "#B3A384"},
+                                                    {"label": "Progress", "data": [10, 35, 0, 40], "backgroundColor": "#564073"}
+                                                ]'>
+                                        </canvas>
+
+                                    </div>
+                                </div>
+                                <div class="chart__item">
+                                    <h3>Receivables</h3>
+                                    <div id="chart1" class="chart__bar" data-attr="10,20,30,40,50" data-labels="title 1,title 2,title 3,title 4,title 5" data-canvas-id="barChart1"  data-bg-colors="#564073,#C4BCCE,#B3A384 ,#E9E4DB"></div>
+                                    <canvas id="barChart1" width="400" height="200"></canvas>
+                                </div>
+                                <div class="chart__item">
+                                    <h3>Payables</h3>
+                                    <div id="chart2" class="chart__bar" data-attr="15,25,35,45,55" data-labels="title 1,title 2,title 3,title 4,title 5" data-canvas-id="barChart2" data-bg-colors="#564073,#C4BCCE,#B3A384 ,#E9E4DB"></div>
+                                    <canvas id="barChart2" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                        <div class="tab__content-item">
+
+                           3
+                        </div>
+                        <div class="tab__content-item">
+
+                           4
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </section>
+    </div>
+</div>
+
+//= partials/scripts.html
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarContainers = document.querySelectorAll('.calendar');
+        const currentYear = new Date().getFullYear();
+
+        calendarContainers.forEach(container => {
+            for (let month = 0; month < 12; month++) {
+                const calendarDiv = document.createElement('div');
+                calendarDiv.className = 'month-calendar';
+
+                const title = document.createElement('h3');
+                title.textContent = new Date(currentYear, month).toLocaleString('uk-UA', { month: 'long' });
+
+                const calendarEl = document.createElement('div');
+                calendarDiv.appendChild(title);
+                calendarDiv.appendChild(calendarEl);
+                container.appendChild(calendarDiv);
+
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialDate: `${currentYear}-${String(month + 1).padStart(2, '0')}-01`,
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: '',
+                        center: '',
+                        right: ''
+                    }
+                });
+
+                calendar.render();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

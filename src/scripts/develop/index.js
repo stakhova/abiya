@@ -477,6 +477,8 @@ function updateFileListDisplay(fileList) {
 
         let listItem = $(`<div class="form__file-item"><h3>Uploaded ${fileName}</h3></div>`).append(deleteButton);
         fileListContainer.append(listItem);
+
+        console.log(1234, fileListContainer)
     });
 }
 
@@ -1102,7 +1104,12 @@ function uploadAndDeleteFiles() {
     $('.file__input').on('change', function () {
         console.log(5656)
         let files = $(this)[0].files;
-        list = $(this).closest('.form').find('.file__list');
+        // list = $(this).closest('.form').find('.file__list');
+        list = $(this).closest('.form__file').find('.file__list');
+
+        // if(list.closest('.form').hasClass('.form__photo')){
+        //     list = $(this).closest('.form__file').find('.file__list');
+        // }
         for (let i = 0; i < files.length; i++) {
             uploadFile(files[i]);
         }
@@ -1310,7 +1317,6 @@ $(document).ready(function () {
     $('.file-input').on('change', function (event) {
         let fileList = event.target.files;
         console.log(1111111155555)
-
         updateFileListDisplay(fileList);
     });
 

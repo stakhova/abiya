@@ -139,6 +139,10 @@ function  openModalAppend(button){
     $('.modal [name="id"]').val(id)
     $('.modal [name="notes"]').val(text)
 
+    let srcCurrent = button.closest('.photo__item-img').find('img').attr('src')
+    $('.modal__photo-img img').attr('src',srcCurrent)
+    console.log(1212, srcCurrent)
+
 }
 function openModal(btn, modal) {
 
@@ -147,6 +151,15 @@ function openModal(btn, modal) {
         openModalAppend(button)
         modal.show();
         $('body').css('overflow', 'hidden');
+        return false;
+    });
+
+
+
+    $('.close').click(function () {
+        $(this).closest(modal).hide();
+        $('body').css('overflow', 'visible');
+        resetModal();
         return false;
     });
     $('.modal__close').click(function () {
@@ -177,10 +190,136 @@ function openModal(btn, modal) {
     });
 }
 
+function closeModal(form){
+    form.closest('.modal').hide();
+    $('body').css('overflow', 'visible');
+    resetModal();
+}
+
+
+function spline() {
+    const ctxList = document.querySelectorAll('.chart');
+
+    ctxList.forEach(ctx => {
+        // Get chart data from the data-chart attribute and parse it
+        const chartData = JSON.parse(ctx.getAttribute('data-chart'));
+
+        // Construct the dataset for the Chart.js instance
+        const data = {
+            labels: ['Project Value', 'Material Cost', 'Labour Cost', 'Misc. Cost'],
+            datasets: [{
+                label: 'My Dataset',
+                data: chartData.data,
+                backgroundColor: ['#564073', '#C4BCCE', '#EDE8E0', '#B3A384'],
+                hoverOffset: 4
+            }]
+        };
+
+        // Initialize the chart
+        new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                        // position: 'right',
+                    }
+                }
+            }
+        });
+    });
+    const canvas = document.getElementById('chart__line');
+
+    const labels = JSON.parse(canvas.getAttribute('data-labels'));
+    const datasets = JSON.parse(canvas.getAttribute('data-datasets'));
+
+    const ctx = canvas.getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets.map(dataset => ({
+                label: dataset.label,
+                data: dataset.data,
+                backgroundColor: dataset.backgroundColor,
+                borderWidth: 2,
+                fill: false
+            }))
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 10,
+                        min: 0
+                    }
+                },
+                x: {
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+
+    // Bar Chart
+    document.querySelectorAll('.chart__bar').forEach(function (chartDiv) {
+        // Extract data from data-attr and labels
+        let data = chartDiv.getAttribute('data-attr').split(',');
+        let labels = chartDiv.getAttribute('data-labels').split(',');
+        let canvasId = chartDiv.getAttribute('data-canvas-id');
+        var bgColors = chartDiv.getAttribute('data-bg-colors').split(',');
+        // Get the corresponding canvas
+        let ctx = document.getElementById(canvasId).getContext('2d');
+
+        // Create a bar chart using Chart.js
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Dataset for ' + canvasId,
+                    data: data.map(Number),
+                    backgroundColor: bgColors,
+                    borderColor: bgColors.map(color => color.replace('0.2', '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    });
+}
+
+
 
 
 $(document).ready(function () {
     openModal($('.change__data'), $('.modal__change'));
+    openModal($('.photo__add'), $('.modal__change'));
+    openModal($('.photo__resize'), $('.modal__photo'));
 
     changeSelect('location')
     changeSelect('request')
@@ -192,19 +331,45 @@ $(document).ready(function () {
     clearForm()
     tab()
     changeNewTable()
-
-    let formChange = $('.form__change');
-
-    console.log(formChange)
+    let formChange = $('.form__change-note');
     validateForm(formChange, function () {
         ajaxSend(formChange, function (res) {
             currentNotes = $('.modal [name="notes"]').val()
             currentChange.text(currentNotes)
+            closeModal(formChange)
         }, function (error) {
 
             currentNotes = $('.modal [name="notes"]').val()
             currentChange.text(currentNotes)
-        }, 1);
+            closeModal(formChange)
+        });
+    }, 1);
+
+
+    submitFormDataProject('.form__photo');
+
+    spline()
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["08 Jan",	"08 Jan",	"08 Jan",	"Shanghai",	"08 Jan",	"08 Jan",	"08 Jan"],
+            datasets: [{
+                label: 'Series 1', // Name the series
+                data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811], // Specify the data values array
+                fill: false,
+                borderColor: '#2196f3', // Add custom color border (Line)
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                borderWidth: 1 // Specify bar border width
+            }]},
+        options: {
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+        }
     });
+
 
 })

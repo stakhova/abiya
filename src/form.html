@@ -69,17 +69,32 @@
 
                             <div class="question__hide-wrap">
                                 <div class="question__item question__hide question__hide-gap" data-factory-hide="CNC">
-                                    <div class="form__input question__input half">
+                                    <div class="form__input question__input half search__show">
                                         <label >Total Machines used</label>
-                                        <input type="text" name="total_machines_used" placeholder="Text here">
+                                        <select name="total_machines_used" class="question__select" data-placeholder="Select option">
+                                            <option value=""></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
                                     </div>
-                                    <div class="form__input question__input half">
+                                    <div class="form__input question__input half search__show" >
                                         <label>Total Sheets cut</label>
-                                        <input type="text" name="total_sheets_cut" placeholder="Text here">
+                                        <select name="total_sheets_cut" class="question__select" data-placeholder="Select option">
+                                            <option value=""></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
                                     </div>
-                                    <div class="form__input question__input half">
+                                    <div class="form__input question__input half search__show">
                                         <label>Total SQM</label>
-                                        <input  type="text" type="total_sqm" placeholder="Text here" >
+                                        <select name="total_sqm" class="question__select" data-placeholder="Select option">
+                                            <option value=""></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
                                     </div>
 
                                 </div>
@@ -151,15 +166,28 @@
                                 </select>
                             </div>
                             <div class="question__site">
-                                <div class="form__input question__input ">
-                                    <label>Add number </label>
-                                    <input type="text" name="site_number" placeholder="Text here">
+
+                                <div class="form__input question__input half search__show">
+                                    <label>Add number</label>
+                                    <select name="site_number" class="question__select" data-placeholder="Select option">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
                                 </div>
-                                <span>and</span>
-                                <div class="form__input question__input ">
+                                <div class="form__input question__input half search__show">
                                     <label>Add square meters</label>
-                                    <input type="text" name="square_meters" placeholder="Text here">
+                                    <select name="square_meters" class="question__select" data-placeholder="Select option">
+                                        <option value=""></option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
                                 </div>
+
+
+
                             </div>
                         </div>
                         <div class="question__item form__input">
@@ -234,26 +262,26 @@
                         </div>
 
                         <div class="question__item form__input ">
-                            <label class="label__small">Upload files</label>
+                            <label class="label__small">Upload 3x images of Installed Items - from close distance and from far.</label>
                             <div class="form__file">
                                 <ul class="form__file-list file__list">
 
                                 </ul>
                                 <div class="form__file-upload">
-                                    <label for="fileInput"><img src="../img/upload.svg" alt="">Upload the file</label>
-                                    <input type="file" name="file" multiple=""   class="file__input" id="fileInput">
+                                    <label for="fileInput1"><img src="../img/upload.svg" alt="">Upload the file</label>
+                                    <input type="file" name="file" multiple=""   class="file__input" id="fileInput1">
                                 </div>
                             </div>
                         </div>
                         <div class="question__item form__input ">
-                            <label class="label__small">Upload files</label>
+                            <label class="label__small">Upload photo of Installed Area in Drawing in Green Colour</label>
                             <div class="form__file">
                                 <ul class="form__file-list file__list">
 
                                 </ul>
                                 <div class="form__file-upload">
-                                    <label for="fileInput"><img src="../img/upload.svg" alt="">Upload the file</label>
-                                    <input type="file" name="file" multiple=""   class="file__input" id="fileInput">
+                                    <label for="fileInput2"><img src="../img/upload.svg" alt="">Upload the file</label>
+                                    <input type="file" name="file" multiple=""   class="file__input" id="fileInput2">
                                 </div>
                             </div>
                         </div>

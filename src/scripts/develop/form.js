@@ -122,7 +122,8 @@ function formSubmit() {
 function initSelectForm(){
     $('.question__select').each(function () {
         $(this).select2({
-            dropdownParent: $(this).closest('.question__item')
+            dropdownParent: $(this).closest('.question__item'),
+
         });
     });
 }

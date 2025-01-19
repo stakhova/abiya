@@ -321,7 +321,7 @@ $(document).ready(function () {
     openModal($('.change__data'), $('.modal__change'));
     openModal($('.photo__add'), $('.modal__change'));
     openModal($('.photo__resize'), $('.modal__photo'));
-
+    // openModal($('.site .project__clarify-delete '), $('.modal__photo-delete'))
     changeSelect('location')
     changeSelect('request')
     changeSelect('delay')

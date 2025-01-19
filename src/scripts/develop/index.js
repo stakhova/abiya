@@ -961,6 +961,8 @@ function addMoreFile() {
 
 function deleteFileFromModal(btn, content) {
     $(document).on('click', btn, function () {
+
+        console.log(1111111156, $(this))
         $(this).closest('.modal__content').hide();
         content.show();
         let item = $(this).closest('.project__clarify-flex');

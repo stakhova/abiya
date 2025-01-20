@@ -13,6 +13,20 @@
 }
 
 @font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/Inter-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
     font-family: "RozhaOne";
     src: url("../fonts/RozhaOne-Regular.woff") format("woff");
     font-weight: 400;
@@ -54,6 +68,7 @@
     --Arimo:'Arimo', sans-serif;
     --RozhaOne:'RozhaOne', sans-serif;
     --Poppins:'Poppins', sans-serif;
+    --Inter:'Inter', sans-serif;
 }
 
 *, *:before,

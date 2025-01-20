@@ -430,26 +430,163 @@
 
     }
   }
+}
+
+.calendar__block{
+  margin-top: 3.2rem;
+}
+.day__desc{
+  display: flex;
+  gap:4rem;
+  align-items: center;
+  margin: 4rem 0 2.4rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
 
 }
+
+.day__desc::-webkit-scrollbar {
+  background-color: transparent;
+  height: 0.2rem;
+  border-radius: 0.8rem;
+}
+
+.day__desc::-webkit-scrollbar-thumb {
+  background-color: var(--color-violet);
+  border-radius: 0.8rem;
+}
+
+.day__desc-item{
+  display: flex;
+  gap:0.8rem;
+  align-items: center;
+
+  span{
+    width: 4rem;
+    height: 4rem;
+    display: block;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    font: 600 1.4rem / 2rem var(--Inter) ;
+    border-radius: 50%;
+  }
+  h3{
+    font: 400 1.4rem / 1.6rem var(--Arimo) ;
+    white-space: nowrap;
+  }
+  &.work{
+    span{
+      color:white;
+      background-color:#564073 ;
+    }
+    //span:after{
+    //
+    //}
+  }
+  &.engineers{
+    span{
+      background: #56407326;
+    }
+    span:before{
+      content: '';
+      position: absolute;
+      bottom: 0.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: #564073;
+    }
+  }
+}
+
+
 .year-view {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 місяці в рядок */
-  gap: 10px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.2rem 8rem ;
+  padding: 2.4rem;
+  border-radius: 0.8rem;
+  border:0.1rem solid #F2F4F7;
+  box-shadow: 0px 8px 8px -4px #10182808;
+  box-shadow: 0px 20px 24px -4px #10182814;
+}
+
+
+.fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th{
+  border: none;
 }
 .month-calendar {
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 5px;
   overflow: hidden;
 }
 .month-calendar h3 {
   text-align: center;
-  margin: 10px 0;
-  font-size: 1.2em;
+  margin: 0 0 1.2rem;
+  font: 600 1.6rem / 2.4rem var(--Inter) ;
 }
+.fc .fc-col-header-cell-cushion{
+  font: 400 1.4rem / 2rem var(--Inter) ;
+  text-align: center;
+  text-transform: capitalize;
+}
+.fc .fc-daygrid-day-number{
+  font: 400 1.4rem / 2rem var(--Inter) ;
+  text-align: center;
+  padding: 1rem 0;
+}
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: transparent;
+}
+.fc .fc-daygrid-day-top{
+  justify-content: center;
+}
+.fc-daygrid-day-events{
+  display: none;
+}
+.fc-day-other{
+  opacity: 0;
+}
+.day__custom{
+  position: relative;
+  &:after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+  }
+}
+.day__work{
+  color:white;
+  &:after{
+    background-color: #564073;
+  }
+}
+.day__engineers:after{
+  background: #56407326;
+}
+.day__engineers:before{
+  content: '';
+  position: absolute;
+  bottom: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #564073;
+}
+
+
 .month-calendar .fc {
-  margin: 5px;
+  margin: 0;
 }
 .change__data{
   cursor: pointer;
@@ -624,8 +761,14 @@ font-size: 2rem;
     border-right: 0.1rem solid #D9D1C1;
   }
 }
+.site .tab__header-items{
+  display: flex;
+  width: 100%;
+}
+
 .site .tab__header-item {
   border: 0.1rem solid #D9D1C1;
+  font: 400 2rem / 2.8rem 'RozhaOne';
 }
 
 .site .project__top-title{
@@ -648,6 +791,9 @@ font-size: 2rem;
 
 }
 
+.nav-button{
+  display: none;
+}
 
 
 @media only screen and (max-width: 666px) {
@@ -806,5 +952,105 @@ font-size: 2rem;
   .site .site__wrap .project__clarify-text{
     font-size: 1.4rem;
     line-height:normal;
+  }
+
+  .year-view {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .month-calendar {
+    margin-bottom: 2.4rem;
+  }
+  .button__wrap{
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-button{
+    font: 700 1.2rem / 1.6rem var(--Arimo);
+
+    text-decoration: underline;
+    color:#B3A384;
+  }
+  .nav-button.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .year-view{
+    box-shadow: unset;
+    padding: 0;
+    border: none;
+  }
+  .nav-button{
+    display: block;
+  }
+  .site .tab__header-item{
+    display: none;
+    width: 100%;
+    border: none;
+    padding: 0 1.6rem;
+    background-color: transparent;
+    &:after{
+      display: none;
+    }
+    &.active{
+      display: block;
+    }
+  }
+  .tab__header{
+    background: #ECE8E0;
+    padding: 1.6rem;
+
+  }
+  .site .tab__header-item:not(:last-child){
+    border: none;
+  }
+  .nav-button-tab{
+    width: 3.2rem;
+    min-width: 3.2rem;
+    height: 3.2rem;
+    background-color: #B3A384;
+    border-radius: 50%;
+    position: relative;
+    &:after{
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform:translate(-50%,-50%);
+      width: 1.6rem;
+      height: 1.6rem;
+      background: url("../img/arr-next.svg") center/1.6rem 1.6rem no-repeat;
+    }
+    &.prev-tab:after{
+      transform:translate(-50%,-50%) rotate(-180deg);
+    }
+  }
+  .day__desc-item span{
+    min-width: 3.2rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    padding: 0.6rem 0;
+    font-size: 1.2rem;
+  }
+  .day__desc-item.engineers span:before{
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+  .day__desc{
+    margin: 0 -1.6rem 1rem;
+  }
+  .site .tab__header{
+    margin-bottom: 1.2rem;
+  }
+  .day__desc-item:first-of-type{
+    padding-left: 1.6rem;
+  }
+  .calendar__block{
+    margin-top: 0;
+  }
+  .month-calendar{
+   margin: 0;
   }
 }

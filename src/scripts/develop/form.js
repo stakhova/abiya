@@ -15,11 +15,72 @@ function clearForm() {
     });
 }
 
+// function tab() {
+//     $(".tab__header-item").click(function () {
+//         $(".tab__header-item").removeClass("active").eq($(this).index()).addClass("active");
+//         $(".tab__content-item").hide().eq($(this).index()).fadeIn();
+//
+//         if (window.innerWidth <= 666) {
+//             calendarFullMobile()
+//         } else{
+//             calendarFull()
+//         }
+//     }).eq(0).addClass("active");
+// }
+
 function tab() {
-    $(".tab__header-item").click(function () {
-        $(".tab__header-item").removeClass("active").eq($(this).index()).addClass("active");
-        $(".tab__content-item").hide().eq($(this).index()).fadeIn();
-    }).eq(0).addClass("active");
+    const tabItems = document.querySelectorAll(".tab__header-item");
+    const contentItems = document.querySelectorAll(".tab__content-item");
+    const prevButton = document.querySelector(".nav-button-tab.prev-tab");
+    const nextButton = document.querySelector(".nav-button-tab.next-tab");
+
+    let currentIndex = 0;
+
+    // Function to update tabs
+    const updateTabs = (index) => {
+        tabItems.forEach((item, i) => {
+            item.classList.toggle("active", i === index);
+        });
+        contentItems.forEach((item, i) => {
+            item.style.display = i === index ? "block" : "none";
+        });
+
+        // Enable/Disable navigation buttons
+        prevButton.disabled = index === 0;
+        nextButton.disabled = index === tabItems.length - 1;
+
+        // Render the calendar based on the screen width
+        if (window.innerWidth <= 666) {
+            calendarFullMobile();
+        } else {
+            calendarFull();
+        }
+    };
+
+    // Event listener for tab click (desktop)
+    tabItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+            currentIndex = index;
+            updateTabs(currentIndex);
+        });
+    });
+
+    // Event listeners for mobile navigation
+    prevButton.addEventListener("click", () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateTabs(currentIndex);
+        }
+    });
+
+    nextButton.addEventListener("click", () => {
+        if (currentIndex < tabItems.length - 1) {
+            currentIndex++;
+            updateTabs(currentIndex);
+        }
+    });
+
+    updateTabs(currentIndex);
 }
 
 
@@ -315,6 +376,203 @@ function spline() {
 }
 
 
+function formatDateCalendar(dateStr) {
+    const [day, month, year] = dateStr.split('/');
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
+
+
+
+function calendarFull() {
+    const calendarContainers = document.querySelectorAll('.calendar');
+    const currentYear = new Date().getFullYear();
+
+    calendarContainers.forEach((container, index) => {
+        container.innerHTML = ''; // Очищуємо попередній вміст
+
+        for (let month = 0; month < 12; month++) {
+            const calendarDiv = document.createElement('div');
+            calendarDiv.className = 'month-calendar';
+
+            // Додаємо місяць і рік до заголовка
+            const title = document.createElement('h3');
+            title.textContent = new Date(currentYear, month).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+            const calendarEl = document.createElement('div');
+            calendarDiv.appendChild(title);
+            calendarDiv.appendChild(calendarEl);
+            container.appendChild(calendarDiv);
+
+            // Отримуємо дані для вкладки
+            const tabData = days[index];
+            const workDates = tabData ? tabData.daysWork.map(formatDateCalendar) : [];
+            const engineersDates = tabData ? tabData.daysEngineers.map(formatDateCalendar) : [];
+
+            // Ініціалізуємо FullCalendar
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'en',
+                initialDate: `${currentYear}-${String(month + 1).padStart(2, '0')}-01`,
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: '',
+                    center: '',
+                    right: ''
+                },
+                firstDay: 1,
+                height: 'auto',
+                contentHeight: 'auto',
+                dayHeaderFormat: { weekday: 'short' },
+                dayHeaderContent: (args) => args.text.substring(0, 2),
+                dayCellDidMount: (info) => {
+                    const dateStr = info.date.toISOString().split('T')[0]; // Формат дати YYYY-MM-DD
+                    const localDateStr = new Date(info.date.getTime() - info.date.getTimezoneOffset() * 60000)
+                        .toISOString()
+                        .split('T')[0]; // Конвертуємо в локальний час
+
+                    // Додаємо клас для робочих днів
+                    if (workDates.includes(localDateStr)) {
+                        info.el.classList.add('day__custom', 'day__work');
+                    }
+
+                    // Додаємо клас для днів інженерів
+                    if (engineersDates.includes(localDateStr)) {
+                        info.el.classList.add('day__custom', 'day__engineers');
+                    }
+                }
+            });
+
+            calendar.render();
+        }
+    });
+}
+
+
+function calendarFullMobile() {
+    const calendarContainers = document.querySelectorAll('.calendar');
+    const currentYear = new Date().getFullYear();
+    const monthsPerView = 2; // Number of months to show at a time
+
+    calendarContainers.forEach((container, index) => {
+        container.innerHTML = ''; // Clear previous content
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'calendar-wrapper';
+        container.appendChild(wrapper);
+
+        let currentStartMonth = 0;
+
+        const renderMonths = () => {
+            wrapper.innerHTML = '';
+
+            for (let i = 0; i < monthsPerView; i++) {
+                const month = currentStartMonth + i;
+
+                if (month >= 12) break;
+
+                const calendarDiv = document.createElement('div');
+                calendarDiv.className = 'month-calendar';
+
+
+                const title = document.createElement('h3');
+                title.textContent = new Date(currentYear, month).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+                const calendarEl = document.createElement('div');
+                calendarDiv.appendChild(title);
+                calendarDiv.appendChild(calendarEl);
+                wrapper.appendChild(calendarDiv);
+
+
+                const tabData = days[index];
+                const workDates = tabData ? tabData.daysWork.map(formatDateCalendar) : [];
+                const engineersDates = tabData ? tabData.daysEngineers.map(formatDateCalendar) : [];
+
+
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    locale: 'en',
+                    initialDate: `${currentYear}-${String(month + 1).padStart(2, '0')}-01`,
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: '',
+                        center: '',
+                        right: ''
+                    },
+                    firstDay: 1,
+                    height: 'auto',
+                    contentHeight: 'auto',
+                    dayHeaderFormat: { weekday: 'short' },
+                    dayHeaderContent: (args) => args.text.substring(0, 2),
+                    dayCellDidMount: (info) => {
+                        const localDateStr = new Date(info.date.getTime() - info.date.getTimezoneOffset() * 60000)
+                            .toISOString()
+                            .split('T')[0];
+
+
+                        if (workDates.includes(localDateStr)) {
+                            info.el.classList.add('day__custom', 'day__work');
+                        }
+
+                        if (engineersDates.includes(localDateStr)) {
+                            info.el.classList.add('day__custom', 'day__engineers');
+                        }
+                    }
+                });
+
+                calendar.render();
+            }
+        };
+
+
+        const navPrev = document.createElement('button');
+        navPrev.textContent = 'Previous';
+        navPrev.className = 'nav-button prev';
+
+        const navNext = document.createElement('button');
+        navNext.textContent = 'Next';
+        navNext.className = 'nav-button next';
+
+        const updateButtonState = () => {
+            navPrev.classList.toggle('disabled', currentStartMonth === 0);
+            navNext.classList.toggle('disabled', currentStartMonth >= 12 - monthsPerView);
+        };
+
+        navPrev.addEventListener('click', (event) => {
+            event.preventDefault(); // Забороняє стандартну поведінку кнопки
+            const scrollTop = window.scrollY; // Зберігає поточну позицію прокрутки
+
+            if (currentStartMonth > 0) {
+                currentStartMonth = Math.max(0, currentStartMonth - monthsPerView);
+                renderMonths();
+                updateButtonState();
+            }
+
+            window.scrollTo(0, scrollTop); // Відновлює позицію прокрутки
+        });
+
+        navNext.addEventListener('click', (event) => {
+            event.preventDefault();
+            const scrollTop = window.scrollY;
+
+            if (currentStartMonth < 12 - monthsPerView) {
+                currentStartMonth = Math.min(12 - monthsPerView, currentStartMonth + monthsPerView);
+                renderMonths();
+                updateButtonState();
+            }
+
+            window.scrollTo(0, scrollTop);
+        });
+
+        renderMonths();
+        updateButtonState();
+
+
+        const buttonWrap = document.createElement('div');
+        buttonWrap.className = 'button__wrap';
+        buttonWrap.appendChild(navPrev);
+        buttonWrap.appendChild(navNext);
+
+        container.appendChild(buttonWrap);
+    });
+}
 
 
 $(document).ready(function () {
@@ -330,6 +588,11 @@ $(document).ready(function () {
     initSelectForm()
     formSubmit()
     clearForm()
+    if (window.innerWidth <= 666) {
+        calendarFullMobile()
+    } else{
+        calendarFull()
+    }
     tab()
     changeNewTable()
     let formChange = $('.form__change-note');
@@ -349,28 +612,28 @@ $(document).ready(function () {
 
     submitFormDataProject('.form__photo');
 
-    spline()
-
-    var ctx = document.getElementById("myChart").getContext('2d');
-
-
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["08 Jan",	"08 Jan",	"08 Jan",	"Shanghai",	"08 Jan",	"08 Jan",	"08 Jan"],
-            datasets: [{
-                label: 'Series 1', // Name the series
-                data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811], // Specify the data values array
-                fill: false,
-                borderColor: '#2196f3', // Add custom color border (Line)
-                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-                borderWidth: 1 // Specify bar border width
-            }]},
-        options: {
-            responsive: true, // Instruct chart js to respond nicely.
-            maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-        }
-    });
+    // spline()
+    //
+    // var ctx = document.getElementById("myChart").getContext('2d');
+    //
+    //
+    // var myChart = new Chart(ctx, {
+    //     type: 'line',
+    //     data: {
+    //         labels: ["08 Jan",	"08 Jan",	"08 Jan",	"Shanghai",	"08 Jan",	"08 Jan",	"08 Jan"],
+    //         datasets: [{
+    //             label: 'Series 1', // Name the series
+    //             data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811], // Specify the data values array
+    //             fill: false,
+    //             borderColor: '#2196f3', // Add custom color border (Line)
+    //             backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+    //             borderWidth: 1 // Specify bar border width
+    //         }]},
+    //     options: {
+    //         responsive: true, // Instruct chart js to respond nicely.
+    //         maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
+    //     }
+    // });
 
 
 })

@@ -4,7 +4,7 @@
     //= partials/header.html
 
     <div class="wrap__main">
-        <section class="project project__wrap site overview " data-role="">
+        <section class="project project__wrap site  " data-role="">
             <div class="container">
                 <div class="project__top">
                     <div class="project__top-block">
@@ -67,12 +67,12 @@
                                     Living room
                                 </h4>
                             </td>
-                            <td>
-                                <h4 class="project__clarify-text change__data">
+                            <td >
+                                <h4 class="project__clarify-text ">
                                     Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                 </h4>
                             </td>
-                            <td>
+                            <td class="change__data">
                                 <h4 class="project__clarify-text">
                                     Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                 </h4>
@@ -99,12 +99,12 @@
                                         Living room
                                     </h4>
                                 </td>
-                                <td>
-                                    <h4 class="project__clarify-text change__data">
+                                <td >
+                                    <h4 class="project__clarify-text ">
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td  class="change__data">
                                     <h4 class="project__clarify-text">
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
@@ -132,11 +132,11 @@
                                     </h4>
                                 </td>
                                 <td>
-                                    <h4 class="project__clarify-text change__data">
+                                    <h4 class="project__clarify-text ">
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
@@ -164,11 +164,11 @@
                                     </h4>
                                 </td>
                                 <td>
-                                    <h4 class="project__clarify-text change__data">
+                                    <h4 class="project__clarify-text ">
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
@@ -239,7 +239,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <h4 class="project__clarify-text change__data">
+                                            <h4 class="project__clarify-text ">
                                                 Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                             </h4>
                                         </td>
@@ -250,7 +250,7 @@
                                                 Action
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="change__data">
                                             <h4 class="project__clarify-text">
                                                 Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
 
@@ -319,7 +319,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <h4 class="project__clarify-text change__data">
+                                        <h4 class="project__clarify-text">
                                             Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                         </h4>
                                     </td>
@@ -330,12 +330,10 @@
                                             Action
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="change__data">
                                         <h4 class="project__clarify-text">
                                             Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
-
                                         </h4>
-
                                     </td>
                                 </tr>
                                 </tbody>
@@ -360,12 +358,12 @@
                     </div>
                     <div class="modal__overflow">
                         <form action="" class="form form__change-note">
-                            <input type="hidden" name="action" value="change__delays-notes">
-                            <input type="hidden" name="id" >
+                            <input type="hidden" name="action" value="update_delay">
+                            <input type="hidden" name="item_id" >
                             <input type="hidden" name="project_id" value="1" >
                             <div class="modal__change-input form__input">
-                                <label>Notes</label>
-                                <textarea  name="notes" ></textarea>
+                                <label>Action</label>
+                                <textarea  name="action_text" ></textarea>
                             </div>
                             <div class="modal__change-btn">
                                 <button type="button" class="close section__button section__button-secondary">Cancel</button>

@@ -4,14 +4,14 @@
     //= partials/header.html
 
     <div class="wrap__main">
-        <section class="project project__wrap site overview " data-role="">
+        <section class="project project__wrap site " data-role="">
             <div class="container">
                 <div class="project__top">
                     <div class="project__top-block">
                         <div class="project__top-icon img">
                             <img src="../img/site/tops.svg" alt="">
                         </div>
-                        <h3 class="project__top-title">Project: Name <p>1.4. Progress. Request</p></h3>
+                        <h3 class="project__top-title">Project: Name <p>1.3. Progress. Request</p></h3>
                     </div>
                     <div class="project__top-block ">
 
@@ -58,7 +58,7 @@
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Notes here...
                                     </h4>
@@ -80,7 +80,7 @@
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Notes here...
                                     </h4>
@@ -102,7 +102,7 @@
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Notes here...
                                     </h4>
@@ -124,7 +124,7 @@
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Notes here...
                                     </h4>
@@ -182,7 +182,7 @@
                                                 Action
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="change__data">
                                             <h4 class="project__clarify-text">
                                                 Notes here...
                                             </h4>
@@ -236,7 +236,7 @@
                                                 Action
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="change__data">
                                             <h4 class="project__clarify-text">
                                                 Notes here...
                                             </h4>
@@ -256,6 +256,31 @@
                 </div>
             </div>
         </section>
+        <div class="modal modal__change"  >
+            <div class="modal__wrap">
+                <div class="modal__content">
+                    <div class="modal__close img">
+                        <img src="../../img/close.svg" alt="">
+                    </div>
+                    <div class="modal__overflow">
+                        <form action="" class="form form__change-note">
+                            <input type="hidden" name="action" value="update_orders">
+                            <input type="hidden" name="item_id" >
+                            <input type="hidden" name="project_id" value="1" >
+                            <div class="modal__change-input form__input">
+                                <label>Action</label>
+                                <textarea  name="action_text" ></textarea>
+                            </div>
+                            <div class="modal__change-btn">
+                                <button type="button" class="close section__button section__button-secondary">Cancel</button>
+                                <button class="section__button ">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>

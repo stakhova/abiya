@@ -415,22 +415,20 @@
   .project__table-clarify th{
     text-align: center;
   }
+  .tab{
+    &__header{
+      display: flex;
+      & > *{
 
-}
-.overview {
-
-}
-
-
-
-.tab{
-  &__header{
-    display: flex;
-    & > *{
-
+      }
     }
   }
 }
+
+
+
+
+
 
 .calendar__block{
   margin-top: 3.2rem;
@@ -998,7 +996,7 @@ font-size: 2rem;
       display: block;
     }
   }
-  .tab__header{
+  .site .tab__header{
     background: #ECE8E0;
     padding: 1.6rem;
 
@@ -1052,5 +1050,69 @@ font-size: 2rem;
   }
   .month-calendar{
    margin: 0;
+  }
+  .photo__wrap tr:first-child td .site__wrap{
+    align-items: center;
+  }
+  .site .project__task-step{
+    padding: 1.7rem 0 ;
+  }
+  .clarify__mob-top{
+    width: 3.2rem;
+    min-width: 3.2rem;
+    height: 3.2rem;
+    background-color: #B3A384;
+    border-radius: 50%;
+    position: relative;
+  }
+  .clarify__mob-top:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.6rem;
+    height: 1.6rem;
+    background: url(../img/arr-next.svg) center / 1.6rem 1.6rem no-repeat;
+  }
+  .clarify__mob-top.prev:after {
+    transform: translate(-50%, -50%) rotate(-180deg);
+  }
+  .clarify__mob-nav-top{
+    position:absolute;
+    top: 3.8rem;
+    margin:0;
+    .prev{
+      margin-left:1.6rem;
+    }
+    .next{
+      margin-right:1.6rem;
+    }
+  }
+
+  .project__clarify-mob.background{
+    margin:0 -1.6rem;
+    .clarify__mob-wrap table{
+      border:none;
+    }
+    .clarify__mob-text{
+      color:#564073;
+      font: 400 1.4rem / 1.9rem var(--Arimo)
+    }
+    td:last-child{
+      width:50%;
+    }
+    td:first-child {
+      background-color: transparent;
+      width:50%;
+    }
+    tr:first-child {
+      background-color: #EDE8E0;
+      width:50%;
+      .clarify__mob-text{
+        color:#4B4B4B;
+        font: 400 2rem / 2.8rem var(--RozhaOne)
+      }
+    }
   }
 }

@@ -534,7 +534,7 @@ function showMobTask(table, elem, prev, next) {
     });
 }
 
-function successFormData() {}
+
 
 
 function submitFormDataProject(form) {
@@ -552,6 +552,11 @@ function submitFormDataProject(form) {
         });
 
         let fileProject = $(this).closest('.modal').find('input[type="file"]');
+
+
+        fileProject.each(function(){
+            console.log('namenamename', $(this).attr('name'))
+        })
         let messageProject = $(this).closest('.modal').find('input[name="notes"]');
         let required = false;
 
@@ -597,6 +602,8 @@ function submitFormDataProject(form) {
 
             // Remove default files and add uploaded files
             formData.forEach(function (value, key) {
+
+
                 if (key === 'file[]') {
                     formData.delete(key);
                 }
@@ -649,7 +656,16 @@ function submitFormDataProject(form) {
     });
 }
 
-// Helper function to reset the form after submission
+
+
+function tab() {
+    $(".tab__header-item").click(function () {
+        $(".tab__header-item").removeClass("active").eq($(this).index()).addClass("active");
+        $(".tab__content-item").hide().eq($(this).index()).fadeIn();
+
+    }).eq(0).addClass("active");
+}
+
 function resetForm() {
     $('body').removeClass('hidden');
     $('.form__file-list > *').remove();
@@ -1337,6 +1353,7 @@ $(document).ready(function () {
     openModalFromEmail();
     showLogOut();
     showInstruction();
+    tab()
 });
 
 $(window).load(function () {});

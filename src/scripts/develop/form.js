@@ -15,41 +15,22 @@ function clearForm() {
     });
 }
 
-// function tab() {
-//     $(".tab__header-item").click(function () {
-//         $(".tab__header-item").removeClass("active").eq($(this).index()).addClass("active");
-//         $(".tab__content-item").hide().eq($(this).index()).fadeIn();
-//
-//         if (window.innerWidth <= 666) {
-//             calendarFullMobile()
-//         } else{
-//             calendarFull()
-//         }
-//     }).eq(0).addClass("active");
-// }
 
-function tab() {
-    const tabItems = document.querySelectorAll(".tab__header-item");
-    const contentItems = document.querySelectorAll(".tab__content-item");
-    const prevButton = document.querySelector(".nav-button-tab.prev-tab");
-    const nextButton = document.querySelector(".nav-button-tab.next-tab");
-
+function tabCalendar() {
+    const $tabItems = $(".site .tab__header-item");
+    const $contentItems = $(".site .tab__content-item");
+    const $prevButton = $(".nav-button-tab.prev-tab");
+    const $nextButton = $(".nav-button-tab.next-tab");
     let currentIndex = 0;
 
-    // Function to update tabs
     const updateTabs = (index) => {
-        tabItems.forEach((item, i) => {
-            item.classList.toggle("active", i === index);
-        });
-        contentItems.forEach((item, i) => {
-            item.style.display = i === index ? "block" : "none";
-        });
+        $tabItems.removeClass("active").eq(index).addClass("active");
+        $contentItems.hide().eq(index).show();
 
-        // Enable/Disable navigation buttons
-        prevButton.disabled = index === 0;
-        nextButton.disabled = index === tabItems.length - 1;
 
-        // Render the calendar based on the screen width
+        $prevButton.prop("disabled", index === 0);
+        $nextButton.prop("disabled", index === $tabItems.length - 1);
+
         if (window.innerWidth <= 666) {
             calendarFullMobile();
         } else {
@@ -57,24 +38,21 @@ function tab() {
         }
     };
 
-    // Event listener for tab click (desktop)
-    tabItems.forEach((item, index) => {
-        item.addEventListener("click", () => {
-            currentIndex = index;
-            updateTabs(currentIndex);
-        });
+
+    $tabItems.on("click", function () {
+        currentIndex = $tabItems.index(this);
+        updateTabs(currentIndex);
     });
 
-    // Event listeners for mobile navigation
-    prevButton.addEventListener("click", () => {
+    $prevButton.on("click", function () {
         if (currentIndex > 0) {
             currentIndex--;
             updateTabs(currentIndex);
         }
     });
 
-    nextButton.addEventListener("click", () => {
-        if (currentIndex < tabItems.length - 1) {
+    $nextButton.on("click", function () {
+        if (currentIndex < $tabItems.length - 1) {
             currentIndex++;
             updateTabs(currentIndex);
         }
@@ -191,15 +169,16 @@ function initSelectForm(){
 
 
 
-let currentChange, currentNotes
+let currentChange, currentAction, currentText
 
 
 function  openModalAppend(button){
     currentChange = button
-    let id = button.closest('[data-item-id]').data('item-id')
-    let text = button.text().trim()
-    $('.modal [name="id"]').val(id)
-    $('.modal [name="notes"]').val(text)
+    currentText = button.find('.project__clarify-text')
+    let item_id = button.closest('[data-item-id]').data('item-id')
+    let text = currentText.text().trim()
+    $('.modal [name="item_id"]').val(item_id)
+    $('.modal [name="action_text"]').val(text)
 
     let srcCurrent = button.closest('.photo__item-img').find('img').attr('src')
     $('.modal__photo-img img').attr('src',srcCurrent)
@@ -593,18 +572,18 @@ $(document).ready(function () {
     } else{
         calendarFull()
     }
-    tab()
+    tabCalendar()
     changeNewTable()
     let formChange = $('.form__change-note');
     validateForm(formChange, function () {
         ajaxSend(formChange, function (res) {
-            currentNotes = $('.modal [name="notes"]').val()
-            currentChange.text(currentNotes)
+            currentAction = $('.modal [name="action_text"]').val()
+            currentText.text(currentAction)
             closeModal(formChange)
         }, function (error) {
 
-            currentNotes = $('.modal [name="notes"]').val()
-            currentChange.text(currentNotes)
+            currentAction = $('.modal [name="action_text"]').val()
+            currentText.text(currentAction)
             closeModal(formChange)
         });
     }, 1);

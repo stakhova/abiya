@@ -4,7 +4,7 @@
     //= partials/header.html
 
     <div class="wrap__main">
-        <section class="project project__wrap site overview " data-role="">
+        <section class="project project__wrap site " data-role="">
             <div class="container">
                 <div class="project__top">
                     <div class="project__top-block">
@@ -58,7 +58,7 @@
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Notes here...
                                     </h4>
@@ -80,56 +80,14 @@
                                         Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
                                     </h4>
                                 </td>
-                                <td>
+                                <td class="change__data">
                                     <h4 class="project__clarify-text">
                                         Notes here...
                                     </h4>
                                 </td>
                             </tr>
-                            <tr data-item-id="3">
-                                <td>
-                                    <h4 class="project__clarify-text ">
-                                        08/01/2024
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4 class="project__clarify-text ">
-                                        Living room
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4 class="project__clarify-text">
-                                        Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4 class="project__clarify-text">
-                                        Notes here...
-                                    </h4>
-                                </td>
-                            </tr>
-                            <tr data-item-id="4">
-                                <td>
-                                    <h4 class="project__clarify-text ">
-                                        08/01/2024
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4 class="project__clarify-text ">
-                                        Living room
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4 class="project__clarify-text">
-                                        Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero Nunc vulputate libero
-                                    </h4>
-                                </td>
-                                <td>
-                                    <h4 class="project__clarify-text">
-                                        Notes here...
-                                    </h4>
-                                </td>
-                            </tr>
+
+
 
                         </tbody>
                     </table>
@@ -182,7 +140,7 @@
                                                 Action
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="change__data">
                                             <h4 class="project__clarify-text">
                                                 Notes here...
                                             </h4>
@@ -236,7 +194,7 @@
                                                 Action
                                             </div>
                                         </td>
-                                        <td>
+                                        <td class="change__data">
                                             <h4 class="project__clarify-text">
                                                 Notes here...
                                             </h4>
@@ -256,6 +214,31 @@
                 </div>
             </div>
         </section>
+        <div class="modal modal__change"  >
+            <div class="modal__wrap">
+                <div class="modal__content">
+                    <div class="modal__close img">
+                        <img src="../../img/close.svg" alt="">
+                    </div>
+                    <div class="modal__overflow">
+                        <form action="" class="form form__change-note">
+                            <input type="hidden" name="action" value="update_request">
+                            <input type="hidden" name="item_id" >
+                            <input type="hidden" name="project_id" value="1" >
+                            <div class="modal__change-input form__input">
+                                <label>Action</label>
+                                <textarea  name="action_text" ></textarea>
+                            </div>
+                            <div class="modal__change-btn">
+                                <button type="button" class="close section__button section__button-secondary">Cancel</button>
+                                <button class="section__button ">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>

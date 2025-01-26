@@ -21,6 +21,7 @@ function tabCalendar() {
     const $contentItems = $(".site .tab__content-item");
     const $prevButton = $(".nav-button-tab.prev-tab");
     const $nextButton = $(".nav-button-tab.next-tab");
+
     let currentIndex = 0;
 
     const updateTabs = (index) => {
@@ -185,15 +186,21 @@ function  openModalAppend(button){
     console.log(1212, srcCurrent)
 
 }
-function openModal(btn, modal) {
+function openModal(modal, btn) {
 
-    btn.click(function () {
-        button = $(this);
-        openModalAppend(button)
+    if (btn) {
+        btn.click(function () {
+            const button = $(this);
+            openModalAppend(button);
+            modal.show();
+            $('body').css('overflow', 'hidden');
+            return false;
+        });
+    } else {
         modal.show();
         $('body').css('overflow', 'hidden');
-        return false;
-    });
+    }
+
 
 
 
@@ -555,10 +562,10 @@ function calendarFullMobile() {
 
 
 $(document).ready(function () {
-    openModal($('.change__data'), $('.modal__change'));
-    openModal($('.photo__add'), $('.modal__change'));
-    openModal($('.photo__resize'), $('.modal__photo'));
-    // openModal($('.site .project__clarify-delete '), $('.modal__photo-delete'))
+    openModal($('.modal__change'), $('.change__data'));
+    openModal( $('.modal__change'), $('.photo__add'));
+    openModal($('.modal__photo'),$('.photo__resize'));
+
     changeSelect('location')
     changeSelect('request')
     changeSelect('delay')

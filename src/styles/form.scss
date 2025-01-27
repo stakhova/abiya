@@ -54,6 +54,7 @@
   }
   .form__input{
     gap:0.8rem;
+    position:relative;
   }
   .question__item-radio{
     gap:1.2rem;
@@ -793,7 +794,28 @@ font-size: 2rem;
   display: none;
 }
 
+.canvas__wrap{
+  display:flex;
+  width:100%;
+}
+.canvas__item{
+  width:46.2rem;
+  height:26.4rem;
+  //width:100%;
+  //  height:100%;
+}
 
+.canvas__info{
+  display:flex;
+  flex-direction:column;
+  gap:0.8rem;
+}
+.canvas__info-title{
+  font: 700 2rem / 2.8rem var(--Arimo);
+}
+.canvas__info-item{
+  display:flex;
+}
 @media only screen and (max-width: 666px) {
 
   .question .container{

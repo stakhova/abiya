@@ -37,38 +37,99 @@
                     </div>
                     <div class="tab__content ">
                         <div class="tab__content-item">
-
-                            <canvas id="myChart"></canvas>                        </div>
-                        <div class="tab__content-item">
-
-                            <canvas class="chart" data-chart='{"data": [6500, 6500, 6500, 6500]}'></canvas>
-                            <canvas class="chart" data-chart='{"data": [6500, 6500, 6500, 6500]}'></canvas>
-                            <div class="chart__list">
-                                <div class="chart__item">
-                                    <h3>Receivables & Progress </h3>
-                                    <div class="chart__line">
-
-                                        <canvas id="chart__line"
-                                                data-labels="[0, 1, 2, 3]"
-                                                data-datasets='[
-                                                    {"label": "Receivables", "data": [20, 100, 25, 50], "backgroundColor": "#B3A384"},
-                                                    {"label": "Progress", "data": [10, 35, 0, 40], "backgroundColor": "#564073"}
-                                                ]'>
+                            <div class="canvas__table">
+                                <div class="canvas__wrap">
+                                    <div class="canvas__info">
+                                        <div class="canvas__info-title">Sheets</div>
+                                        <div class="canvas__info-item"><span>Units:</span><h3>1100</h3></div>
+                                        <div class="canvas__info-item"><span>Units:</span><h3>1100</h3></div>
+                                    </div>
+                                    <div class="canvas__item">
+                                        <canvas data-chart
+                                                id="chart1"
+                                                data-type="line"
+                                                data-labels='["08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"]'
+                                                data-data='[500, 800, 1500, 900, 1200]'
+                                                data-border-color="#B3A384"
+                                                data-background-color="#B3A384"
+                                        >
                                         </canvas>
+                                    </div>
 
+                                    <div class="canvas__item">
+                                        <canvas data-chart
+                                                data-type="line"
+                                                data-labels='["08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"]'
+                                                data-data='[500, 800, 1500, 900, 1200]'
+                                                data-border-color="#84A3B3"
+                                                data-background-color="#84A3B3">
+
+                                        </canvas>
                                     </div>
                                 </div>
-                                <div class="chart__item">
-                                    <h3>Receivables</h3>
-                                    <div id="chart1" class="chart__bar" data-attr="10,20,30,40,50" data-labels="title 1,title 2,title 3,title 4,title 5" data-canvas-id="barChart1"  data-bg-colors="#564073,#C4BCCE,#B3A384 ,#E9E4DB"></div>
-                                    <canvas id="barChart1" width="400" height="200"></canvas>
-                                </div>
-                                <div class="chart__item">
-                                    <h3>Payables</h3>
-                                    <div id="chart2" class="chart__bar" data-attr="15,25,35,45,55" data-labels="title 1,title 2,title 3,title 4,title 5" data-canvas-id="barChart2" data-bg-colors="#564073,#C4BCCE,#B3A384 ,#E9E4DB"></div>
-                                    <canvas id="barChart2" width="400" height="200"></canvas>
+                                <div class="canvas__wrap">
+                                    <div class="canvas__info">
+                                        <div class="canvas__info-title">Sheets</div>
+                                        <div class="canvas__info-item"><span>Units:</span><h3>1100</h3></div>
+                                        <div class="canvas__info-item"><span>Units:</span><h3>1100</h3></div>
+                                    </div>
+                                    <div class="canvas__item">
+                                        <canvas data-chart
+                                                data-type="line"
+                                                data-labels='["08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"]'
+                                                data-data='[500, 800, 1500, 900, 1200]'
+                                                data-border-color="#B3A384"
+                                                data-background-color="#B3A384"
+                                        >
+                                        </canvas>
+                                    </div>
+
+                                    <div class="canvas__item">
+                                        <canvas data-chart
+
+                                                data-type="line"
+                                                data-labels='["08 Jan", "09 Jan", "10 Jan", "11 Jan", "12 Jan"]'
+                                                data-data='[500, 800, 1500, 900, 1200]'
+                                                data-border-color="#84A3B3"
+                                                data-background-color="#84A3B3">
+
+                                        </canvas>
+                                    </div>
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="tab__content-item">
+
+<!--                            <canvas class="chart" data-chart='{"data": [6500, 6500, 6500, 6500]}'></canvas>-->
+<!--                            <canvas class="chart" data-chart='{"data": [6500, 6500, 6500, 6500]}'></canvas>-->
+<!--                            <div class="chart__list">-->
+<!--                                <div class="chart__item">-->
+<!--                                    <h3>Receivables & Progress </h3>-->
+<!--                                    <div class="chart__line">-->
+
+<!--                                        <canvas id="chart__line"-->
+<!--                                                data-labels="[0, 1, 2, 3]"-->
+<!--                                                data-datasets='[-->
+<!--                                                    {"label": "Receivables", "data": [20, 100, 25, 50], "backgroundColor": "#B3A384"},-->
+<!--                                                    {"label": "Progress", "data": [10, 35, 0, 40], "backgroundColor": "#564073"}-->
+<!--                                                ]'>-->
+<!--                                        </canvas>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="chart__item">-->
+<!--                                    <h3>Receivables</h3>-->
+<!--                                    <div id="chart11" class="chart__bar" data-attr="10,20,30,40,50" data-labels="title 1,title 2,title 3,title 4,title 5" data-canvas-id="barChart1"  data-bg-colors="#564073,#C4BCCE,#B3A384 ,#E9E4DB"></div>-->
+<!--                                    <canvas id="barChart1" width="400" height="200"></canvas>-->
+<!--                                </div>-->
+<!--                                <div class="chart__item">-->
+<!--                                    <h3>Payables</h3>-->
+<!--                                    <div id="chart22" class="chart__bar" data-attr="15,25,35,45,55" data-labels="title 1,title 2,title 3,title 4,title 5" data-canvas-id="barChart2" data-bg-colors="#564073,#C4BCCE,#B3A384 ,#E9E4DB"></div>-->
+<!--                                    <canvas id="barChart2" width="400" height="200"></canvas>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
 
 

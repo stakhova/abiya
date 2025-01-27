@@ -599,27 +599,93 @@ $(document).ready(function () {
     submitFormDataProject('.form__photo');
 
     // spline()
-    //
-    // var ctx = document.getElementById("myChart").getContext('2d');
-    //
-    //
-    // var myChart = new Chart(ctx, {
-    //     type: 'line',
-    //     data: {
-    //         labels: ["08 Jan",	"08 Jan",	"08 Jan",	"Shanghai",	"08 Jan",	"08 Jan",	"08 Jan"],
-    //         datasets: [{
-    //             label: 'Series 1', // Name the series
-    //             data: [500,	50,	2424,	14040,	14141,	4111,	4544,	47,	5555, 6811], // Specify the data values array
-    //             fill: false,
-    //             borderColor: '#2196f3', // Add custom color border (Line)
-    //             backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-    //             borderWidth: 1 // Specify bar border width
-    //         }]},
-    //     options: {
-    //         responsive: true, // Instruct chart js to respond nicely.
-    //         maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-    //     }
-    // });
+
+
+    console.log('CHART123',document.querySelectorAll('canvas[data-chart]'))
+    document.querySelectorAll('canvas[data-chart]').forEach((canvas) => {
+        const ctx = canvas.getContext('2d');
+
+        // Отримати дані з data-атрибутів
+        const type = canvas.dataset.type || 'line';
+        const labels = JSON.parse(canvas.dataset.labels || '[]');
+        const data = JSON.parse(canvas.dataset.data || '[]');
+        const borderColor = canvas.dataset.borderColor || '#000';
+        const backgroundColor = canvas.dataset.backgroundColor || '#000';
+
+        // Знайти максимальне значення для нормалізації
+        const maxValue = Math.max(...data);
+
+        // Нормалізувати дані до шкали 0-100
+        const normalizedData = data.map(value => (value / maxValue) * 100);
+
+        // Створити графік
+        new Chart(ctx, {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Dataset',
+                    data: normalizedData, // Нормалізовані дані
+                    fill: false,
+                    borderColor: borderColor,
+                    backgroundColor: backgroundColor,
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        ticks: {
+                            stepSize: 50, // Крок осі Y
+                            callback: function (value) {
+                                return value + '%';
+                            },
+                        },
+                        min: 0,
+                        max: 100,
+                        padding: 20, // Збільшуємо відступи знизу та зверху
+                    },
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            // Показувати оригінальні значення в tooltip
+                            label: function (context) {
+                                const originalValue = data[context.dataIndex];
+                                return `Value: ${originalValue} sqm`;
+                            },
+                        },
+                    },
+                    datalabels: {
+                        align: 'top', // Розташування тексту
+                        color: '#000', // Колір тексту
+                        font: {
+                            size: 12,
+                        },
+                        formatter: function (value, context) {
+                            // Додавання 'sqm' до оригінальних значень
+                            const originalValue = data[context.dataIndex];
+                            return `${originalValue} sqm`;
+                        },
+                        padding: 5, // Збільшити відступи між текстом та точкою
+                    },
+                },
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 10,
+                        top: 50,
+                        bottom: 50,
+                    },
+                },
+            },
+            plugins: [ChartDataLabels], // Підключення плагіну DataLabels
+        });
+    });
+
+
 
 
 })

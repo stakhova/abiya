@@ -16,6 +16,65 @@ function clearForm() {
 }
 
 
+
+function fillAreaSelect() {
+
+    if (typeof projects === 'undefined' || !projects) {
+        return;
+    }
+
+    projects = JSON.parse(projects);
+
+    $(document).on('change', '.question__item select[name="project_id"]', function () {
+        let selectedProjectId = $(this).val();
+        let selectedProject = projects.find(project => project.id == selectedProjectId);
+        let areaSelect = $('select[name="area"]');
+
+        areaSelect.empty().append('<option value="">Select area</option>');
+
+        if (selectedProject) {
+            selectedProject.areas.forEach(area => {
+                areaSelect.append(`<option value="${area.area}">${area.area}</option>`);
+            });
+        } else {
+            areaSelect.append('<option value="">No areas available</option>');
+        }
+    });
+
+
+}
+
+function initializeCanvasNavigation() {
+
+    $(".tab__content-item").each(function () {
+        const $canvasWraps = $(this).find(".canvas__wrap:not(.canvas__wrap-top)");
+        const $prevButton = $(this).find(".button__wrap .prev");
+        const $nextButton = $(this).find(".button__wrap .next");
+        let canvasIndex = 0;
+
+        const updateCanvasDisplay = () => {
+            $canvasWraps.hide().eq(canvasIndex).show();
+            $prevButton.prop("disabled", canvasIndex === 0);
+            $nextButton.prop("disabled", canvasIndex === $canvasWraps.length - 1);
+        };
+
+        updateCanvasDisplay();
+
+        $prevButton.on("click", function () {
+            if (canvasIndex > 0) {
+                canvasIndex--;
+                updateCanvasDisplay();
+            }
+        });
+
+        $nextButton.on("click", function () {
+            if (canvasIndex < $canvasWraps.length - 1) {
+                canvasIndex++;
+                updateCanvasDisplay();
+            }
+        });
+    });
+}
 function tabCalendar() {
     const $tabItems = $(".site .tab__header-item");
     const $contentItems = $(".site .tab__content-item");
@@ -24,21 +83,20 @@ function tabCalendar() {
 
     let currentIndex = 0;
 
-    const updateTabs = (index) => {
+    const updateTabs = index => {
         $tabItems.removeClass("active").eq(index).addClass("active");
         $contentItems.hide().eq(index).show();
-
 
         $prevButton.prop("disabled", index === 0);
         $nextButton.prop("disabled", index === $tabItems.length - 1);
 
         if (window.innerWidth <= 666) {
             calendarFullMobile();
+            initializeCanvasNavigation();
         } else {
             calendarFull();
         }
     };
-
 
     $tabItems.on("click", function () {
         currentIndex = $tabItems.index(this);
@@ -62,14 +120,11 @@ function tabCalendar() {
     updateTabs(currentIndex);
 }
 
-
-function changeNewTable(){
+function changeNewTable() {
     if (window.innerWidth <= 666) {
-        $('.project__top-block:last-of-type').append($('.site__link'))
+        $('.project__top-block:last-of-type').append($('.site__link'));
     }
 }
-
-
 
 function changeSelect(change) {
     $('.question__hide').each(function () {
@@ -152,39 +207,34 @@ function formSubmit() {
         if ($(this).val().trim()) {
             $(this).closest('div').removeClass('error');
         }
-        if($('div.error').length < 1){
-            $('p.error').remove()
+        if ($('div.error').length < 1) {
+            $('p.error').remove();
         }
     });
 }
 
-
-function initSelectForm(){
+function initSelectForm() {
     $('.question__select').each(function () {
         $(this).select2({
-            dropdownParent: $(this).closest('.question__item'),
+            dropdownParent: $(this).closest('.question__item')
 
         });
     });
 }
 
+let currentChange, currentAction, currentText;
 
+function openModalAppend(button) {
+    currentChange = button;
+    currentText = button.find('.project__clarify-text');
+    let item_id = button.closest('[data-item-id]').data('item-id');
+    let text = currentText.text().trim();
+    $('.modal [name="item_id"]').val(item_id);
+    $('.modal [name="action_text"]').val(text);
 
-let currentChange, currentAction, currentText
-
-
-function  openModalAppend(button){
-    currentChange = button
-    currentText = button.find('.project__clarify-text')
-    let item_id = button.closest('[data-item-id]').data('item-id')
-    let text = currentText.text().trim()
-    $('.modal [name="item_id"]').val(item_id)
-    $('.modal [name="action_text"]').val(text)
-
-    let srcCurrent = button.closest('.photo__item-img').find('img').attr('src')
-    $('.modal__photo-img img').attr('src',srcCurrent)
-    console.log(1212, srcCurrent)
-
+    let srcCurrent = button.closest('.photo__item-img').find('img').attr('src');
+    $('.modal__photo-img img').attr('src', srcCurrent);
+    console.log(1212, srcCurrent);
 }
 function openModal(modal, btn) {
 
@@ -200,9 +250,6 @@ function openModal(modal, btn) {
         modal.show();
         $('body').css('overflow', 'hidden');
     }
-
-
-
 
     $('.close').click(function () {
         $(this).closest(modal).hide();
@@ -238,104 +285,38 @@ function openModal(modal, btn) {
     });
 }
 
-function closeModal(form){
+function closeModal(form) {
     form.closest('.modal').hide();
     $('body').css('overflow', 'visible');
     resetModal();
 }
 
-
 function spline() {
-    const ctxList = document.querySelectorAll('.chart');
 
-    ctxList.forEach(ctx => {
-        // Get chart data from the data-chart attribute and parse it
-        const chartData = JSON.parse(ctx.getAttribute('data-chart'));
+    document.querySelectorAll('[data-color]').forEach(function (color) {
+        let bgColors = color.closest('[data-color]').getAttribute('data-color').split(',');
 
-        // Construct the dataset for the Chart.js instance
-        const data = {
-            labels: ['Project Value', 'Material Cost', 'Labour Cost', 'Misc. Cost'],
-            datasets: [{
-                label: 'My Dataset',
-                data: chartData.data,
-                backgroundColor: ['#564073', '#C4BCCE', '#EDE8E0', '#B3A384'],
-                hoverOffset: 4
-            }]
-        };
+        const spans = color.querySelectorAll('.analysis__desc-item span');
 
-        // Initialize the chart
-        new Chart(ctx, {
-            type: 'pie',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: false
-                        // position: 'right',
-                    }
-                }
-            }
+
+        spans.forEach((span, index) => {
+            span.style.backgroundColor = bgColors[index % bgColors.length];
         });
-    });
-    const canvas = document.getElementById('chart__line');
+    })
 
-    const labels = JSON.parse(canvas.getAttribute('data-labels'));
-    const datasets = JSON.parse(canvas.getAttribute('data-datasets'));
-
-    const ctx = canvas.getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: datasets.map(dataset => ({
-                label: dataset.label,
-                data: dataset.data,
-                backgroundColor: dataset.backgroundColor,
-                borderWidth: 2,
-                fill: false
-            }))
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'bottom'
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 10,
-                        min: 0
-                    }
-                },
-                x: {
-                    ticks: {
-                        stepSize: 1
-                    }
-                }
-            }
-        }
-    });
-
-    // Bar Chart
     document.querySelectorAll('.chart__bar').forEach(function (chartDiv) {
-        // Extract data from data-attr and labels
+
         let data = chartDiv.getAttribute('data-attr').split(',');
-        let labels = chartDiv.getAttribute('data-labels').split(',');
         let canvasId = chartDiv.getAttribute('data-canvas-id');
-        var bgColors = chartDiv.getAttribute('data-bg-colors').split(',');
-        // Get the corresponding canvas
+        let bgColors = chartDiv.closest('[data-color]').getAttribute('data-color').split(',');
+
+        console.log('bgColors',bgColors)
+
         let ctx = document.getElementById(canvasId).getContext('2d');
 
-        // Create a bar chart using Chart.js
         new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
-                labels: labels,
                 datasets: [{
                     label: 'Dataset for ' + canvasId,
                     data: data.map(Number),
@@ -345,15 +326,9 @@ function spline() {
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
                 plugins: {
                     legend: {
-                        display: true,
-                        position: 'bottom'
+                        display: false,
                     }
                 }
             }
@@ -361,13 +336,10 @@ function spline() {
     });
 }
 
-
 function formatDateCalendar(dateStr) {
     const [day, month, year] = dateStr.split('/');
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 }
-
-
 
 function calendarFull() {
     const calendarContainers = document.querySelectorAll('.calendar');
@@ -408,12 +380,10 @@ function calendarFull() {
                 height: 'auto',
                 contentHeight: 'auto',
                 dayHeaderFormat: { weekday: 'short' },
-                dayHeaderContent: (args) => args.text.substring(0, 2),
-                dayCellDidMount: (info) => {
+                dayHeaderContent: args => args.text.substring(0, 2),
+                dayCellDidMount: info => {
                     const dateStr = info.date.toISOString().split('T')[0]; // Формат дати YYYY-MM-DD
-                    const localDateStr = new Date(info.date.getTime() - info.date.getTimezoneOffset() * 60000)
-                        .toISOString()
-                        .split('T')[0]; // Конвертуємо в локальний час
+                    const localDateStr = new Date(info.date.getTime() - info.date.getTimezoneOffset() * 60000).toISOString().split('T')[0]; // Конвертуємо в локальний час
 
                     // Додаємо клас для робочих днів
                     if (workDates.includes(localDateStr)) {
@@ -431,7 +401,6 @@ function calendarFull() {
         }
     });
 }
-
 
 function calendarFullMobile() {
     const calendarContainers = document.querySelectorAll('.calendar');
@@ -458,7 +427,6 @@ function calendarFullMobile() {
                 const calendarDiv = document.createElement('div');
                 calendarDiv.className = 'month-calendar';
 
-
                 const title = document.createElement('h3');
                 title.textContent = new Date(currentYear, month).toLocaleString('en-US', { month: 'long', year: 'numeric' });
 
@@ -467,11 +435,9 @@ function calendarFullMobile() {
                 calendarDiv.appendChild(calendarEl);
                 wrapper.appendChild(calendarDiv);
 
-
                 const tabData = days[index];
                 const workDates = tabData ? tabData.daysWork.map(formatDateCalendar) : [];
                 const engineersDates = tabData ? tabData.daysEngineers.map(formatDateCalendar) : [];
-
 
                 const calendar = new FullCalendar.Calendar(calendarEl, {
                     locale: 'en',
@@ -486,12 +452,9 @@ function calendarFullMobile() {
                     height: 'auto',
                     contentHeight: 'auto',
                     dayHeaderFormat: { weekday: 'short' },
-                    dayHeaderContent: (args) => args.text.substring(0, 2),
-                    dayCellDidMount: (info) => {
-                        const localDateStr = new Date(info.date.getTime() - info.date.getTimezoneOffset() * 60000)
-                            .toISOString()
-                            .split('T')[0];
-
+                    dayHeaderContent: args => args.text.substring(0, 2),
+                    dayCellDidMount: info => {
+                        const localDateStr = new Date(info.date.getTime() - info.date.getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
                         if (workDates.includes(localDateStr)) {
                             info.el.classList.add('day__custom', 'day__work');
@@ -507,7 +470,6 @@ function calendarFullMobile() {
             }
         };
 
-
         const navPrev = document.createElement('button');
         navPrev.textContent = 'Previous';
         navPrev.className = 'nav-button prev';
@@ -521,7 +483,7 @@ function calendarFullMobile() {
             navNext.classList.toggle('disabled', currentStartMonth >= 12 - monthsPerView);
         };
 
-        navPrev.addEventListener('click', (event) => {
+        navPrev.addEventListener('click', event => {
             event.preventDefault(); // Забороняє стандартну поведінку кнопки
             const scrollTop = window.scrollY; // Зберігає поточну позицію прокрутки
 
@@ -534,7 +496,7 @@ function calendarFullMobile() {
             window.scrollTo(0, scrollTop); // Відновлює позицію прокрутки
         });
 
-        navNext.addEventListener('click', (event) => {
+        navNext.addEventListener('click', event => {
             event.preventDefault();
             const scrollTop = window.scrollY;
 
@@ -550,7 +512,6 @@ function calendarFullMobile() {
         renderMonths();
         updateButtonState();
 
-
         const buttonWrap = document.createElement('div');
         buttonWrap.className = 'button__wrap';
         buttonWrap.appendChild(navPrev);
@@ -560,77 +521,41 @@ function calendarFullMobile() {
     });
 }
 
-
-$(document).ready(function () {
-    openModal($('.modal__change'), $('.change__data'));
-    openModal( $('.modal__change'), $('.photo__add'));
-    openModal($('.modal__photo'),$('.photo__resize'));
-
-    changeSelect('location')
-    changeSelect('request')
-    changeSelect('delay')
-    changeSelect('toolbox')
-    changeSelect('factory')
-    initSelectForm()
-    formSubmit()
-    clearForm()
-    if (window.innerWidth <= 666) {
-        calendarFullMobile()
-    } else{
-        calendarFull()
-    }
-    tabCalendar()
-    changeNewTable()
-    let formChange = $('.form__change-note');
-    validateForm(formChange, function () {
-        ajaxSend(formChange, function (res) {
-            currentAction = $('.modal [name="action_text"]').val()
-            currentText.text(currentAction)
-            closeModal(formChange)
-        }, function (error) {
-
-            currentAction = $('.modal [name="action_text"]').val()
-            currentText.text(currentAction)
-            closeModal(formChange)
-        });
-    }, 1);
-
-
-    submitFormDataProject('.form__photo');
-
-    // spline()
-
-
-    console.log('CHART123',document.querySelectorAll('canvas[data-chart]'))
-    document.querySelectorAll('canvas[data-chart]').forEach((canvas) => {
+function chart() {
+    document.querySelectorAll('canvas[data-chart]').forEach(canvas => {
         const ctx = canvas.getContext('2d');
 
-        // Отримати дані з data-атрибутів
+        // Retrieve data from data attributes
         const type = canvas.dataset.type || 'line';
         const labels = JSON.parse(canvas.dataset.labels || '[]');
         const data = JSON.parse(canvas.dataset.data || '[]');
         const borderColor = canvas.dataset.borderColor || '#000';
         const backgroundColor = canvas.dataset.backgroundColor || '#000';
 
-        // Знайти максимальне значення для нормалізації
+        // Find max value for normalization
         const maxValue = Math.max(...data);
 
-        // Нормалізувати дані до шкали 0-100
-        const normalizedData = data.map(value => (value / maxValue) * 100);
+        // Normalize data to a 0-100 scale
+        const normalizedData = data.map(value => value / maxValue * 100);
 
-        // Створити графік
+        // Set font size based on screen width
+        const fontSize = window.innerWidth <= 666 ? 7 : 10;
+
+        // Create the chart
         new Chart(ctx, {
             type: type,
             data: {
                 labels: labels,
                 datasets: [{
                     label: 'Dataset',
-                    data: normalizedData, // Нормалізовані дані
+                    data: normalizedData,
                     fill: false,
                     borderColor: borderColor,
                     backgroundColor: backgroundColor,
                     borderWidth: 1,
-                }],
+                    pointRadius: 3,
+                    pointHoverRadius: 5
+                }]
             },
             options: {
                 responsive: true,
@@ -638,54 +563,117 @@ $(document).ready(function () {
                 scales: {
                     y: {
                         ticks: {
-                            stepSize: 50, // Крок осі Y
+                            stepSize: 50,
+                            font: {
+                                size: fontSize
+                            },
                             callback: function (value) {
                                 return value + '%';
-                            },
+                            }
+                        },
+                        grid: {
+                            borderDash: [5, 5],
+                            color: '#cccccc'
                         },
                         min: 0,
-                        max: 100,
-                        padding: 20, // Збільшуємо відступи знизу та зверху
+                        max: 100
                     },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: fontSize
+                            }
+                        },
+                        grid: {
+                            borderDash: [5, 5],
+                            color: '#cccccc'
+                        }
+                    }
                 },
                 plugins: {
+                    legend: {
+                        display: false
+                    },
                     tooltip: {
+                        titleFont: {
+                            size: fontSize
+                        },
+                        bodyFont: {
+                            size: fontSize
+                        },
                         callbacks: {
-                            // Показувати оригінальні значення в tooltip
                             label: function (context) {
                                 const originalValue = data[context.dataIndex];
-                                return `Value: ${originalValue} sqm`;
-                            },
-                        },
+                                return `Value: ${originalValue}`;
+                            }
+                        }
                     },
                     datalabels: {
-                        align: 'top', // Розташування тексту
-                        color: '#000', // Колір тексту
+                        align: 'top',
+                        color: '#000',
                         font: {
-                            size: 12,
+                            size: fontSize
                         },
                         formatter: function (value, context) {
-                            // Додавання 'sqm' до оригінальних значень
                             const originalValue = data[context.dataIndex];
-                            return `${originalValue} sqm`;
+                            return `${originalValue}`;
                         },
-                        padding: 5, // Збільшити відступи між текстом та точкою
-                    },
+                        padding: 5
+                    }
                 },
                 layout: {
                     padding: {
                         left: 10,
                         right: 10,
-                        top: 50,
-                        bottom: 50,
-                    },
-                },
+                        top: 20,
+                        bottom: 20
+                    }
+                }
             },
-            plugins: [ChartDataLabels], // Підключення плагіну DataLabels
+            plugins: [ChartDataLabels]
         });
     });
+}
+$(document).ready(function () {
+    openModal($('.modal__change'), $('.change__data'));
+    openModal($('.modal__change'), $('.photo__add'));
+    openModal($('.modal__photo'), $('.photo__resize'));
 
+    changeSelect('location');
+    changeSelect('request');
+    changeSelect('delay');
+    changeSelect('toolbox');
+    changeSelect('factory');
+    initSelectForm();
+    formSubmit();
+    clearForm();
+    if (window.innerWidth <= 666) {
+        calendarFullMobile();
+    } else {
+        calendarFull();
+    }
+    tabCalendar();
+    changeNewTable();
+    let formChange = $('.form__change-note');
+    validateForm(formChange, function () {
+        ajaxSend(formChange, function (res) {
+            currentAction = $('.modal [name="action_text"]').val();
+            currentText.text(currentAction);
+            closeModal(formChange);
+        }, function (error) {
 
+            currentAction = $('.modal [name="action_text"]').val();
+            currentText.text(currentAction);
+            closeModal(formChange);
+        });
+    }, 1);
 
+    chart();
+    submitFormDataProject('.form__photo');
 
-})
+    spline()
+    fillAreaSelect()
+
+    console.log('CHART123', document.querySelectorAll('canvas[data-chart]'));
+});
+//# sourceMappingURL=form.js.map

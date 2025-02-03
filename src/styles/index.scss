@@ -1782,6 +1782,14 @@ input:-webkit-autofill:focus {
   display: flex;
   align-items: center;
 }
+.project__link-wrap a:last-child{
+  display: none;
+}
+
+.site .project__table{
+  margin-top: 3.2rem;
+}
+
 .project__text-title{
   font: 700 1.6rem / normal var(--Arimo);
 }

@@ -293,24 +293,35 @@ function closeModal(form) {
 
 function spline() {
 
-    document.querySelectorAll('[data-color]').forEach(function (color) {
-        let bgColors = color.closest('[data-color]').getAttribute('data-color').split(',');
+    document.querySelectorAll('[data-color]').forEach(function (colorElement) {
+        let bgColors = colorElement.closest('[data-color]').getAttribute('data-color').split(',');
 
-        const spans = color.querySelectorAll('.analysis__desc-item span');
-
-
-        spans.forEach((span, index) => {
-            span.style.backgroundColor = bgColors[index % bgColors.length];
+        const descSpans = colorElement.querySelectorAll('.analysis__desc-item span');
+        descSpans.forEach((span, index) => {
+            span.style.backgroundColor = bgColors[index % bgColors.length].trim();
         });
-    })
+
+        const lineItems = colorElement.querySelectorAll('.analysis__line-item');
+        lineItems.forEach((lineItem, lineIndex) => {
+            let percentValues = lineItem.getAttribute('data-percent').split(',').map(Number);
+            const spans = lineItem.querySelectorAll('span');
+            let baseColor = bgColors[lineIndex % bgColors.length].trim(); // Assign base color per line item
+
+            spans.forEach((span, spanIndex) => {
+                if (percentValues[spanIndex] !== undefined) {
+                    span.style.backgroundColor = baseColor;
+                    span.style.display = 'inline-block';
+                    span.style.width = `${percentValues[spanIndex]}%`;
+                }
+            });
+        });
+    });
+
 
     document.querySelectorAll('.chart__bar').forEach(function (chartDiv) {
-
         let data = chartDiv.getAttribute('data-attr').split(',');
         let canvasId = chartDiv.getAttribute('data-canvas-id');
         let bgColors = chartDiv.closest('[data-color]').getAttribute('data-color').split(',');
-
-        console.log('bgColors',bgColors)
 
         let ctx = document.getElementById(canvasId).getContext('2d');
 
@@ -321,7 +332,7 @@ function spline() {
                     label: 'Dataset for ' + canvasId,
                     data: data.map(Number),
                     backgroundColor: bgColors,
-                    borderColor: bgColors.map(color => color.replace('0.2', '1')),
+                    borderColor: bgColors.map(color => color.trim()),
                     borderWidth: 1
                 }]
             },
@@ -330,6 +341,9 @@ function spline() {
                     legend: {
                         display: false,
                     }
+                },
+                interaction: {
+                    mode: null
                 }
             }
         });

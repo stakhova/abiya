@@ -900,6 +900,38 @@ font-size: 2rem;
 .chart__item-wrap{
   margin: 4rem auto;
 }
+
+.analysis .project__clarify-mob.background .tr__empty{
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+}
+
+.analysis__line-title{
+  margin-bottom: 1.6rem;
+  color:#000;
+  font: 400 1.2rem / 1.4rem var(--Arimo);
+  text-align: center;
+}
+.analysis__line{
+  margin:  0 auto;
+  padding: 2.8rem 1rem 2rem;
+}
+.analysis__line-list{
+  max-width: 21.6rem;
+  margin: 0 auto;
+  display: flex;
+  gap:1.2rem;
+  flex-direction: column;
+}
+.analysis__line-item{
+  gap:0.2rem;
+  display: flex;
+
+  span{
+    display: block;
+    height: 1.6rem;
+  }
+}
 @media only screen and (max-width: 666px) {
 
   .question .container{
@@ -1268,5 +1300,10 @@ font-size: 2rem;
     flex-wrap: wrap;
     gap:1.4rem;
     align-items: center;
+  }
+  .analysis__wrap .analysis__desc-list{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 }
